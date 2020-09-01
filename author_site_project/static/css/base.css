@@ -1,0 +1,36 @@
+/* -------------- NAV BAR */
+#navbar {
+    display: flex;
+    background-color: white;
+    box-shadow: 0px 5px 5px grey;
+    margin-bottom: 5px;
+}
+
+#navbar a {
+    color: black;
+}
+
+#navbar button {
+    color: black;
+}
+
+
+.logo-container h1{
+    font-size: 2rem;
+}
+
+@media (max-width: 991px) {
+    #navbar .container {
+        width: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    #navbar {
+        flex-direction: column;
+    }
+}
+
+.text-black {
+    color: black;
+}
