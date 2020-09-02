@@ -3,7 +3,9 @@
 <nav id="navbar"
     class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container logo-container">
-        <h1>Holly Thomas</h1>
+        <a href="{% url 'index' %}">
+            <h1>Holly Thomas</h1>
+        </a>
     </div>
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -24,7 +26,7 @@
                     <a class="nav-link" href="#">Worlds</a>
                 </li>
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href="#">About Holly</a>
+                    <a class="nav-link" href="{% url 'about' %}">About Holly</a>
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="#">Fan Art Gallery</a>

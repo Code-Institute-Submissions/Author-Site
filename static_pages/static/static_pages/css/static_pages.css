@@ -5,10 +5,45 @@
 
 .paralax-background-main {
     background-image: url(/static/img/glitter-background-1.jpg);
-    height: 500px;
+    height: 400px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+.about-section {
+
+}
+
+.about-image-container {
+    width: 70vw;
+    height: 45vw;
+    margin: 15px auto ;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+}
+
+.about-image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.about-text-container {
+
+}
+
+/* -------------------------------- MEDIA QUERIES */
+
+@media (min-width: 600px) {
+
+}
+
+
+/* ---------------------------- BACKGROUND IMAGES */
+
+#ava-world-img-1 {
+    background-image: url(/static/img/arches-2.png);
+}

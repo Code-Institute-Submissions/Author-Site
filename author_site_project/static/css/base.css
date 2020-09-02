@@ -8,6 +8,7 @@
 
 #navbar a {
     color: black;
+    text-decoration: none;
 }
 
 #navbar button {
@@ -31,6 +32,14 @@
     }
 }
 
-.text-black {
-    color: black;
+.magic-text {
+    color: #232133;
+    text-shadow: 0 0 4px #ffe668;
+    font-size: 4.5vw;
+    text-align: center;
+}
+
+.page-title {
+    margin: 45px 0;
+    text-align: center;
 }
