@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <form action="{% url 'update_profile' %}" method="POST" >
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button >
+            Update Information
+        </button>
+    </form>
+</div>
+
+
+
+{% endblock %}
