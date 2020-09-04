@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- PRODUCT -->
+<section id="product" class="py-4">
+    <div class="container">
+        <a href="{% url 'products' %}" class="btn btn-light mb-4">
+            <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+            <span>Back To Shop</span>
+        </a>
+
+        <div class="row">
+            <div class="col">
+
+                <!-- image -->
+                <img src="{{ product.image.url}}" alt="product photo"
+                    class="img-main img-fluid mb-3">
+
+                <!-- title -->
+                <div id="product-details-container">
+                    <div>
+                        <h3>{{ product.name }}</h3>
+                        <h6 class="text-primary">
+                            {{ product.get_product_type_display }}</h6>
+                        <p>
+                            <i class="fas fa-book text-secondary"></i>
+                            {{ product.series }}
+                        </p>
+                        <p class="lead mb-0 text-left font-weight-bold">
+                            ${{ product.price }}</p>
+
+                        {% if product.shipping %}
+                        <p>Worldwide Shipping ${{ product.shipping }}</p>
+                        {% endif  %}
+
+                        <p>
+                            <a class="btn btn-light mb-4" data-toggle="collapse"
+                                href="#collapseExample" role="button"
+                                aria-expanded="false"
+                                aria-controls="collapseExample">
+                                Product Details
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="col-12">
+                    <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span>Back To Shop</span>
+                    </a>
+                    <input type="submit" class="btn btn-light mb-4" value="Add to Bag">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
