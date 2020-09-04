@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 from series.models import Series
@@ -13,19 +14,19 @@ class Product(models.Model):
     ]
 
     # ALL PRODUCTS
+    name = models.CharField(max_length=254)
     series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, related_name='products')
+    product_type = models.CharField(choices=_TYPE_OF_PRODUCT, max_length=20)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     in_stock = models.BooleanField(default=True)
     image = models.ImageField()
-    name = models.CharField(max_length=254)
-    product_type = models.CharField(choices=_TYPE_OF_PRODUCT, max_length=20)
     description = models.TextField()
-    price = models.DecimalField(max_digits=6, decimal_places=2)
     shipping = models.DecimalField(max_digits=6, decimal_places=2)
     recommended_audience_age = models.IntegerField()
 
     # ALL BOOKS
     author = models.CharField(max_length=254, null=True, blank=True)
-    publish_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    publish_date = models.DateTimeField(default=datetime.now, null=True, blank=True)
     publisher = models.CharField(max_length=254, null=True, blank=True)
     isbn = models.CharField(max_length=254, null=True, blank=True)
 
