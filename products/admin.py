@@ -40,7 +40,7 @@ class ProductAdmin(admin.ModelAdmin):
         }),
         ('All Books', {
             'fields': ('author', 'publish_date', 'publisher',
-            'isbn',)
+            'isbn', 'synopsis')
         }),
         ('Physical Books & E-books', {
             'fields': ('page_count',)

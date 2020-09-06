@@ -29,6 +29,7 @@ class Product(models.Model):
     publish_date = models.DateTimeField(default=datetime.now, null=True, blank=True)
     publisher = models.CharField(max_length=254, null=True, blank=True)
     isbn = models.CharField(max_length=254, null=True, blank=True)
+    synopsis = models.TextField(null=True, blank=True)
 
     # PHYSICAL BOOKS & E-BOOKS
     page_count = models.IntegerField(null=True, blank=True)
