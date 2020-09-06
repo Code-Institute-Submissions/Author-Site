@@ -5,7 +5,8 @@
 <div>
     <form action="{% url 'update_profile' %}" method="POST" >
         {% csrf_token %}
-        {{ form|crispy }}
+        {{ user_form|crispy }}
+        {{ user_profile_form|crispy }}
         <button >
             Update Information
         </button>
