@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from products.models import Product
+from .constants import ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL
 
 
 def add_to_shopping_basket(request, product_id):
@@ -30,27 +31,32 @@ def add_to_shopping_basket(request, product_id):
         shopping_basket[product_id] += 1
 
         if product.product_type == 'merchandise':
-            messages.success(
+            messages.add_message(
                 request,
+                ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL,
                 f'Hey, you just added another { product.name } to your shopping basket!')
         else:
-            messages.success(
+            messages.add_message(
                 request,
+                ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL,
                 f'Hey, you just added another { product.get_product_type_display() } version of { product.name } to your shopping basket!')
     else:
         shopping_basket[product_id] = 1
 
         if product.product_type == 'merchandise':
-            messages.success(
+            messages.add_message(
                 request,
+                ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL,
                 f'Hey, you just added a { product.name } to your shopping basket!')
         elif product.product_type in ['audio_book', 'e_book']:
-            messages.success(
+            messages.add_message(
                 request,
+                ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL,
                 f'Hey, you just added an { product.get_product_type_display() } version of { product.name } to your shopping basket!')
         else:
-            messages.success(
+            messages.add_message(
                 request,
+                ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL,
                 f'Hey, you just added a { product.get_product_type_display() } version of { product.name } to your shopping basket!')
 
     request.session['shopping_basket'] = shopping_basket
