@@ -55,6 +55,19 @@
     <!-- Nav bar -->
     {% include 'includes/_navbar.html' %}
 
+    {% if messages %}
+        <div class="message-container">
+            {% for message in messages %}
+                {% if message.level == ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL %}
+                    {% include 'includes/alerts/_success_modal.html' %}
+                {% else %}
+                    {% include 'includes/alerts/_alerts.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
     {% block content %}
     {% endblock %}
 
