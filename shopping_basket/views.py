@@ -8,6 +8,20 @@ from .constants import ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL
 def view_or_update_shopping_basket(request):
     """ A view to return the shopping basket page """
 
+    if request.method == 'POST':
+        action = request.POST['action']
+        product_id = request.POST['product_id']
+        shopping_basket = request.session.get('shopping_basket', {})
+
+        if action == 'plus':
+            shopping_basket[product_id] += 1
+        else:
+            shopping_basket[product_id] -= 1
+            if shopping_basket[product_id] < 1:
+                del shopping_basket[product_id]
+
+        request.session['shopping_basket'] = shopping_basket
+
     return render(request, 'shopping_basket/shopping_basket.html')
 
 
