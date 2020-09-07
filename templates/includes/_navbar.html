@@ -2,15 +2,19 @@
 
 <nav id="navbar"
     class="navbar navbar-expand-lg navbar-light sticky-top">
-    <div class="container logo-container">
+
+    <!-- TOP BAR -->
+    <div class="logo-container">
+        <a href="{% url 'index' %}">
+            <div class="nav-logo-div"></div>
+        </a>
         <a href="{% url 'index' %}">
             <h1>Holly Thomas</h1>
         </a>
     </div>
+
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="#" class="logo" alt="">
-        </a>
+        <!-- MAIN MENU LINKS -->
 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNavAltMarkup">
@@ -23,7 +27,10 @@
                     <a class="nav-link" href="{% url 'products' %}">Shop</a>
                 </li>
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href="#">Worlds</a>
+                    <a class="nav-link" href="#">Ava's World</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="#">Parma Ham's World</a>
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'about' %}">About Holly</a>
@@ -33,35 +40,45 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav ml-auto">
 
-                {% if user.is_authenticated %}
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="{% url 'update_profile' %}">
-                            <i class="fas fa-user"></i>
-                            My Profile
-                        </a>
-                    </li>
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="{% url 'account_logout' %}">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Logout
-                        </a>
-                    </li>
-                {% else %}
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="{% url 'account_signup' %}">
-                            <i class="fas fa-user-plus"></i>
-                            Register
-                        </a>
-                    </li>
-                    <li class="nav-item mr-3">
-                        <a class="nav-link" href="{% url 'account_login' %}">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Login
-                        </a>
-                    </li>
-                {% endif %}
+            <ul class="navbar-nav ml-auto">
+                <!-- ACCOUNT MINIM MENU-->
+
+                <a class="text-black nav-link" href="#" id="account-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="nav-icon-container">
+                        <div class="nav-icon-inner"><i class="fas fa-user fa-lg"></i></div>
+                        <div class="nav-icon-inner">&nbsp;   Account</div>
+                    </div>
+
+                </a>
+
+                <!-- ACCOUNT DROPDOWNS-->
+                <div class="dropdown-menu border-0" aria-labelledby="account-options">
+                    {% if request.user.is_authenticated %}
+
+                      {% if request.user.is_superuser %}
+                        <!-- TODO: where does this link lead to? -->
+                        <a href="" class="dropdown-item">Product Management</a>
+                      {% endif %}
+
+                      <a href="{% url 'update_profile' %}" class="dropdown-item">My Details</a>
+                      <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+
+                    {% else %}
+                      <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                      <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                    {% endif %}
+                  </div>
+
+
+
+                <a class="nav-link" href="{% url 'view_or_update_shopping_basket' %}">
+                    <div class="nav-icon-container">
+                        <div class="nav-icon-inner"><i class="fas fa-shopping-basket fa-lg"></i></div>
+                        <div class="nav-icon-inner">&nbsp;  Basket ({{ shopping_basket.no_of_products }})</div>
+                    </div>
+                </a>
+
             </ul>
         </div>
     </div>
