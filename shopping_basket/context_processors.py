@@ -39,7 +39,7 @@ def shopping_basket(request):
 
     # TODO: sort products
 
-    return {
+    context =  {
         'ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL': ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL,
         'shopping_basket': {
             'no_of_products': no_of_products,
@@ -48,3 +48,5 @@ def shopping_basket(request):
             'shipping_cost': shipping_cost,
         }
     }
+
+    return context
