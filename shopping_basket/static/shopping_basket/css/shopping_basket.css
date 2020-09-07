@@ -1,0 +1,54 @@
+.basket-item {
+    margin: 12px 4vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.basket-item img {
+    height: 30vw;
+    width: 30vw;
+}
+
+.amount-section {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.amount-form-group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.amount-button-form {
+    display: inline;
+}
+
+.amount-display {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px;
+    width: 38px;
+    height: 38px;
+    margin: 0 4px;
+    text-align: center;
+}
+
+.total-and-payments-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 4vw;
+}
+
+/* -------------------------------- MEDIA QUERIES */
+
+@media (min-width: 700px) {
+    .basket-item {
+        flex-direction: row;
+    }
+    .basket-item img {
+        height: 200px;
+        width: 200px;
+        margin: 0 15px;
+    }
+}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+        href="{% static 'shopping_basket/css/shopping_basket.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <section id="basket">
+
+        <!-- PAGE HEADER -->
+        <div>
+            <h1 class="page-title">Your Basket</h1>
+            <hr>
+        </div>
+
+        <!-- BASKET -->
+        <div class="row">
+            <div class="col">
+
+                <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span>Back To Shop</span>
+                </a>
+
+                <!-- ITEMS -->
+                {% if shopping_basket.products %}
+
+                    {% for item in shopping_basket.products %}
+                        <div class="basket-item">
+
+                            <!-- IMAGE -->
+                            <div>
+                                <img src="{{ item.product.image.url }}" alt="product photo">
+                            </div>
+
+                            <!-- DETAILS -->
+                            <div>
+                                <h4>{{ item.product.name }}</h4>
+                                <h6 class="text-primary">
+                                    {{ item.product.get_product_type_display }}</h6>
+                                <p>
+                                    <i class="fas fa-book text-secondary"></i>
+                                    {{ item.product.series }}
+                                </p>
+                                <p>{{ item.product.description }}</p>
+                                <a href="{% url 'product_detail' item.product.id %}"
+                                    class="btn btn-light btn-block">Read More</a>
+                            </div>
+
+                            <!-- AMOUNT & PRICE -->
+                            <div class="amount-section">
+
+                                <form
+                                    action="{% url 'view_or_update_shopping_basket' %}"
+                                    method="POST"
+                                    class="amount-form-group">
+                                    {% csrf_token %}
+
+                                    <button
+                                        name="action" value="plus"
+                                        class="btn btn-light mb-2" type="submit">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+
+                                    <div class="amount-display">
+                                        <span>{{ item.amount }}</span>
+                                    </div>
+
+                                    <button
+                                        name="action" value="minus"
+                                        class="btn btn-light mb-2" type="submit">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+
+                                    <input type="hidden" name="product_id"
+                                        value="{{ item.product.id }}">
+                                    <input type="hidden" name="redirect_url"
+                                        value="{{ request.path }}">
+                                </form>
+
+                                <p class="lead font-weight-bold mb-0 text-right">
+                                    Subtotal ${{ item.subtotal }}
+                                </p>
+
+                                {% if item.product.shipping %}
+                                <p class="text-right">World Shipping
+                                    ${{ item.product.shipping }}</p>
+                                {% endif  %}
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-5">
+                            <hr>
+                        </div>
+
+                    {% endfor %}
+
+                    <!-- TOTAL & PAYMENT -->
+                    <div class="total-and-payments-container">
+                        <h6><strong>Shopping Basket Total: </strong>${{ shopping_basket.total_cost }}</h6>
+                        <h6><strong>Shipping Total: </strong>${{ shopping_basket.shipping_cost }}</h6>
+                        <h4 class="mt-4"><strong>Grand Total: ${{ shopping_basket.total_cost }}</strong></h4>
+                    </div>
+
+                {% else %}
+
+                <div>
+                    <p>Hey, looks like your bag is empty!</p>
+                    <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span>Visit Shop</span>
+                    </a>
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}

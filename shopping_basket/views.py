@@ -5,6 +5,12 @@ from products.models import Product
 from .constants import ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL
 
 
+def view_or_update_shopping_basket(request):
+    """ A view to return the shopping basket page """
+
+    return render(request, 'shopping_basket/shopping_basket.html')
+
+
 def add_to_shopping_basket(request, product_id):
     """ A view to add items to the user's shopping basket """
 
