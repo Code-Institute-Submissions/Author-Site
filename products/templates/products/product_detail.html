@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -16,8 +21,19 @@
             <div class="col">
 
                 <!-- image -->
-                <img src="{{ product.image.url}}" alt="product photo"
-                    class="img-main img-fluid mb-3">
+                <div>
+                    <img src="{{ product.image.url}}" alt="product photo"
+                        class="img-main img-fluid mb-3">
+
+                    {% if not product.in_stock %}
+                    <div class="product-image-overlay">
+                        <h2>
+                            <span class="badge badge-secondary text-red">Out of stock</span>
+                        </h2>
+                    </div>
+                    {% endif %}
+
+                </div>
 
                 <!-- title -->
                 <div id="product-details-container">

@@ -1,3 +1,13 @@
 .card-img-overlay {
     pointer-events: none;
 }
+
+.product-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1.25rem;
+    margin-left: 15px;
+    border-radius: calc(.25rem - 1px);
+    pointer-events: none;
+}
