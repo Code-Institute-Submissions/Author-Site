@@ -40,6 +40,27 @@
     margin: 0 4vw;
 }
 
+/* ------------------------ CONDITIONAL RENDERING */
+
+.basket-item #update-button {
+    display: none;
+}
+
+.basket-item.amount-changed #update-button {
+    display: block;
+}
+
+.basket-item.amount-changed #subtotal {
+    display: none;
+}
+
+.basket-item.zero h4,
+.basket-item.zero h6,
+.basket-item.zero p {
+    text-decoration: line-through;
+}
+
+
 /* -------------------------------- MEDIA QUERIES */
 
 @media (min-width: 700px) {

@@ -39,7 +39,7 @@
                             </div>
 
                             <!-- DETAILS -->
-                            <div>
+                            <div id="details-section">
                                 <h4>{{ item.product.name }}</h4>
                                 <h6 class="text-primary">
                                     {{ item.product.get_product_type_display }}</h6>
@@ -57,31 +57,40 @@
 
                                 <form
                                     action="{% url 'view_or_update_shopping_basket' %}"
-                                    method="POST"
-                                    class="amount-form-group">
+                                    method="POST">
                                     {% csrf_token %}
 
-                                    <button
-                                        name="action" value="plus"
-                                        class="btn btn-light mb-2" type="submit">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
+                                    <div class="amount-form-group">
+                                        <button
+                                            name="increment" class="btn btn-light mb-2"
+                                            type="button">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
 
-                                    <div class="amount-display">
-                                        <span>{{ item.amount }}</span>
+                                        <input class="amount-display" name="amount"
+                                            value="{{ item.amount }}" readonly>
+
+
+                                        <button
+                                            name="decrement" class="btn btn-light mb-2"
+                                            type="button">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+
+                                        <input type="hidden" name="product_id"
+                                            value="{{ item.product.id }}">
                                     </div>
 
-                                    <button
-                                        name="action" value="minus"
-                                        class="btn btn-light mb-2" type="submit">
-                                        <i class="fas fa-minus"></i>
+                                    <button id="update-button"
+                                        class="btn btn-light btn-block" type="submit">
+                                        Update
                                     </button>
 
-                                    <input type="hidden" name="product_id"
-                                        value="{{ item.product.id }}">
                                 </form>
 
-                                <p class="lead font-weight-bold mb-0 text-right">
+
+
+                                <p id="subtotal" class="lead font-weight-bold mb-0 text-right">
                                     Subtotal ${{ item.subtotal }}
                                 </p>
 
@@ -124,6 +133,14 @@
     </section>
 
 
+{% endblock %}
 
+
+<!-- CODE FOR ADJUSTING PRODUCT AMOUNTS & UPDATING BACKEND -->
+{% block postloadjs %}
+
+    {{block.super}}
+
+    <script type="text/javascript" src="{% static 'shopping_basket/js/shopping_basket.js' %}"></script>
 
 {% endblock %}
