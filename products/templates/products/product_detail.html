@@ -9,7 +9,7 @@
 
 <!-- PRODUCT -->
 <section id="product" class="py-4">
-    <div class="container">
+    <div class="product-detail-container">
         <a href="{% url 'products' %}" class="btn btn-light mb-4">
             <span class="icon">
                 <i class="fas fa-chevron-left"></i>
@@ -20,10 +20,14 @@
         <div class="row">
             <div class="col">
 
-                <!-- image -->
-                <div>
-                    <img src="{{ product.image.url}}" alt="product photo"
+                <!-- IMAGE -->
+                <div class="image-div">
+
+                    <div>
+                        <img src="{{ product.image.url}}" alt="product photo"
                         class="img-main img-fluid mb-3">
+                    </div>
+
 
                     {% if not product.in_stock %}
                     <div class="product-image-overlay">
@@ -35,7 +39,7 @@
 
                 </div>
 
-                <!-- title -->
+                <!-- DETAILS -->
                 <div id="product-details-container">
                     <div>
                         <h3>{{ product.name }}</h3>
@@ -49,33 +53,49 @@
                             ${{ product.price }}</p>
 
                         {% if product.shipping %}
-                        <p>Worldwide Shipping ${{ product.shipping }}</p>
+                            <p>Worldwide Shipping ${{ product.shipping }}</p>
                         {% endif  %}
 
-                        <p>
-                            <a class="btn btn-light mb-4" data-toggle="collapse"
-                                href="#collapseExample" role="button"
-                                aria-expanded="false"
-                                aria-controls="collapseExample">
-                                Product Details
-                            </a>
-                        </p>
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
+                        {% if product.product_type == 'merchandise' %}
 
+                            <p>{{ product.description }}</p>
+
+                        {% else  %}
+                            <div>
+                                <p>{{ product.synopsis }}</p>
                             </div>
-                        </div>
 
+                            <p>
+                                <a class="btn btn-light mb-4" data-toggle="collapse"
+                                    href="#collapseDetails" role="button"
+                                    aria-expanded="false"
+                                    aria-controls="collapseDetails">
+                                    Product Details
+                                </a>
+                            </p>
+                            <div class="collapse" id="collapseDetails">
+                                <div class="card card-body">
+                                    <p><strong>Author: </strong>{{ product.author }}</p>
+                                    <p><strong>Publish Date: </strong>{{ product.publish_date }}</p>
+                                    <p><strong>Publisher: </strong>{{ product.publisher }}</p>
+                                    <p><strong>ISBN: </strong>{{ product.isbn }}</p>
 
+                                    {% if not product.product_type == 'audio_book' %}
+                                        <p><strong>Pages: </strong>{{ product.page_count }}</p>
+                                    {% else %}
+                                        <p><strong>Narrator: </strong>{{ product.narrator }}</p>
+                                        <p><strong>Run Time: </strong>{{ product.run_time }} min</p>
+                                    {% endif %}
+                                </div>
+                            </div>
 
+                        {% endif %}
                     </div>
                 </div>
 
                 <hr>
 
-
-
-                    <div class="col-12">
+                    <div>
                         <form action="{% url 'add_to_shopping_basket' product.id %}" method="POST">
                             {% csrf_token %}
 
@@ -91,9 +111,6 @@
                         </form>
 
                     </div>
-
-
-
 
             </div>
         </div>
