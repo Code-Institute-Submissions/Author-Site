@@ -119,3 +119,13 @@
 </section>
 
 {% endblock %}
+
+
+<!-- MODAL -->
+{% block postloadjs %}
+    <script type="text/javascript">
+        $(() => {
+            $('.modal').modal()
+        })
+    </script>
+{% endblock %}
