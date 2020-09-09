@@ -14,6 +14,7 @@ def shopping_basket(request):
     products = []
     total_cost = 0
     shipping_cost = 0
+    grand_total = 0
 
     # Load or create basket
     shopping_basket = request.session.get('shopping_basket', {})
@@ -30,6 +31,7 @@ def shopping_basket(request):
         no_of_products += amount
         total_cost += subtotal
         shipping_cost += product.shipping * amount
+        grand_total += (subtotal + (product.shipping * amount))
 
         products.append({
             'product': product,
@@ -46,6 +48,7 @@ def shopping_basket(request):
             'products': products,
             'total_cost': total_cost,
             'shipping_cost': shipping_cost,
+            'grand_total': grand_total,
         }
     }
 
