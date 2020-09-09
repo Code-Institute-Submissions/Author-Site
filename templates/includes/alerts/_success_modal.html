@@ -3,28 +3,53 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Added to shopping basket!</h5>
+
+        <h5 class="modal-title">Shopping Basket Preview</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+
       </div>
+
       <div class="modal-body">
+
         <p>{{ message }}</p>
+
+
+        {% for item in shopping_basket.products %}
+          <hr>
+          <div class="modal-bag-preview">
+            <img src="{{ item.product.image.url }}" alt="product photo">
+            <div class="modal-item-details">
+              <h5>{{ item.product.name }}</h5>
+              <p class="text-primary">
+                  {{ item.product.get_product_type_display }}
+              <p>
+              <p><strong>In Basket:</strong>  {{ item.amount }}</p>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="modal-total-preview">
+          <hr>
+          <p>
+            To see a full breakdown of prices, and to edit the items in your
+            shopping basket, please go to basket.
+          </p>
+          <p>
+            <strong>Current Total (including shipping): </strong>
+            ${{ shopping_basket.total_cost }}
+          </p>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Keep Shopping</button>
-        <a href="{% url 'view_or_update_shopping_basket' %}" class="btn btn-light mb-4">
+        <a href="{% url 'view_or_update_shopping_basket' %}" class="btn btn-light">
           <span>Go To Basket</span>
-      </a>
+        </a>
       </div>
+
     </div>
   </div>
 </div>
-
-<!-- TODO: PRODUCT DETAILS IN MODAL
-    ITEM IMAGE
-    ITEM TITLE
-    ITEM SERIES
-    ITEM PRICE
-    ITEM SHIPPING
-    SHOPPING BASKET TOTAL -- >
