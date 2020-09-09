@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <form action="{% url 'add_art' %}" method="POST" >
+        {% csrf_token %}
+        {{ add_art_form|crispy }}
+        <button >
+            Update Information
+        </button>
+    </form>
+</div>
+
+
+
+{% endblock %}

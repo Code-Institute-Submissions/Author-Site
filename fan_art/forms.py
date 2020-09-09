@@ -1,0 +1,28 @@
+from django import forms
+from django.contrib.auth.models import User
+from .models import FanArt
+
+class UserFanArtForm(forms.ModelForm):
+
+    class Meta:
+        model = FanArt
+        exclude = ('user_profile', 'is_approved')
+
+
+    def __init__(self, *args, **kwargs):
+        """
+
+        """
+        super().__init__(*args, **kwargs)
+
+        # CUSTOMIZING THE FORM FIELDS
+        for fieldname, field in self.fields.items():
+            if fieldname != 'default_country':
+                if field.required:
+                    placeholder = f'{field.label} *'
+                else:
+                    placeholder = field.label
+
+                field.widget.attrs['placeholder'] = placeholder
+
+            field.label = False
