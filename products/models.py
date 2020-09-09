@@ -26,7 +26,7 @@ class Product(models.Model):
 
     # ALL BOOKS
     author = models.CharField(max_length=254, null=True, blank=True)
-    publish_date = models.DateTimeField(default=datetime.now, null=True, blank=True)
+    publish_date = models.DateField(null=True, blank=True)
     publisher = models.CharField(max_length=254, null=True, blank=True)
     isbn = models.CharField(max_length=254, null=True, blank=True)
     synopsis = models.TextField(null=True, blank=True)
