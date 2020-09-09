@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fan_art/css/fan_art.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+<section id="page-heading">
+    <div>
+        <h1 class="page-title">Fan Art Gallery</h1>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="container">
+        <div class="row">
+
+            {% if art_list %}
+
+            {% for art in art_list %}
+
+            <!-- ART CARD -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="{{ art.image.url }}"
+                        alt="product photo">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ art.title }}</h4>
+                        <p>{{ art.description }}</p>
+                        <h6>
+                            By:
+                            {% if art.artist_name %}
+                                {{ art.artist_name }}
+                            {% else %}
+                                {{ art.user_profile }}
+                            {% endif %}
+                        </h6>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+            {% else %}
+            <div class="col-md-12">
+                <p>We have no Art to show right now, why not submit some?</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
