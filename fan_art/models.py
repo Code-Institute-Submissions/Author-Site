@@ -11,8 +11,8 @@ class FanArt(models.Model):
     artist_name = models.CharField(max_length=254, null=True, blank=True)
     description = models.TextField()
     is_approved = models.BooleanField(default=False)
-    publish_date = models.DateField(null=True, blank=True, default=date.today)
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, related_name='fan_art')
+    publish_date = models.DateField(default=date.today)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='fan_art')
     series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, related_name='fan_art')
 
     def __str__(self):
