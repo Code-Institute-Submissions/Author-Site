@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <img src="{{ fan_art.image.url }}">
+    <form action="{% url 'edit_art' fan_art.id %}" method="POST" >
+        {% csrf_token %}
+        {{ update_fan_art_form|crispy }}
+        <button >
+            Update Information
+        </button>
+    </form>
+</div>
+
+<!-- DELETE -->
+<button type="button" class="btn btn-light mb-4" data-toggle="modal" data-target="#exampleModal">
+    <span class="icon">
+        <i class="fas fa-trash-alt"></i>
+    </span>
+    <span>Delete</span>
+</button>
+
+{% include 'fan_art/includes/_confirm_delete.html' %}
+
+
+{% endblock %}
