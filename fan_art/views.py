@@ -10,7 +10,7 @@ from .forms import CreateFanArtForm, UpdateFanArtForm
 def fan_art_gallery(request):
     """ A view to return all peices of fan art """
 
-    art_list = FanArt.objects.all()
+    art_list = FanArt.objects.all().filter(is_approved=True)
 
     context = {
         'art_list': art_list
