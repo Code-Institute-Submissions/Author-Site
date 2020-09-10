@@ -63,7 +63,18 @@
                                         {{ art.user_profile }}
                                     {% endif %}
                                 </h6>
-
+                                <a href="{% url 'add_art' %}" class="btn btn-light mb-4">
+                                    <span class="icon">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span>Edit</span>
+                                </a>
+                                <button type="button" class="btn btn-light mb-4" data-toggle="modal" data-target="#exampleModal">
+                                    <span class="icon">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </span>
+                                    <span>Delete</span>
+                                </button>
                             </div>
 
                         </div>
@@ -88,6 +99,8 @@
         </a>
 
     </div>
+
+    {% include 'fan_art/includes/_confirm_delete.html' %}
 </section>
 
 {% endblock %}

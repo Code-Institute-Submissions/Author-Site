@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import FanArt
 from profiles.models import UserProfile
 from .forms import UserFanArtForm
+
 
 def fan_art_gallery(request):
     """ A view to return all peices of fan art """
@@ -33,7 +35,16 @@ def user_gallery(request):
 def add_art(request):
     """ A view for the user to submit their own art to the gallery """
 
-    add_art_form = UserFanArtForm()
+    if request.method == 'POST':
+        add_art_form = UserFanArtForm(request.POST, request.FILES)
+        if add_art_form.is_valid():
+            add_art_form.save()
+            messages.success(request, 'Image added successfully')
+            add_art_form = UserFanArtForm()
+        else:
+            messages.error(request, 'Form not valid')
+    else:
+        add_art_form = UserFanArtForm()
 
     context = {
         'add_art_form':  add_art_form,
