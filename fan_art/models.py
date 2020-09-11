@@ -13,7 +13,7 @@ class FanArt(models.Model):
     is_approved = models.BooleanField(default=False)
     publish_date = models.DateField(default=date.today)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='fan_art')
-    series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, related_name='fan_art')
+    series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, blank=True, related_name='fan_art')
 
     def __str__(self):
         return f'Title: {self.title}, by user {self.user_profile.user}'
