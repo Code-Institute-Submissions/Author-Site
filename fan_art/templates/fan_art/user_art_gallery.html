@@ -50,8 +50,19 @@
                     <div class="col-md-6 col-lg-4 mb-4">
 
                         <div class="card">
-                            <img class="card-img-top" src="{{ art.image.url }}"
+                            <div>
+                                <img class="card-img-top" src="{{ art.image.url }}"
                                 alt="product photo">
+
+                                {% if not art.is_approved %}
+                                    <div class="card-img-overlay">
+                                        <h2>
+                                            <span class="badge badge-secondary text-red">Pending Approval</span>
+                                        </h2>
+                                    </div>
+                                {% endif %}
+                            </div>
+
                             <div class="card-body">
                                 <h4 class="card-title">{{ art.title }}</h4>
                                 <p>{{ art.description }}</p>

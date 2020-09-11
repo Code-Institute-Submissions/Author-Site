@@ -1,0 +1,49 @@
+/* --------------------------- USER FAN ART*/
+
+.card-img-overlay {
+    pointer-events: none;
+}
+
+/* --------------------------- ADD FAN ART */
+
+#add-fan-art {
+    width: 90vw;
+    margin: auto;
+}
+
+#add-fan-art input {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#add-fan-art textarea {
+    width: 100%;
+}
+
+/* --------------------------- EDIT FAN ART */
+
+.edit-fan-art-image-display {
+    width: 80%;
+    margin: auto;
+}
+
+.edit-fan-art-image-display img{
+    width: 100%;
+}
+
+/* --------------------------- MEDIA QUERIES*/
+
+@media (min-width: 576px) {
+    #add-fan-art {
+        width: 80vw;
+    }
+    .edit-fan-art-image-display {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 992px) {
+    #add-fan-art {
+        width: 800px;
+    }
+}
