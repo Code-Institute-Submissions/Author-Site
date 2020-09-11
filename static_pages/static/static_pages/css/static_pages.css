@@ -1,7 +1,11 @@
-.page-block {
-    min-height: 500px;
-    width: 100%;
+/* -------------------------------- GENERAL */
+
+.horizontal-line {
+    width: 80vw;
+    margin: auto;
 }
+
+/* -------------------------------- HOME PAGE */
 
 .paralax-background-main {
     background-image: url(/static/img/glitter-background-1.jpg);
@@ -12,15 +16,28 @@
     background-size: cover;
 }
 
-.about-section {
+.page-block {
+    min-height: 500px;
+    width: 100%;
+}
 
+
+/* -------------------------------- ABOUT PAGE */
+
+
+.about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10vw;
 }
 
 .about-image-container {
-    width: 70vw;
-    height: 45vw;
-    margin: 15px auto ;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+    width: 80vw;
+    max-width: 350px;
+    height: 80vw;
+    max-height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
 .about-image {
@@ -31,19 +48,36 @@
     background-size: cover;
 }
 
-.about-text-container {
 
-}
 
 /* -------------------------------- MEDIA QUERIES */
+@media (min-width: 576px) {
+    .about-image-container {
+        width: 60vw;
+        height: 60vw;
+    }
+}
 
-@media (min-width: 600px) {
-
+@media (min-width: 992px) {
+    .about-section {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .about-image-container {
+        width: 35vw;
+        max-width: 400px;
+        height: 35vw;
+        max-height: 400px;
+    }
+    .about-text-container {
+        margin: 15px 2vw;
+        width: 50vw;
+    }
 }
 
 
 /* ---------------------------- BACKGROUND IMAGES */
 
-#ava-world-img-1 {
-    background-image: url(/static/img/arches-2.png);
+#about-image-1 {
+    background-image: url(/static/img/author-profile-photo.png);
 }
