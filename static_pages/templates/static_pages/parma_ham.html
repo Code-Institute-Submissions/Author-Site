@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'static_pages/css/static_pages.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<!-- PARALAX HEADING -->
+<section id="page-heading">
+    <div class="paralax-background">
+        <div class="paralax-text-div">
+            <h2 class="paralax-text">Parma Ham's World</h2>
+        </div>
+    </div>
+</section>
+
+<!-- MAGIC DOOR SECTION -->
+<section id="magic-door-section">
+
+    <!-- SECTION 1 -->
+    <div class="about-section">
+        <div class="world-image-container-ls mb-4">
+            <div id="ph-pic-1" class="about-image"></div>
+        </div>
+        <div class="about-text-container">
+            <p>
+                Some text about the world, how it works, a bit of
+                magic info that sort of thing.
+            </p>
+        </div>
+    </div>
+
+    <!-- PARALAX PAGE BREAK -->
+    <div class="paralax-background">
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="about-section">
+        <div class="world-image-container-p mb-4">
+            <div id="ph-pic-2" class="about-image"></div>
+        </div>
+        <div class="about-text-container">
+            <p>
+                Some text about the inspiration behind it, how
+                it was written.
+            </p>
+        </div>
+    </div>
+
+    <!-- PARALAX PAGE BREAK -->
+    <div class="paralax-background">
+    </div>
+
+
+</section>
+
+
+{% endblock %}
