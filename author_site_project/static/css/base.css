@@ -1,16 +1,40 @@
 /* ---------------------------- SITE WIDE STYLING */
 
-.magic-text {
-    color: #232133;
-    text-shadow: 0 0 4px #ffe668;
-    font-size: 4.5vw;
-    text-align: center;
-}
-
 .page-title {
     margin: 45px 0;
     text-align: center;
 }
+
+.paralax-background {
+    background-image: url(/static/img/glitter-background-1.jpg);
+    height: 80vw;
+    max-height: 250px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.paralax-text-div {
+    height: 100%;
+    width: 100%;
+    padding: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paralax-text {
+    color: #211f30;
+    text-shadow: -1px 1px 8px #f5e388,
+				  1px 1px 8px #f5e388,
+				 1px -1px 8px #f5e388,
+				-1px -1px 8px #f5e388;
+
+    font-size: 10vw;
+    text-align: center;
+}
+
 
 /* ------------------------------- NAV BAR */
 #navbar {
@@ -81,6 +105,12 @@
 /* -------------------------- MEDIA QUERIES*/
 
 @media (min-width: 576px) {
+    .paralax-background {
+        height: 45vw;
+    }
+    .paralax-text {
+        font-size: 7vw;
+    }
     .modal-dialog {
         max-width: 80vw !important;
     }
@@ -93,6 +123,14 @@
         width: 18vw;
     }
 }
+
+@media (min-width: 768px) {
+    .paralax-background {
+        height: 40vw;
+        max-height: 350px;
+    }
+}
+
 
 @media (max-width: 992px) {
     #navbar .container {
@@ -121,6 +159,9 @@
         display: flex;
         justify-content: center;
         margin: 2px 2px;
+    }
+    .paralax-text {
+        font-size: 70px;
     }
     .modal-dialog {
         max-width: 800px !important;
