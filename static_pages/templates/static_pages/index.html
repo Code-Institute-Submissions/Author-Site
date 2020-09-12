@@ -5,56 +5,86 @@
 <link rel="stylesheet" href="{% static 'static_pages/css/static_pages.css' %}">
 {% endblock %}
 
+
 {% block content %}
 
-<!-- CAROUSEL -->
-<div class="page-block">
-    <div id="carouselExampleControls" class="carousel slide"
-        data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="..." class="d-block w-100" alt="...">
+<!-- PARALAX HEADING -->
+<section id="page-heading">
+    <div class="paralax-background">
+        <div class="paralax-text-div">
+            <h2 class="paralax-text">Welcome to worlds of magic</h2>
+        </div>
+    </div>
+</section>
+
+
+<section id="home-page">
+
+    <!-- WORLD OF AVA -->
+    <div class="page-block">
+        <div class="about-section">
+            <div class="about-image-container mb-4">
+                <div id="ava-pic-1" class="about-image"></div>
             </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
+            <div class="about-text-container">
+                <p>
+                    Some text about the world of Ava
+                </p>
+                <div>
+                    <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                        <span class="icon">
+                            <i class="fas fa-book-reader"></i>
+                        </span>
+                        <span>Read More</span>
+                    </a>
+                    <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                        <span class="icon">
+                            <i class="fas fa-shopping-basket"></i>
+                        </span>
+                        <span>Buy The Book</span>
+                    </a>
+
+                </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls"
-            role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls"
-            role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
-</div>
 
-<!-- MAGIC PAGE BREAK -->
-<div class="paralax-background-main">
-    <h1 class="magic-text">Welcome to worlds of magic</h1>
-</div>
+    <!-- PARALAX PAGE BREAK -->
+    <div class="paralax-background">
+    </div>
 
-<!-- WORLD OF AVA -->
-<div class="page-block">
-    <p>The World of Ava</p>
-</div>
+    <!-- WORLD OF PARMA HAM -->
+    <div class="page-block">
+        <div class="about-section">
+            <div class="about-image-container mb-4">
+                <div id="ph-pic-1" class="about-image"></div>
+            </div>
+            <div class="about-text-container">
+                <p>
+                    Some text about the world of Parma Ham
+                </p>
+                <div>
+                    <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                        <span class="icon">
+                            <i class="fas fa-book-reader"></i>
+                        </span>
+                        <span>Read More</span>
+                    </a>
+                    <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                        <span class="icon">
+                            <i class="fas fa-shopping-basket"></i>
+                        </span>
+                        <span>Buy The Book</span>
+                    </a>
 
-<!-- MAGIC PAGE BREAK -->
-<div class="paralax-background-main">
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- WORLD OF PARMA HAM -->
-<div class="page-block">
-    <p>The world of Parma ham</p>
-</div>
+    <!-- PARALAX PAGE BREAK -->
+    <div class="paralax-background">
+    </div>
 
-<!-- MAGIC PAGE BREAK -->
-<div class="paralax-background-main">
-</div>
+</section>
 {% endblock %}
