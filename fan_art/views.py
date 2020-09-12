@@ -13,7 +13,8 @@ def fan_art_gallery(request):
     art_list = FanArt.objects.all().filter(is_approved=True)
 
     context = {
-        'art_list': art_list
+        'art_list': art_list,
+        'current_page': 'fan_art_gallery',
     }
 
     return render(request, 'fan_art/fan_art_gallery.html', context)
@@ -25,7 +26,8 @@ def user_gallery(request):
     users_art = FanArt.objects.all().filter(user_profile=request.user.id)
 
     context = {
-        'users_art': users_art
+        'users_art': users_art,
+        'current_page': 'fan_art_gallery',
     }
 
     return render(request, 'fan_art/user_art_gallery.html', context)
@@ -54,6 +56,7 @@ def edit_art(request, art_id):
     context = {
         'update_fan_art_form': update_fan_art_form,
         'fan_art': fan_art,
+        'current_page': 'fan_art_gallery',
     }
 
     return render(request, 'fan_art/edit_fan_art.html', context)
@@ -94,6 +97,7 @@ def add_art(request):
 
     context = {
         'add_art_form':  add_art_form,
+        'current_page': 'fan_art_gallery',
     }
 
     return render(request, 'fan_art/add_fan_art.html', context)

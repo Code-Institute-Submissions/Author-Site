@@ -25,23 +25,43 @@
             <ul class="navbar-nav">
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'products' %}">Shop</a>
-                    <div class="nav-underline"></div>
+                    {% if current_page == 'products' %}
+                        <div class="nav-underline-active"></div>
+                    {% else %}
+                        <div class="nav-underline"></div>
+                    {% endif %}
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'magic_door' %}">Ava's World</a>
-                    <div class="nav-underline"></div>
+                    {% if current_page == 'magic_door' %}
+                        <div class="nav-underline-active"></div>
+                    {% else %}
+                        <div class="nav-underline"></div>
+                    {% endif %}
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'parma_ham' %}">Parma Ham's World</a>
-                    <div class="nav-underline-active"></div>
+                    {% if current_page == 'parma_ham' %}
+                        <div class="nav-underline-active"></div>
+                    {% else %}
+                        <div class="nav-underline"></div>
+                    {% endif %}
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'about' %}">About Holly</a>
-                    <div class="nav-underline"></div>
+                    {% if current_page == 'about' %}
+                        <div class="nav-underline-active"></div>
+                    {% else %}
+                        <div class="nav-underline"></div>
+                    {% endif %}
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'fan_art_gallery' %}">Fan Art Gallery</a>
+                    {% if current_page == 'fan_art_gallery' %}
+                    <div class="nav-underline-active"></div>
+                {% else %}
                     <div class="nav-underline"></div>
+                {% endif %}
                 </li>
             </ul>
 

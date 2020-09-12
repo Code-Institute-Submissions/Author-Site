@@ -6,12 +6,15 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'static_pages/about.html')
+    context = {'current_page': 'about'}
+    return render(request, 'static_pages/about.html', context)
 
 
 def magic_door(request):
-    return render(request, 'static_pages/magic_door.html')
+    context = {'current_page': 'magic_door'}
+    return render(request, 'static_pages/magic_door.html', context)
 
 
 def parma_ham(request):
-    return render(request, 'static_pages/parma_ham.html')
+    context = {'current_page': 'parma_ham'}
+    return render(request, 'static_pages/parma_ham.html', context)
