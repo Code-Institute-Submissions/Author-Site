@@ -37,11 +37,11 @@
 
 
 /* ------------------------------- NAV BAR */
+
 #navbar {
     display: flex;
     background-color: white;
-    box-shadow: 0px 5px 5px grey;
-    margin-bottom: 5px;
+    flex-wrap: nowrap;
 }
 
 #navbar a {
@@ -53,14 +53,27 @@
     color: black;
 }
 
+.nav-link-container {
+    padding: 0 20px;
+}
+
+.nav-underline-active {
+    display: none;
+}
+
+.nav-underline {
+    display: none;
+}
+
 .logo-container {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
 
 .logo-container h1{
-    font-size: 5vw;
-    margin: 2.5vw 10px;
+    font-size: 6vw;
+    margin: 4px;
 }
 
 .nav-logo-div {
@@ -104,7 +117,12 @@
 
 /* -------------------------- MEDIA QUERIES*/
 
+
 @media (min-width: 576px) {
+    .logo-container h1{
+        font-size: 5vw;
+        margin: 6px;
+    }
     .paralax-background {
         height: 45vw;
     }
@@ -124,6 +142,7 @@
     }
 }
 
+
 @media (min-width: 768px) {
     .paralax-background {
         height: 40vw;
@@ -138,9 +157,14 @@
     }
 }
 
+
 @media (min-width: 992px) {
     #navbar {
         flex-direction: column;
+    }
+    .nav-link-container {
+        width: 100%;
+        padding: 0 20px;
     }
     .logo-container {
         width: 100%;
@@ -160,15 +184,40 @@
         justify-content: center;
         margin: 2px 2px;
     }
+    .nav-underline {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: #f7e799;
+    }
+    .nav-underline-active {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: #dab61a;
+        box-shadow: -1px 1px 8px #f5e388,
+                      1px 1px 8px #f5e388,
+                     1px -1px 8px #f5e388,
+                    -1px -1px 8px #f5e388;
+    }
     .paralax-text {
         font-size: 70px;
     }
     .modal-dialog {
         max-width: 800px !important;
     }
-
     .modal img {
         height: 185px;
         width: 185px;
     }
 }
+/*
+@media only screen and (min-width: 1200px) {
+    #navbar {
+        font-size: 21.4px;
+    }
+    .dropdown-item {
+        font-size: 21.4px;
+    }
+}
+*/

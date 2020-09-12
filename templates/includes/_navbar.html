@@ -13,7 +13,7 @@
         </a>
     </div>
 
-    <div class="container">
+    <div class="nav-link-container">
         <!-- MAIN MENU LINKS -->
 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -25,60 +25,68 @@
             <ul class="navbar-nav">
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'products' %}">Shop</a>
+                    <div class="nav-underline"></div>
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'magic_door' %}">Ava's World</a>
+                    <div class="nav-underline"></div>
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'parma_ham' %}">Parma Ham's World</a>
+                    <div class="nav-underline-active"></div>
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'about' %}">About Holly</a>
+                    <div class="nav-underline"></div>
                 </li>
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{% url 'fan_art_gallery' %}">Fan Art Gallery</a>
+                    <div class="nav-underline"></div>
                 </li>
             </ul>
 
 
             <ul class="navbar-nav ml-auto">
                 <!-- ACCOUNT MINIM MENU-->
+                <li class="nav-item dropdown">
+                    <a class="text-black nav-link " href="#" id="account-options"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button"
+                        aria-haspopup="true">
 
-                <a class="text-black nav-link" href="#" id="account-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="nav-icon-container">
-                        <div class="nav-icon-inner"><i class="fas fa-user fa-lg"></i></div>
-                        <div class="nav-icon-inner">&nbsp;   Account</div>
+                        <div class="nav-icon-container">
+                            <div class="nav-icon-inner"><i class="fas fa-user fa-lg"></i></div>
+                            <div class="nav-icon-inner">&nbsp;   Account</div>
+                        </div>
+                    </a>
+
+                    <!-- ACCOUNT DROPDOWNS-->
+                    <div class="dropdown-menu border-0" aria-labelledby="account-options">
+                        {% if request.user.is_authenticated %}
+
+                        {% if request.user.is_superuser %}
+                            <!-- TODO: where does this link lead to? -->
+                            <a href="" class="dropdown-item">Product Management</a>
+                        {% endif %}
+
+                        <a href="{% url 'user_gallery' %}" class="dropdown-item">My Art</a>
+                        <a href="{% url 'update_profile' %}" class="dropdown-item">My Details</a>
+                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+
+                        {% else %}
+                        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                        {% endif %}
                     </div>
+                </li>
 
-                </a>
-
-                <!-- ACCOUNT DROPDOWNS-->
-                <div class="dropdown-menu border-0" aria-labelledby="account-options">
-                    {% if request.user.is_authenticated %}
-
-                      {% if request.user.is_superuser %}
-                        <!-- TODO: where does this link lead to? -->
-                        <a href="" class="dropdown-item">Product Management</a>
-                      {% endif %}
-
-                      <a href="{% url 'user_gallery' %}" class="dropdown-item">My Art</a>
-                      <a href="{% url 'update_profile' %}" class="dropdown-item">My Details</a>
-                      <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-
-                    {% else %}
-                      <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                      <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                    {% endif %}
-                  </div>
-
-
-
-                <a class="nav-link" href="{% url 'view_or_update_shopping_basket' %}">
-                    <div class="nav-icon-container">
-                        <div class="nav-icon-inner"><i class="fas fa-shopping-basket fa-lg"></i></div>
-                        <div class="nav-icon-inner">&nbsp;  Basket ({{ shopping_basket.no_of_products }})</div>
-                    </div>
-                </a>
+                <li>
+                    <a class="nav-link" href="{% url 'view_or_update_shopping_basket' %}">
+                        <div class="nav-icon-container">
+                            <div class="nav-icon-inner"><i class="fas fa-shopping-basket fa-lg"></i></div>
+                            <div class="nav-icon-inner">&nbsp;  Basket ({{ shopping_basket.no_of_products }})</div>
+                        </div>
+                    </a>
+                </li>
 
             </ul>
         </div>
