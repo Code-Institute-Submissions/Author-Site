@@ -18,14 +18,16 @@
 
         <!-- BASKET -->
         <div class="row">
-            <div class="col">
+            <div class="container">
 
-                <a href="{% url 'products' %}" class="btn btn-light mb-4">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span>Back To Shop</span>
-                </a>
+                <div>
+                    <a href="{% url 'products' %}" class="glow-button mb-4">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span>Back To Shop</span>
+                    </a>
+                </div>
 
                 <!-- ITEMS -->
                 {% if shopping_basket.products %}
@@ -48,8 +50,16 @@
                                     {{ item.product.series }}
                                 </p>
                                 <p>{{ item.product.description }}</p>
-                                <a href="{% url 'product_detail' item.product.id %}"
-                                    class="btn btn-light btn-block">Read More</a>
+                                <div>
+                                    <a href="{% url 'product_detail' item.product.id %}"
+                                    class="glow-button">
+                                        <span class="icon">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </span>
+                                        <span>Product Page</span>
+                                    </a>
+                                </div>
+
                             </div>
 
                             <!-- AMOUNT & PRICE -->
@@ -113,6 +123,19 @@
                         <h6><strong>Shopping Basket Total: </strong>${{ shopping_basket.total_cost }}</h6>
                         <h6><strong>Shipping Total: </strong>${{ shopping_basket.shipping_cost }}</h6>
                         <h4 class="mt-4"><strong>Grand Total: ${{ shopping_basket.grand_total }}</strong></h4>
+
+                        <form action="#" method="POST">
+                            {% csrf_token %}
+
+                            <div>
+                                <button class="glow-button mt-3">
+                                <span class="icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </span>
+                                <span>Pay</span>
+                                </button>
+                            </div>
+                        </form>
                     </div>
 
                 {% else %}

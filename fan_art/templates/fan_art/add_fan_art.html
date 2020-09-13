@@ -18,12 +18,14 @@
 <section id="add-fan-art">
     <div class="container">
 
-        <a href="{% url 'user_gallery' %}" class="btn btn-light mb-4">
-            <span class="icon">
-                <i class="fas fa-palette"></i>
-            </span>
-            <span>Back To My Art</span>
-        </a>
+        <div>
+            <a href="{% url 'user_gallery' %}" class="glow-button mb-4">
+                <span class="icon">
+                    <i class="fas fa-palette"></i>
+                </span>
+                <span>My Art</span>
+            </a>
+        </div>
 
         <div class="tip-box">
             <p>
@@ -53,12 +55,14 @@
                     {{ add_art_form.series |as_crispy_field }}
                 </fieldset>
 
-                <button class="btn btn-light my-4">
-                    <span class="icon">
-                        <i class="fas fa-share-square"></i>
-                    </span>
-                    Upload
-                </button>
+                <div>
+                    <button class="glow-button my-4">
+                        <span class="icon">
+                            <i class="fas fa-share-square"></i>
+                        </span>
+                        Upload
+                    </button>
+                </div>
 
             </form>
         </div>

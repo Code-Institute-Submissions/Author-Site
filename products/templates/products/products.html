@@ -57,7 +57,14 @@
                                     <p class="card-text">
                                         {{ product.description }}
                                     </p>
-                                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-block">Read More</a>
+                                    <div class="single-button-container">
+                                        <a href="{% url 'product_detail' product.id %}" class="glow-button">
+                                            <span class="icon">
+                                                <i class="fab fa-readme"></i>
+                                            </span>
+                                            See Details
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

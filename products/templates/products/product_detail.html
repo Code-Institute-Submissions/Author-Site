@@ -10,12 +10,15 @@
 <!-- PRODUCT -->
 <section id="product" class="py-4">
     <div class="product-detail-container">
-        <a href="{% url 'products' %}" class="btn btn-light mb-4">
-            <span class="icon">
-                <i class="fas fa-chevron-left"></i>
-            </span>
-            <span>Back To Shop</span>
-        </a>
+
+        <div class="single-button-container-l mb-4">
+            <a href="{% url 'products' %}" class="glow-button">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span>Back To Shop</span>
+            </a>
+        </div>
 
         <div class="row">
             <div class="col">
@@ -65,14 +68,20 @@
                                 <p>{{ product.synopsis }}</p>
                             </div>
 
-                            <p>
-                                <a class="btn btn-light mb-4" data-toggle="collapse"
+                            <div class="single-button-container-l">
+                                <a class="glow-button mb-2" data-toggle="collapse"
                                     href="#collapseDetails" role="button"
                                     aria-expanded="false"
                                     aria-controls="collapseDetails">
-                                    Product Details
+                                    <span class="icon">
+                                        <i class="fab fa-readme"></i>
+                                    </span>
+                                    Details
+                                    <span class="icon">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </span>
                                 </a>
-                            </p>
+                            </div>
                             <div class="collapse" id="collapseDetails">
                                 <div class="card card-body">
                                     <p><strong>Author: </strong>{{ product.author }}</p>
@@ -98,16 +107,22 @@
                     <div>
                         <form action="{% url 'add_to_shopping_basket' product.id %}" method="POST">
                             {% csrf_token %}
+                            <div>
+                                <a href="{% url 'products' %}" class="glow-button mb-4">
+                                    <span class="icon">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span>Back To Shop</span>
+                                </a>
 
-                            <a href="{% url 'products' %}" class="btn btn-light mb-4">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span>Back To Shop</span>
-                            </a>
-
-                            <input type="submit" class="btn btn-light mb-4" value="Add to Bag">
-                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                <button type="submit" class="glow-button mb-4" value="Add to Bag">
+                                    <span class="icon">
+                                        <i class="fas fa-shopping-basket"></i>
+                                    </span>
+                                    <span>Add to Bag</span>
+                                </button>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            </div>
                         </form>
 
                     </div>
@@ -123,6 +138,8 @@
 
 <!-- MODAL -->
 {% block postloadjs %}
+    {{ block.super }}
+
     <script type="text/javascript">
         $(() => {
             $('.modal').modal()

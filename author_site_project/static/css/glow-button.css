@@ -1,0 +1,140 @@
+/*
+  CODE FROM:
+  https://www.codingnepalweb.com/2020/05/cool-glowing-effect-on-css-buttons.html
+*/
+
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+/*------------------------- CONTAINERS  */
+.double-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.single-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.single-button-container-l {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/*------------------------- BUTTONS */
+
+.glow-button{
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  margin: 5px 0;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  background: #e7be08;
+  color: #000;
+  font-size: 3vw;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0s;
+  padding: 10px 20px;
+  width: 48vw;
+  max-width: 230px;
+  text-decoration: none;
+}
+
+.delete-button {
+    background: red;
+    color: #fff;
+    text-align: center;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    font-size: 3vw;
+    display: inline-block;
+    position: relative;
+    margin: 5px 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    padding: 10px 20px;
+    width: 48vw;
+    max-width: 230px;
+    text-decoration: none;
+}
+
+/*------------------------- THE GLOW  */
+
+.glow-button:first-child:hover,
+.glow-button:last-child:hover {
+  background: linear-gradient(90deg, #f0cc2e, #f5e388, #dab61a, #ffeb3b, #f0cc2e);
+  background-size: 400%;
+  text-decoration: none;
+  color: #000;
+}
+
+.glow-button:first-child:before,
+.glow-button:last-child:before {
+  text-decoration: none;
+  color: #000;
+  content: '';
+  position: absolute;
+  background: inherit;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  border-radius: 50px;
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0s;
+}
+
+.glow-button:first-child:hover:before,
+.glow-button:last-child:hover:before {
+  opacity: 1;
+  z-index: -1;
+}
+
+.glow-button:hover{
+  z-index: 1;
+  animation: glow 8s linear infinite;
+}
+
+
+@keyframes glow {
+  0%{
+    background-position: 0%;
+  }
+  100%{
+    background-position: 400%;
+  }
+}
+
+/*------------------------- MEDIA QUERIES  */
+
+@media (min-width: 576px) {
+    .glow-button{
+        font-size: 17px;
+        width: 42vw;
+        margin: 5px 5px;
+    }
+    .delete-button {
+        font-size: 17px;
+        width: 42vw;
+        margin: 5px 5px;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .button-container {
+        flex-direction: row;
+        align-items: center;
+    }
+}
