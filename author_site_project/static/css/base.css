@@ -1,5 +1,10 @@
 /* ---------------------------- SITE WIDE STYLING */
 
+body {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1.1rem !important;
+}
+
 .page-title {
     margin: 45px 0;
     text-align: center;
@@ -25,6 +30,7 @@
 }
 
 .paralax-text {
+    font-family: 'Mystery Quest', cursive;
     color: #211f30;
     text-shadow: -1px 1px 8px #f5e388,
 				  1px 1px 8px #f5e388,
@@ -72,6 +78,7 @@
 }
 
 .logo-container h1{
+    font-family: 'Mystery Quest', cursive;
     font-size: 6vw;
     margin: 4px;
 }
