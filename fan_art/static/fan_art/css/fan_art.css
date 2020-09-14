@@ -6,17 +6,17 @@
 
 /* --------------------------- ADD FAN ART */
 
-#add-fan-art {
+.fan-art-form {
     width: 90vw;
     margin: auto;
 }
 
-#add-fan-art input {
+.fan-art-form input {
     width: 100%;
     margin-bottom: 5px;
 }
 
-#add-fan-art textarea {
+.fan-art-form textarea {
     width: 100%;
 }
 
@@ -34,7 +34,7 @@
 /* --------------------------- MEDIA QUERIES*/
 
 @media (min-width: 576px) {
-    #add-fan-art {
+    .fan-art-form {
         width: 80vw;
     }
     .edit-fan-art-image-display {
@@ -43,7 +43,7 @@
 }
 
 @media (min-width: 992px) {
-    #add-fan-art {
+    .fan-art-form {
         width: 800px;
     }
 }

@@ -7,19 +7,21 @@
 
 {% block content %}
 
-<!-- PAGE HEADER -->
+<!-- PARALAX HEADING -->
 <section id="page-heading">
-    <div>
-        <h1 class="page-title">Edit Your Art</h1>
+    <div class="paralax-background">
+        <div class="paralax-text-div">
+            <h2 class="paralax-text">Edit Your Art</h2>
+        </div>
     </div>
 </section>
 
 <!-- EDIT -->
 <section id="add-fan-art">
-    <div class="container">
+    <div class="container fan-art-form">
 
         <div>
-            <a href="{% url 'user_gallery' %}" class="glow-button mb-4">
+            <a href="{% url 'user_gallery' %}" class="glow-button my-4">
                 <span class="icon">
                     <i class="fas fa-palette"></i>
                 </span>
@@ -76,10 +78,12 @@
 
             </form>
         </div>
-
-
-
     </div>
+
+    <!-- PARALAX PAGE BREAK -->
+    <div class="paralax-background">
+    </div>
+
 </section>
 
 {% include 'fan_art/includes/_confirm_delete.html' %}

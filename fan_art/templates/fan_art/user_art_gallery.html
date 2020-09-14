@@ -9,10 +9,13 @@
 
 {% block content %}
 
-<!-- PAGE HEADER -->
+
+<!-- PARALAX HEADING -->
 <section id="page-heading">
-    <div>
-        <h1 class="page-title">Your Art</h1>
+    <div class="paralax-background">
+        <div class="paralax-text-div">
+            <h2 class="paralax-text">Your Art</h2>
+        </div>
     </div>
 </section>
 
@@ -22,14 +25,14 @@
 
         <div>
 
-            <a href="{% url 'fan_art_gallery' %}" class="glow-button mb-4">
+            <a href="{% url 'fan_art_gallery' %}" class="glow-button my-4">
                 <span class="icon">
                     <i class="fas fa-palette"></i>
                 </span>
                 <span>Main Gallery</span>
             </a>
 
-            <a href="{% url 'add_art' %}" class="glow-button mb-4">
+            <a href="{% url 'add_art' %}" class="glow-button my-4">
                 <span class="icon">
                     <i class="fas fa-paint-brush"></i>
                 </span>
@@ -111,9 +114,13 @@
             </a>
         </div>
 
+         <!-- PARALAX PAGE BREAK -->
+
+
     </div>
 
-
+<div class="paralax-background">
+    </div>
 </section>
 
 {% endblock %}

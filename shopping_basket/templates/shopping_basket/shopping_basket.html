@@ -10,18 +10,21 @@
 
     <section id="basket">
 
-        <!-- PAGE HEADER -->
-        <div>
-            <h1 class="page-title">Your Basket</h1>
-            <hr>
-        </div>
+        <!-- PARALAX HEADING -->
+        <section id="page-heading">
+            <div class="paralax-background">
+                <div class="paralax-text-div">
+                    <h2 class="paralax-text">Your Basket</h2>
+                </div>
+            </div>
+        </section>
 
         <!-- BASKET -->
         <div class="row">
             <div class="container">
 
-                <div>
-                    <a href="{% url 'products' %}" class="glow-button mb-4">
+                <div class="basket-button-div">
+                    <a href="{% url 'products' %}" class="glow-button my-4">
                         <span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
@@ -37,7 +40,7 @@
 
                             <!-- IMAGE -->
                             <div>
-                                <img src="{{ item.product.image.url }}" alt="product photo">
+                                <img src="{{ item.product.image.url }}" alt="product photo" class="mb-3">
                             </div>
 
                             <!-- DETAILS -->
@@ -132,7 +135,7 @@
                             {% csrf_token %}
 
                             <div>
-                                <button class="glow-button mt-3">
+                                <button class="glow-button mt-3 my-4">
                                 <span class="icon">
                                     <i class="fas fa-money-bill-wave"></i>
                                 </span>
@@ -144,19 +147,27 @@
 
                 {% else %}
 
-                <div>
-                    <p>Hey, looks like your bag is empty!</p>
-                    <a href="{% url 'products' %}" class="btn btn-light mb-4">
+                <div class="empty-basket-div">
+
+
+                    <div class="empty-basket-icon">
                         <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
+                            <i class="fas fa-shopping-basket"></i>
                         </span>
-                        <span>Visit Shop</span>
-                    </a>
+                        <br>
+                        <p>Hey, looks like your bag is empty! Why not check out the shop?</p>
+                    </div>
+
+
                 </div>
 
                 {% endif %}
             </div>
         </div>
+          <!-- PARALAX PAGE BREAK -->
+    <div class="paralax-background">
+    </div>
+
     </section>
 
 
