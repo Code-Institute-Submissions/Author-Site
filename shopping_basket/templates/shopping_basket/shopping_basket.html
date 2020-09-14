@@ -72,7 +72,7 @@
 
                                     <div class="amount-form-group">
                                         <button
-                                            name="increment" class="btn btn-light mb-2"
+                                            name="increment" class="square-button"
                                             type="button">
                                             <i class="fas fa-plus"></i>
                                         </button>
@@ -82,7 +82,7 @@
 
 
                                         <button
-                                            name="decrement" class="btn btn-light mb-2"
+                                            name="decrement" class="square-button"
                                             type="button">
                                             <i class="fas fa-minus"></i>
                                         </button>
@@ -91,11 +91,15 @@
                                             value="{{ item.product.id }}">
                                     </div>
 
-                                    <button id="update-button"
-                                        class="btn btn-light btn-block" type="submit">
-                                        Update
-                                    </button>
-
+                                    <div>
+                                        <button id="update-button"
+                                            class="short-button" type="submit">
+                                            <span class="icon">
+                                                <i class="fas fa-share"></i>
+                                            </span>
+                                            <span>Update</span>
+                                        </button>
+                                    </div>
                                 </form>
 
 

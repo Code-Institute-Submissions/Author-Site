@@ -60,6 +60,11 @@
     text-decoration: line-through;
 }
 
+.basket-item.zero .short-button {
+    background: red;
+    color: #fff;
+}
+
 
 /* -------------------------------- MEDIA QUERIES */
 
