@@ -43,6 +43,24 @@
 
         <hr>
 
+        {% if unapproved_art == True %}
+            <div id="unapproved-art-alert" class="alert alert-primary my-5" role="alert">
+                <p>
+                    Hey! It looks like you have recently added some art!
+                    All art is looked at by one of our moderators to make
+                    sure both the art itself and the text are suitable
+                    for all audiences. Once it's been approved it will
+                    appear in the main art gallery for the world to admire!
+                    <br><br>
+                    Please note that this also applies to art that has
+                    previously been approved, but has then has been edited.  
+                </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
         <div class="row">
 
             {% if  user_fan_art %}
