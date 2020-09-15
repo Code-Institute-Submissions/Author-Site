@@ -23,7 +23,7 @@ body {
 .paralax-text-div {
     height: 100%;
     width: 100%;
-    padding: 10vw;
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
