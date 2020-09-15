@@ -4,6 +4,15 @@
     pointer-events: none;
 }
 
+#unapproved-art-alert {
+    display: flex;
+    align-items: flex-start;
+}
+
+#unapproved-art-alert button {
+    margin-left: 5px;
+}
+
 /* --------------------------- ADD FAN ART */
 
 .fan-art-form {

@@ -31,6 +31,13 @@ def user_gallery(request):
 
     user_fan_art = FanArt.objects.all().filter(user_profile=request.user.id)
 
+    # Checking for unapproved user_fan_art
+    unapproved_art = False
+
+    for art in user_fan_art:
+        if not art.is_approved:
+            unapproved_art = True
+
     # Pagination
     paginator = Paginator(user_fan_art, 9)
     page = request.GET.get('page')
@@ -39,6 +46,7 @@ def user_gallery(request):
     context = {
         'user_fan_art': paged_user_fan_art,
         'current_page': 'fan_art_gallery',
+        'unapproved_art': unapproved_art,
     }
 
     return render(request, 'fan_art/user_art_gallery.html', context)
