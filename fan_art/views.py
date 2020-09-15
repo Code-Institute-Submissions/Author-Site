@@ -1,3 +1,4 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,10 +11,15 @@ from .forms import CreateFanArtForm, UpdateFanArtForm
 def fan_art_gallery(request):
     """ A view to return all peices of fan art """
 
-    art_list = FanArt.objects.all().filter(is_approved=True)
+    fan_art = FanArt.objects.all().filter(is_approved=True)
+
+    # Pagination
+    paginator = Paginator(fan_art, 9)
+    page = request.GET.get('page')
+    paged_fan_art = paginator.get_page(page)
 
     context = {
-        'art_list': art_list,
+        'fan_art': paged_fan_art,
         'current_page': 'fan_art_gallery',
     }
 
@@ -23,10 +29,15 @@ def fan_art_gallery(request):
 def user_gallery(request):
     """ A view to return the user's submitted fan art """
 
-    users_art = FanArt.objects.all().filter(user_profile=request.user.id)
+    user_fan_art = FanArt.objects.all().filter(user_profile=request.user.id)
+
+    # Pagination
+    paginator = Paginator(user_fan_art, 9)
+    page = request.GET.get('page')
+    paged_user_fan_art = paginator.get_page(page)
 
     context = {
-        'users_art': users_art,
+        'user_fan_art': paged_user_fan_art,
         'current_page': 'fan_art_gallery',
     }
 

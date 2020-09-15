@@ -1,4 +1,6 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render, get_object_or_404
+
 
 from .models import Product
 from series.models import Series
@@ -30,8 +32,13 @@ def all_products(request):
         except ValueError:
             selected_product_type = ''
 
+    # Pagination
+    paginator = Paginator(products, 9)
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+
     context = {
-        'products': products,
+        'products': paged_products,
         'current_page': 'products',
         'selected_series': selected_series,
         'series_list': series_list,
