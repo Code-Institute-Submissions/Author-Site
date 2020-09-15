@@ -17,8 +17,58 @@
         </div>
     </section>
 
+
+    <!-- PRODUCT FILTERS -->
+    <section id="product-filter">
+        <div class="container">
+            <form id="filter-products-form" class="form" method="GET" action="{% url 'products' %}">
+
+                <div id="series-filter" class="form-group">
+                    <select name="series" class="form-control">
+
+                        {% if selected_series == '' %}
+                            <option value="" selected>All Series</option>
+                        {% else %}
+                            <option value="">All Series</option>
+                        {% endif %}
+
+                        {% for series in series_list %}
+                            {% if selected_series == series.id %}
+                                <option value="{{ series.id }}" selected>{{ series.name }}</option>
+                            {% else %}
+                                <option value="{{ series.id }}">{{ series.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <div id="product-type-filter" class="form-group">
+                    <select name="product_type" class="form-control">
+
+                        {% if selected_product_type == '' %}
+                            <option value="" selected>All Products</option>
+                        {% else %}
+                            <option value="">All Products</option>
+                        {% endif %}
+
+                        {% for db_name, display_name in product_types %}
+                            {% if db_name == selected_product_type %}
+                                <option value="{{ db_name }}" selected>{{ display_name }}</option>
+                            {% else %}
+                                <option value="{{ db_name }}">{{ display_name }}</option>
+                            {% endif %}
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
     <!-- PRODUCTS -->
-    <section id="listings" class="py-4">
+    <section id="products" class="py-4">
         <div class="container">
             <div class="row">
 
@@ -96,5 +146,14 @@
 
     </section>
 
+
+{% endblock %}
+
+<!-- CODE FOR FILTERING PRODUCTS -->
+{% block postloadjs %}
+
+    {{block.super}}
+
+    <script type="text/javascript" src="{% static 'products/js/products.js' %}"></script>
 
 {% endblock %}
