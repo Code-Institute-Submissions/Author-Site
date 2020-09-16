@@ -41,6 +41,25 @@ body {
     text-align: center;
 }
 
+.empty-basket-div {
+    height: 50vw;
+    max-height: 500px;
+    padding: 0 10%;
+}
+
+.empty-basket-icon {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-basket-icon i {
+   font-size: 10vw;
+   color: lightgrey;
+}
+
 
 /* ------------------------------- NAV BAR */
 

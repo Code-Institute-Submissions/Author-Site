@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+        href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- PARALAX HEADING -->
+    <section id="page-heading">
+        <div class="paralax-background">
+            <div class="paralax-text-div">
+                <h2 class="paralax-text">Orders</h2>
+            </div>
+        </div>
+    </section>
+
+    <section id="orders">
+
+        {% if user_orders %}
+
+            <div class="container">
+
+                {% for order in user_orders %}
+                <!-- ORDER TABLE -->
+                <div class="order-table-container">
+
+                    <div>
+                        <h4 class="order-heading">Order Details</h4>
+                        <hr>
+                        <p><span class="order-info-heading">Date:</span>&nbsp; 02/02/2020</p>
+                        <p><span class="order-info-heading">Items:</span></p>
+                        <p>Ava & The Magic Door - Audio book - 1</p>
+                        <p>Ava & The Magic Door - Hard Back Book - 2</p>
+                        <p><span class="order-info-heading">Total:</span>&nbsp; $20.00</p>
+                        <p><span class="order-info-heading">Status:</span>&nbsp; Paid - Shipped</p>
+                    </div>
+
+                    <div class="order-button-div">
+                        <a href="{% url 'order' %}" class="glow-button">
+                            <span class="icon">
+                                <i class="fas fa-receipt"></i>
+                            </span>
+                            <span>See Order</span>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+            </div>
+
+        {% else %}
+
+            <div class="container empty-orders-container">
+
+                <div class="empty-basket-icon">
+                    <span class="icon">
+                        <i class="fas fa-shopping-basket"></i>
+                    </span>
+                    <br>
+                    <p>Hey, looks like you havent made any purchases yet! Why not check out the shop?</p>
+                </div>
+
+                <div class="basket-button-div">
+                    <a href="{% url 'products' %}" class="glow-button my-4">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span>To Shop</span>
+                    </a>
+                </div>
+
+            </div>
+
+        {% endif %}
+    </section>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+        href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- PARALAX HEADING -->
+    <section id="page-heading">
+        <div class="paralax-background">
+            <div class="paralax-text-div">
+                <h2 class="paralax-text">Orders</h2>
+            </div>
+        </div>
+    </section>
+
+    <section id="orders">
+
+        {% if user_order %}
+
+            <div class="container">
+
+
+                <!-- ORDER TABLE -->
+                <div class="order-table-container">
+
+                    <div>
+                        <h4 class="order-heading">Order Details</h4>
+                        <hr>
+                        <p><span class="order-info-heading">Date:</span>&nbsp; 02/02/2020</p>
+                        <p><span class="order-info-heading">Order Number:</span>&nbsp; wq09346734675+24571+8541´90</p>
+                        <p><span class="order-info-heading">Items:</span></p>
+
+                        <div class="order-line-item-div">
+                            <p><strong>Ava & The Magic Door</strong></p>
+                            <p>Audio book</p>
+                            <p>Price: $14.00</p>
+                            <p>Shipping: $9.00</p>
+                            <p>Quantity: 1</p>
+                            <p><strong>Sub Total: $14.00</strong></p>
+                        </div>
+
+                        <div class="order-line-item-div">
+                            <p><strong>Ava & The Magic Door</strong></p>
+                            <p>Hard Back Book</p>
+                            <p>Price: $14.00</p>
+                            <p>Shipping: $9.00</p>
+                            <p>Quantity: 2</p>
+                            <p><strong>Sub Total: $28.00</strong></p>
+                        </div>
+
+
+                        <p><span class="order-info-heading">Total:</span>&nbsp; $20.00</p>
+                        <p><span class="order-info-heading">Shipping:</span>&nbsp; $20.00</p>
+                        <hr>
+                        <p class="order-info-large"><span class="order-info-heading">Grand Total:</span>&nbsp; $20.00</p>
+                        <p class="order-info-large"><span class="order-info-heading">Status:</span>&nbsp; Paid - Shipped</p>
+                    </div>
+
+                    <div class="order-button-div">
+                        <a href="{% url 'orders' %}" class="glow-button">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span>Orders</span>
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        {% else %}
+
+            <div class="container empty-orders-container">
+
+                <div class="empty-basket-icon">
+                    <span class="icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    <br>
+                    <p>Oh my, it looks like something went wrong! Please contact us to find out why</p>
+                </div>
+
+                <div class="basket-button-div">
+                    <a href="{% url 'index' %}" class="glow-button my-4">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span>Home</span>
+                    </a>
+                </div>
+
+            </div>
+
+        {% endif %}
+    </section>
+
+{% endblock %}
