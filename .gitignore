@@ -5,3 +5,4 @@ venv
 .env
 .vscode
 .mypy_cache
+/media
