@@ -129,13 +129,20 @@
                                 {{ order_form.shipping_country | as_crispy_field }}
                             </fieldset>
 
+                            <!-- MINI HEADING -->
+                            <div class="my-4 ml-4">
+                                <span class="checkout-line-info-heading-dark">Card Details</span>
+                            </div>
+
                             <!-- STRIPE ELEMENTS -->
-                            <div class="mt-4" id="card-element"> <!-- Stripe.js injects the Card Element --> </div>
-                            <p id="card-error" role="alert"></p>
-                            <p class="result-message hidden">
-                                Payment succeeded, see the result in your
-                                <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
-                            </p>
+                            <fieldset id="payment-section"  class="order-form-section">
+                                <div class="mt-4" id="card-element"> <!-- Stripe.js injects the Card Element --> </div>
+                                <div id="card-error" role="alert"></div>
+                            </fieldset>
+
+                            <!-- Client secret & public key from view passed to JavaScript handling the stripe payment -->
+                            <input type="hidden" value="{{ client_secret }}" id="client_secret">
+                            <input type="hidden" value="{{ stripe_public_key }}" id="stripe_public_key">
 
                             <!-- BUTTONS -->
                             <div class="container checkout-form-buttons">

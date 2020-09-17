@@ -50,6 +50,14 @@
     padding: 10px;
 }
 
+#payment-section {
+    width: 80vw;
+    margin: auto;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .checkout-form-buttons {
     margin: 20px 0;
     display: flex;
