@@ -141,6 +141,51 @@ body {
 }
 
 
+/* -------------------------- FOOTER */
+
+.footer {
+    height: 100px;
+    padding: 0 10vw;
+    display: flex;
+    align-items: center;
+}
+
+.footer-inner {
+    display: flex;
+    height: 70px;
+}
+
+.publisher-info-div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.publishing-logo-div {
+    background-image: url(/static/img/publishing-logo.png);
+    min-width: 27px;
+    width: 8vw;
+    min-height: 27px;
+    height: 8vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.publisher-info-div p {
+    margin-bottom: 0 !important;
+    margin-left: 10px;
+    font-size: 1.4rem;
+    font-family: "Times New Roman", Times, serif !important;
+}
+
+.vertical-line-div {
+    min-height: 34px;
+    height: 10vw;
+    width: 3px;
+    background-color: black;
+}
+
 /* -------------------------- MEDIA QUERIES*/
 
 
@@ -165,6 +210,13 @@ body {
     .modal img {
         height: 18vw;
         width: 18vw;
+    }
+    .publishing-logo-div {
+        width: 45px;
+        height: 45px;
+    }
+    .vertical-line-div {
+        height: 57px;
     }
 }
 
