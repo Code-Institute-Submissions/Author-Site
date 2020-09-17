@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+        href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://js.stripe.com/v3/"></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+        <!-- PARALAX HEADING -->
+        <section id="page-heading">
+            <div class="paralax-background">
+                <div class="paralax-text-div">
+                    <h2 class="paralax-text">Checkout</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKOUT -->
+        <section id="checkout">
+            <div class="row">
+
+                <div id="overview-and-form" class="container">
+
+                    <div id="order-preview-section">
+
+                        <!-- MINI HEADING -->
+                        <div class="my-4 ml-4">
+                            <span class="checkout-line-info-heading-dark">Order Preview</span>
+                        </div>
+
+
+                        <!-- BASKET OVERVIEW -->
+                        {% for item in shopping_basket.products %}
+                            <div class="checkout-line-item">
+
+                                    <!-- DETAILS -->
+                                    <div class="checkout-line-item-info-div">
+                                        <p><span class="checkout-line-info-heading">Item:</span>&nbsp; {{ item.product.name }}</p>
+                                        <p><span class="checkout-line-info-heading">Type:</span>&nbsp; {{ item.product.get_product_type_display }} - {{ item.amount }}</p>
+                                    </div>
+
+                                    <!-- RUNNING TOTAL-->
+                                    <div class="checkout-line-item-price-div">
+                                        <p><span class="checkout-line-info-heading">Price:</span>&nbsp; ${{ item.product.price }}</p>
+                                        {% if item.amount > 1 %}
+                                            <p><span class="checkout-line-info-heading">Sub Total:</span>&nbsp; ${{ item.subtotal }}</p>
+                                        {% endif %}
+                                        <p><span class="checkout-line-info-heading">Shipping:</span>&nbsp; ${{ item.product.shipping }}</p>
+                                    </div>
+                            </div>
+                        {% endfor %}
+
+
+                        <!-- TOTAL -->
+                        <div class="total-container">
+                            <p><span class="checkout-line-info-heading">Order Total:</span>&nbsp; ${{ shopping_basket.total_cost }}</p>
+                            <p><span class="checkout-line-info-heading">Shipping Total:</span>&nbsp; ${{ shopping_basket.shipping_cost }}</p>
+                            <p><span class="checkout-line-info-heading">Order Total:</span>&nbsp; <strong>${{ shopping_basket.grand_total }}</strong></p>
+                        </div>
+
+                    </div>
+
+                    <div id="payment-form-section">
+
+                        <!-- ORDER FORM -->
+                        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                            {% csrf_token %}
+
+                            <!-- MINI HEADING -->
+                            <div class="my-4 ml-4">
+                                <span class="checkout-line-info-heading-dark">Your Details</span>
+                            </div>
+
+                            <fieldset class="order-form-section">
+                                {{ order_form.full_name | as_crispy_field }}
+                                {{ order_form.email | as_crispy_field }}
+                                {{ order_form.phone_number | as_crispy_field }}
+                            </fieldset>
+
+                            <!-- MINI HEADING -->
+                            <div class="my-4 ml-4">
+                                <span class="checkout-line-info-heading-dark">Gift Message</span>
+                            </div>
+
+                            <fieldset class="order-form-section ">
+                                {{ order_form.gift_message | as_crispy_field }}
+                            </fieldset>
+
+                            <!-- MINI HEADING -->
+                            <div class="my-4 ml-4">
+                                <span class="checkout-line-info-heading-dark">Card Address</span>
+                            </div>
+
+                            <fieldset class="order-form-section ">
+                                {{ order_form.payment_street_address1 | as_crispy_field }}
+                                {{ order_form.payment_street_address2 | as_crispy_field }}
+                                {{ order_form.payment_town_or_city | as_crispy_field }}
+                                {{ order_form.payment_county | as_crispy_field }}
+                                {{ order_form.payment_postcode | as_crispy_field }}
+                                {{ order_form.payment_country | as_crispy_field }}
+                            </fieldset>
+
+                            <!-- MINI HEADING -->
+                            <div class="my-4 ml-4">
+                                <span class="checkout-line-info-heading-dark">Shipping Address</span>
+                            </div>
+
+                            <fieldset class="order-form-section mb-2">
+                                <input type="checkbox" id="use-card-address-as-shipping-address" name="use-card-address-as-shipping-address">
+                                <label for="use-card-address-as-shipping-address"> Use card address</label><br>
+                            </fieldset>
+
+                            <fieldset id="shipping-address-div" class="order-form-section">
+                                {{ order_form.shipping_full_name | as_crispy_field }}
+                                {{ order_form.shipping_street_address1 | as_crispy_field }}
+                                {{ order_form.shipping_street_address2 | as_crispy_field }}
+                                {{ order_form.shipping_town_or_city | as_crispy_field }}
+                                {{ order_form.shipping_county | as_crispy_field }}
+                                {{ order_form.shipping_postcode | as_crispy_field }}
+                                {{ order_form.shipping_country | as_crispy_field }}
+                            </fieldset>
+
+                            <!-- STRIPE ELEMENTS -->
+                            <div class="mt-4" id="card-element"> <!-- Stripe.js injects the Card Element --> </div>
+                            <p id="card-error" role="alert"></p>
+                            <p class="result-message hidden">
+                                Payment succeeded, see the result in your
+                                <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+                            </p>
+
+                            <!-- BUTTONS -->
+                            <div class="container checkout-form-buttons">
+                                <a href="{% url 'view_or_update_shopping_basket' %}" class="glow-button">
+                                    <span class="icon">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span id="button-text">Back To Basket</span>
+                                </a>
+
+                                <button id="submit" class="glow-button">
+                                    <div class="spinner hidden" id="spinner"></div>
+                                    <span class="icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </span>
+                                    <span>Pay</span>
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        <!-- PARALAX PAGE BREAK -->
+        <div class="paralax-background">
+        </div>
+
+    </section>
+
+
+{% endblock %}
+
+
+<!-- STRIPE CODE -->
+{% block postloadjs %}
+
+    {{block.super}}
+
+    <script type="text/javascript" src="{% static 'checkout/js/checkout.js' %}"></script>
+
+{% endblock %}

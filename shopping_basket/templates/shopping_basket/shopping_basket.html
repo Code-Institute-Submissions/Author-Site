@@ -131,18 +131,16 @@
                         <h6><strong>Shipping Total: </strong>${{ shopping_basket.shipping_cost }}</h6>
                         <h4 class="mt-4"><strong>Grand Total: ${{ shopping_basket.grand_total }}</strong></h4>
 
-                        <form action="#" method="POST">
-                            {% csrf_token %}
 
                             <div>
-                                <button class="glow-button mt-3 my-4">
-                                <span class="icon">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                </span>
-                                <span>Pay</span>
-                                </button>
+                                <a href="{% url 'checkout' %}" class="glow-button my-4">
+                                    <span class="icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </span>
+                                    <span>Pay</span>
+                                </a>
                             </div>
-                        </form>
+
                     </div>
 
                 {% else %}
