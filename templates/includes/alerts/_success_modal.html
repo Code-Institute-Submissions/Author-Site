@@ -44,10 +44,22 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Keep Shopping</button>
-        <a href="{% url 'view_or_update_shopping_basket' %}" class="btn btn-light">
-          <span>Go To Basket</span>
-        </a>
+
+        <div>
+          <button type="button" class="glow-button" data-dismiss="modal">
+            <span class="icon">
+              <i class="fas fa-tags"></i>
+            </span>
+            <span>Keep Shopping</span>
+          </button>
+          <a href="{% url 'view_or_update_shopping_basket' %}" class="glow-button">
+            <span class="icon">
+              <i class="fas fa-shopping-basket"></i>
+            </span>
+            <span>Go To Basket</span>
+          </a>
+        </div>
+
       </div>
 
     </div>
