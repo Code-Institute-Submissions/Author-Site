@@ -72,8 +72,10 @@
 
                         <div class="card">
                             <div>
-                                <img class="card-img-top" src="{{ art.image.url }}"
-                                alt="product photo">
+                                <div class="card-image-div">
+                                    <img class="card-img-top" src="{{ art.image.url }}"
+                                    alt="product photo">
+                                </div>
 
                                 {% if not art.is_approved %}
                                     <div class="card-img-overlay">
