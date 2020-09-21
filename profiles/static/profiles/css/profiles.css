@@ -1,6 +1,6 @@
-.order-table-container {
+.order-detail-container {
     border: 1px solid lightgrey;
-    margin-top: 5vw;
+    margin: 5vw 0;
     padding: 15px;
     border-radius: 20px;
     display: flex;
