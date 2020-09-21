@@ -147,6 +147,7 @@ body {
     padding: 0 10vw;
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .footer-inner {
@@ -174,16 +175,17 @@ body {
 .publisher-info-div p {
     margin-bottom: 0 !important;
     margin-left: 10px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-family: "Times New Roman", Times, serif !important;
 }
 
 .vertical-line-div {
-    min-height: 34px;
+    min-height: 30px;
     height: 10vw;
     width: 3px;
     background-color: black;
 }
+
 
 /* -------------------------- MEDIA QUERIES*/
 
@@ -215,7 +217,11 @@ body {
         height: 45px;
     }
     .vertical-line-div {
-        height: 57px;
+        height: 50px;
+    }
+    .footer {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 
