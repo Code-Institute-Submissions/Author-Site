@@ -18,12 +18,6 @@
     font-weight: 600;
 }
 
-.checkout-line-info-heading-dark {
-    text-transform: uppercase;
-    color: black;
-    font-weight: 600;
-}
-
 .total-container {
     display: flex;
     flex-direction: column;
@@ -31,39 +25,6 @@
     margin: 0 4vw;
 }
 
-
-/* -------------- CHECKOUT FORM  */
-
-.order-form-section {
-    width: 80vw;
-    margin: auto;
-}
-
-.order-form-section .textinput,
-.order-form-section textarea,
-#id_payment_country,
-#id_shipping_country {
-    width: 100%;
-    margin-bottom: 5px;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-#payment-section {
-    width: 80vw;
-    margin: auto;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.checkout-form-buttons {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 /* -------------- MEDIA QUERIES */
 
@@ -73,13 +34,7 @@
         justify-content: space-between;
         width: auto;
     }
-    .checkout-form-buttons {
-        flex-direction: row;
-        justify-content: flex-end;
-    }
 }
-
-@media (min-width: 768px) {}
 
 @media (min-width: 992px) {
     #overview-and-form {
@@ -98,9 +53,5 @@
         flex-direction: column;
         justify-content: space-between;
         width: auto;
-    }
-    .order-form-section {
-        width: 100%;
-        margin: auto;
     }
 }

@@ -34,7 +34,7 @@
 
                         <!-- MINI HEADING -->
                         <div class="my-4 ml-4">
-                            <span class="checkout-line-info-heading-dark">Order Preview</span>
+                            <span class="form-section-heading">Order Preview</span>
                         </div>
 
 
@@ -77,10 +77,10 @@
 
                             <!-- MINI HEADING -->
                             <div class="my-4 ml-4">
-                                <span class="checkout-line-info-heading-dark">Your Details</span>
+                                <span class="form-section-heading">Your Details</span>
                             </div>
 
-                            <fieldset class="order-form-section">
+                            <fieldset class="form-section">
                                 {{ order_form.full_name | as_crispy_field }}
                                 {{ order_form.email | as_crispy_field }}
                                 {{ order_form.phone_number | as_crispy_field }}
@@ -88,19 +88,19 @@
 
                             <!-- MINI HEADING -->
                             <div class="my-4 ml-4">
-                                <span class="checkout-line-info-heading-dark">Gift Message</span>
+                                <span class="form-section-heading">Gift Message</span>
                             </div>
 
-                            <fieldset class="order-form-section ">
+                            <fieldset class="form-section ">
                                 {{ order_form.gift_message | as_crispy_field }}
                             </fieldset>
 
                             <!-- MINI HEADING -->
                             <div class="my-4 ml-4">
-                                <span class="checkout-line-info-heading-dark">Card Address</span>
+                                <span class="form-section-heading">Card Address</span>
                             </div>
 
-                            <fieldset class="order-form-section ">
+                            <fieldset class="form-section ">
                                 {{ order_form.payment_street_address1 | as_crispy_field }}
                                 {{ order_form.payment_street_address2 | as_crispy_field }}
                                 {{ order_form.payment_town_or_city | as_crispy_field }}
@@ -111,7 +111,7 @@
 
                             <!-- MINI HEADING -->
                             <div class="my-4 ml-4">
-                                <span class="checkout-line-info-heading-dark">Shipping Address</span>
+                                <span class="form-section-heading">Shipping Address</span>
                             </div>
 
                             <fieldset class="order-form-section mb-2">
@@ -119,7 +119,7 @@
                                 <label for="use-card-address-as-shipping-address"> Use card address</label><br>
                             </fieldset>
 
-                            <fieldset id="shipping-address-div" class="order-form-section">
+                            <fieldset id="shipping-address-div" class="form-section">
                                 {{ order_form.shipping_full_name | as_crispy_field }}
                                 {{ order_form.shipping_street_address1 | as_crispy_field }}
                                 {{ order_form.shipping_street_address2 | as_crispy_field }}
@@ -131,11 +131,11 @@
 
                             <!-- MINI HEADING -->
                             <div class="my-4 ml-4">
-                                <span class="checkout-line-info-heading-dark">Card Details</span>
+                                <span class="form-section-heading">Card Details</span>
                             </div>
 
                             <!-- STRIPE ELEMENTS -->
-                            <fieldset id="payment-section"  class="order-form-section">
+                            <fieldset id="payment-section"  class="form-section">
                                 <div class="mt-4" id="card-element"> <!-- Stripe.js injects the Card Element --> </div>
                                 <div id="card-error" role="alert"></div>
                             </fieldset>
@@ -150,7 +150,7 @@
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
-                                    <span id="button-text">Back To Basket</span>
+                                    <span id="button-text">Back</span>
                                 </a>
 
                                 <button id="submit" class="glow-button">

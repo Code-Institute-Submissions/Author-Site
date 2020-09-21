@@ -1,17 +1,69 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+        href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
+
 
 {% block content %}
 
-<div>
-    <form action="{% url 'update_profile' %}" method="POST" >
-        {% csrf_token %}
-        {{ user_form|crispy }}
-        {{ user_profile_form|crispy }}
-        <button >
-            Update Information
-        </button>
-    </form>
-</div>
+  <!-- PARALAX HEADING -->
+  <section id="page-heading">
+    <div class="paralax-background">
+        <div class="paralax-text-div">
+            <h2 class="paralax-text">My Details</h2>
+        </div>
+    </div>
+    </section>
+
+    <section id="profile-details">
+
+        <div id="profile-details-form-container">
+            <form action="{% url 'update_profile' %}" method="POST" >
+                {% csrf_token %}
+
+                <!-- MINI HEADING -->
+                <div class="my-4 ml-4">
+                    <span class="form-section-heading">Your Details</span>
+                </div>
+
+                <fieldset class="form-section">
+                    {{ user_form.first_name | as_crispy_field }}
+                    {{ user_form.last_name | as_crispy_field }}
+                    {{ user_form.email | as_crispy_field }}
+                    {{ user_profile_form.default_phone_number | as_crispy_field }}
+                </fieldset>
+
+                <!-- MINI HEADING -->
+                <div class="my-4 ml-4">
+                    <span class="form-section-heading">Your Address</span>
+                </div>
+
+                <fieldset class="form-section">
+                    {{ user_profile_form.default_street_address1 | as_crispy_field }}
+                    {{ user_profile_form.default_street_address2 | as_crispy_field }}
+                    {{ user_profile_form.default_town_or_city | as_crispy_field }}
+                    {{ user_profile_form.default_county | as_crispy_field }}
+                    {{ user_profile_form.default_postcode | as_crispy_field }}
+                    {{ user_profile_form.default_country | as_crispy_field }}
+                </fieldset>
+
+                <div>
+                    <button class="glow-button my-4">
+                        <span class="icon">
+                            <i class="fas fa-share"></i>
+                        </span>
+                        <span>Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PARALAX PAGE BREAK -->
+        <div class="paralax-background"></div>
+    </section>
 
 
 
