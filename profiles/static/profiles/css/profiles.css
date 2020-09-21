@@ -1,3 +1,5 @@
+/* ----------------------- ORDERS */
+
 .order-detail-container {
     border: 1px solid lightgrey;
     margin: 5vw 0;
@@ -42,7 +44,7 @@
     margin-bottom: 10vw;
 }
 
-
+/* ----------------------- MEDIA QUERIES */
 
 @media (min-width: 992px) {
     .empty-orders-container {
