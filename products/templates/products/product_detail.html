@@ -5,16 +5,12 @@
     <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
-{% block content %}
 
 <!-- PARALAX HEADING -->
-<section id="page-heading">
-    <div class="paralax-background">
-        <div class="paralax-text-div">
-            <h2 class="paralax-text">Details</h2>
-        </div>
-    </div>
-</section>
+{% block paralax_title%} Details {% endblock%}
+
+
+{% block content %}
 
 <!-- PRODUCT -->
 <section id="product" class="py-4">
@@ -138,9 +134,6 @@
             </div>
         </div>
     </div>
-
-    <!-- PARALAX PAGE BREAK -->
-    <div class="paralax-background"></div>
 
 </section>
 

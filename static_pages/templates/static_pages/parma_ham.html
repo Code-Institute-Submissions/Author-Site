@@ -5,20 +5,16 @@
 <link rel="stylesheet" href="{% static 'static_pages/css/static_pages.css' %}">
 {% endblock %}
 
-{% block content %}
-
 
 <!-- PARALAX HEADING -->
-<section id="page-heading">
-    <div class="paralax-background">
-        <div class="paralax-text-div">
-            <h2 class="paralax-text">Parma Ham's World</h2>
-        </div>
-    </div>
-</section>
+{% block paralax_title%} Parma Ham's World {% endblock%}
+
+
+{% block content %}
 
 <!-- MAGIC DOOR SECTION -->
 <section id="magic-door-section">
+    <!--TODO: rename this section -->
 
     <!-- SECTION 1 -->
     <div class="content-section">
@@ -49,11 +45,6 @@
             </p>
         </div>
     </div>
-
-    <!-- PARALAX PAGE BREAK -->
-    <div class="paralax-background">
-    </div>
-
 
 </section>
 

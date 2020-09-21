@@ -6,18 +6,15 @@
         href="{% static 'shopping_basket/css/shopping_basket.css' %}">
 {% endblock %}
 
+
+<!-- PARALAX HEADING -->
+{% block paralax_title%} Your Basket {% endblock%}
+
+
+
 {% block content %}
 
     <section id="basket">
-
-        <!-- PARALAX HEADING -->
-        <section id="page-heading">
-            <div class="paralax-background">
-                <div class="paralax-text-div">
-                    <h2 class="paralax-text">Your Basket</h2>
-                </div>
-            </div>
-        </section>
 
         <!-- BASKET -->
         <div class="row">
@@ -162,12 +159,8 @@
                 {% endif %}
             </div>
         </div>
-          <!-- PARALAX PAGE BREAK -->
-    <div class="paralax-background">
-    </div>
 
     </section>
-
 
 {% endblock %}
 

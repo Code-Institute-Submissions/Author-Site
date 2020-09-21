@@ -7,16 +7,11 @@
 {% endblock %}
 
 
-{% block content %}
-
 <!-- PARALAX HEADING -->
-<section id="page-heading">
-    <div class="paralax-background">
-        <div class="paralax-text-div">
-            <h2 class="paralax-text">Fan Art Gallery</h2>
-        </div>
-    </div>
-</section>
+{% block paralax_title%} Fan Art Gallery {% endblock%}
+
+
+{% block content %}
 
 <!-- GALLERY -->
 <section id="gallery">
@@ -127,10 +122,6 @@
             {% endif %}
             </div>
         </div>
-    </div>
-
-     <!-- PARALAX PAGE BREAK -->
-     <div class="paralax-background">
     </div>
 
 </section>

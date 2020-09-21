@@ -5,16 +5,12 @@
     <link rel="stylesheet" href="{% static 'fan_art/css/fan_art.css' %}">
 {% endblock %}
 
-{% block content %}
 
 <!-- PARALAX HEADING -->
-<section id="page-heading">
-    <div class="paralax-background">
-        <div class="paralax-text-div">
-            <h2 class="paralax-text">Edit Your Art</h2>
-        </div>
-    </div>
-</section>
+{% block paralax_title%} Edit Your Art {% endblock%}
+
+
+{% block content %}
 
 <!-- EDIT -->
 <section id="add-fan-art">
@@ -78,10 +74,6 @@
 
             </form>
         </div>
-    </div>
-
-    <!-- PARALAX PAGE BREAK -->
-    <div class="paralax-background">
     </div>
 
 </section>

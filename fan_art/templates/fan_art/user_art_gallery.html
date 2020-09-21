@@ -7,17 +7,11 @@
 {% endblock %}
 
 
-{% block content %}
-
-
 <!-- PARALAX HEADING -->
-<section id="page-heading">
-    <div class="paralax-background">
-        <div class="paralax-text-div">
-            <h2 class="paralax-text">Your Art</h2>
-        </div>
-    </div>
-</section>
+{% block paralax_title%}Your Art{% endblock%}
+
+
+{% block content %}
 
 <!-- GALLERY -->
 <section id="gallery">
@@ -190,13 +184,8 @@
             </a>
         </div>
 
-         <!-- PARALAX PAGE BREAK -->
-
-
     </div>
 
-<div class="paralax-background">
-    </div>
 </section>
 
 {% endblock %}

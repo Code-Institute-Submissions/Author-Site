@@ -8,21 +8,14 @@
 
 {% block extra_js %}
     <script src="https://js.stripe.com/v3/"></script>
-
 {% endblock %}
 
 
+<!-- PARALAX HEADING -->
+{% block paralax_title%} Checkout {% endblock%}
+
+
 {% block content %}
-
-
-        <!-- PARALAX HEADING -->
-        <section id="page-heading">
-            <div class="paralax-background">
-                <div class="paralax-text-div">
-                    <h2 class="paralax-text">Checkout</h2>
-                </div>
-            </div>
-        </section>
 
         <!-- CHECKOUT -->
         <section id="checkout">
@@ -169,12 +162,7 @@
                 </div>
             </div>
 
-        <!-- PARALAX PAGE BREAK -->
-        <div class="paralax-background">
-        </div>
-
     </section>
-
 
 {% endblock %}
 

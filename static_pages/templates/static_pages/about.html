@@ -5,18 +5,12 @@
 <link rel="stylesheet" href="{% static 'static_pages/css/static_pages.css' %}">
 {% endblock %}
 
-{% block content %}
-
 
 <!-- PARALAX HEADING -->
-<section id="page-heading">
-    <div class="paralax-background">
-        <div class="paralax-text-div">
-            <h2 class="paralax-text">About Holly</h2>
-        </div>
-    </div>
-</section>
+{% block paralax_title%} About Holly {% endblock%}
 
+
+{% block content %}
 
 <section id="about-section">
 
@@ -36,10 +30,6 @@
                 books the way most people devour chocolate.
             </p>
         </div>
-    </div>
-
-    <!-- PARALAX PAGE BREAK -->
-    <div class="paralax-background">
     </div>
 
 </section>

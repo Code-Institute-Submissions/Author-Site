@@ -58,6 +58,18 @@
     <!-- Nav bar -->
     {% include 'includes/_navbar.html' %}
 
+    <!-- PARALAX HEADING -->
+    <section id="page-heading">
+        <div class="paralax-background">
+            <div class="paralax-text-div">
+                <h2 class="paralax-text">
+                    {% block paralax_title %}{% endblock %}
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- MESSAGES -->
     {% if messages %}
         <div class="message-container">
             {% for message in messages %}
@@ -73,6 +85,9 @@
 
     {% block content %}
     {% endblock %}
+
+    <!-- PARALAX PAGE END -->
+    <div class="paralax-background"></div>
 
     <!-- Footer -->
     {% include 'includes/_footer.html' %}

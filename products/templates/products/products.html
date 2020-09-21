@@ -5,18 +5,12 @@
     <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
+
+<!-- PARALAX HEADING -->
+{% block paralax_title%} Shop {% endblock%}
+
+
 {% block content %}
-
-
-    <!-- PARALAX HEADING -->
-    <section id="page-heading">
-        <div class="paralax-background">
-            <div class="paralax-text-div">
-                <h2 class="paralax-text">Shop</h2>
-            </div>
-        </div>
-    </section>
-
 
     <!-- PRODUCT FILTERS -->
     <section id="product-filter">
@@ -190,18 +184,10 @@
 
         </div>
 
-        <!-- PARALAX PAGE BREAK -->
-        <div class="paralax-background">
-        </div>
-
-
-
     </section>
 
-
-
-
 {% endblock %}
+
 
 <!-- CODE FOR FILTERING PRODUCTS -->
 {% block postloadjs %}
