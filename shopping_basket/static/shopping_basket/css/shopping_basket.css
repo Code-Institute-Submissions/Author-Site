@@ -10,7 +10,7 @@
 
 .basket-item img {
     height: 30vw;
-    width: 30vw;
+    width: auto;
 }
 
 .amount-section {
@@ -85,7 +85,7 @@
     }
     .basket-item img {
         height: 200px;
-        width: 200px;
+        width: auto;
         margin: 0 15px;
     }
 }
