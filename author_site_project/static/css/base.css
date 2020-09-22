@@ -121,7 +121,7 @@ body {
 }
 .modal img {
     height: 30vw;
-    width: 30vw;
+    width: auto;
     margin: 10px;
 }
 
@@ -278,7 +278,6 @@ body {
     }
     .modal img {
         height: 18vw;
-        width: 18vw;
     }
     .publishing-logo-div {
         width: 45px;
@@ -367,7 +366,6 @@ body {
     }
     .modal img {
         height: 185px;
-        width: 185px;
     }
     .allauth-link-text {
         width: 700px;
