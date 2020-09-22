@@ -187,6 +187,74 @@ body {
 }
 
 
+/* -------------------------- ALLAUTH */
+
+#sign-out{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10vw 0;
+}
+
+.allauth-link-text {
+    width: 80vw;
+    margin: 20px auto;
+}
+
+.socialaccount_providers {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.social-account-button  a,
+.social-account-button  a:hover {
+
+    color: black !important;
+    text-decoration: none;
+}
+
+.social-account-button {
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin: 5px 0;
+    border-radius: 50px;
+    border: 2px solid black;
+    outline: none;
+    color: #000;
+    font-size: 4vw;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 55vw;
+    max-width: 230px;
+    text-decoration: none;
+}
+
+/* -------------------------- BIG ICON */
+
+.big-icon-div {
+    height: 20vw;
+    max-height: 400px;
+    padding: 0 10%;
+}
+
+.big-icon {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.big-icon i {
+    font-size: 10vw;
+    color: lightgrey;
+ }
+
+
 /* -------------------------- MEDIA QUERIES*/
 
 
@@ -222,6 +290,14 @@ body {
     .footer {
         flex-direction: row;
         justify-content: space-between;
+    }
+    #sign-out{
+        margin: 75px 0;
+    }
+    .social-account-button{
+        font-size: 17px;
+        width: 42vw;
+        margin: 5px 5px;
     }
 }
 
@@ -293,14 +369,7 @@ body {
         height: 185px;
         width: 185px;
     }
-}
-/*
-@media only screen and (min-width: 1200px) {
-    #navbar {
-        font-size: 21.4px;
-    }
-    .dropdown-item {
-        font-size: 21.4px;
+    .allauth-link-text {
+        width: 700px;
     }
 }
-*/

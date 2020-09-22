@@ -14,7 +14,12 @@
 #id_payment_country,
 #id_shipping_country,
 #id_email,
-#id_default_country {
+#id_default_country,
+#id_username,
+#id_password1,
+#id_password2,
+#id_login,
+#id_password {
     width: 100%;
     margin-bottom: 5px;
     border: 1px solid lightgrey;
@@ -45,6 +50,17 @@
     margin: 40px auto;
 }
 
+/* ---------------- ALLAUTH */
+
+.allauth-section {
+    width: 90vw;
+    margin: auto;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 40px auto;
+}
+
 /* -------------- MEDIA QUERIES */
 
 @media (min-width: 576px) {
@@ -64,5 +80,8 @@
     .form-section {
         width: 100%;
         margin: auto;
+    }
+    .allauth-section {
+        width: 700px;
     }
 }
