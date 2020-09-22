@@ -43,11 +43,11 @@
     }
     #order-preview-section {
         width: 40%;
-        order: 1;
+        order: 2;
     }
     #payment-form-section {
         width: 50%;
-        order: 2;
+        order: 1;
     }
     .checkout-line-item {
         flex-direction: column;
