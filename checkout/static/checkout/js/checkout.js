@@ -68,7 +68,6 @@ $(() => {
     // const saveInfo = Boolean($('#id-save-info').attr('checked'))
     const saveInfo = true
     const postData = {
-      'client_secret': clientSecret,
       'save_info': saveInfo,
     }
 
@@ -76,7 +75,9 @@ $(() => {
       const field = $(element)
       if (field.attr('name') === undefined) return
       if (field.attr('type') === 'checkbox') {
-        postData[field.attr('name')] = field.is(':checked')
+        if (field.is(':checked')) {
+          postData[field.attr('name')] = field.val()
+        }
       } else {
         postData[field.attr('name')] = field.val()
       }
@@ -120,8 +121,8 @@ $(() => {
           // TODO: show error message, re-enable the form
           // showError(result.error.message)
         } else {
-          // orderComplete(result.paymentIntent.id)
           console.log('Sucess!')
+          $('#payment-form')[0].submit()
           /*
           if (result.paymentIntent.status === 'succeeded') {
             form.submit();

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+
+<!-- PARALAX HEADING -->
+{% block paralax_title%} Thank You! {% endblock%}
+
+
+{% block content %}
+
+    <section id="checkout_sucess">
+        <div class="intro-text">
+            <p>
+                Your order has been processed successfully!
+                You can find the order information below.
+                A confirmation email will be sent to
+                <strong>{{ order.email }}</strong>.
+                <br>Thank you for supporting us!
+            </p>
+        </div>
+
+
+        <div class="container">
+
+            <!-- ORDER OVERVIEW -->
+            <div class="order-detail-container">
+
+                <div>
+                    <h4 class="order-heading">Order Details</h4>
+                    <hr>
+                    <p><span class="order-info-heading">Date:</span>&nbsp;
+                        {{ order.date }}</p>
+                    <p><span class="order-info-heading">Order Number:</span>&nbsp;
+                        {{ order.order_number }}</p>
+                    <p><span class="order-info-heading">Items:</span></p>
+
+                    {% for item in order.lineitems.all %}
+                        <div class="order-line-item-div">
+                            <p><strong>{{ item.product.name }}</strong></p>
+                            <p>{{ item.product.get_product_type_display }}</p>
+                            <p>Price: ${{ item.product.price }}</p>
+                            <p>Shipping: ${{ item.product.shipping }}</p>
+                            <p>Quantity: {{ item.quantity }}</p>
+                            <p><strong>Sub Total: ${{ item.grand_total }}</strong></p>
+                        </div>
+                    {% endfor %}
+
+                    <!-- PAYMENT OVERVIEW -->
+                    <p><span class="order-info-heading">Your Details:</span></p>
+                    <div class="order-line-item-div">
+                        <p>{{ order.full_name }}</p>
+                        <p>{{ order.email }}</p>
+                        <p>{{ order.phone_number }}</p>
+                        <p>{{ order.payment_street_address1 }}</p>
+                        <p>{{ order.payment_street_address2 }}</p>
+                        <p>{{ order.payment_town_or_city }}</p>
+                        <p>{{ order.payment_county }}</p>
+                        <p>{{ order.payment_postcode }}</p>
+                        <p>{{ order.payment_country }}</p>
+                    </div>
+
+                    <!-- GIFT MESSAGE -->
+                    {% if order.gift_message %}
+                        <p><span class="order-info-heading">Your Message:</span></p>
+                        <div class="order-line-item-div">
+                            <p><strong>Your Message</strong></p>
+                            <p>{{ order.message }}</p>
+                        </div>
+                    {% endif %}
+
+                    <!-- SHIPPING OVERVIEW -->
+                    <p><span class="order-info-heading">Shipping Information:</span></p>
+                    <div class="order-line-item-div">
+                        <p>{{ order.shipping_full_name }}</p>
+                        <p>{{ order.shipping_street_address1 }}</p>
+                        <p>{{ order.shipping_street_address2 }}</p>
+                        <p>{{ order.shipping_town_or_city }}</p>
+                        <p>{{ order.shipping_county }}</p>
+                        <p>{{ order.shipping_postcode }}</p>
+                        <p>{{ order.shipping_country }}</p>
+                    </div>
+
+                    <p><span class="order-info-heading">Total:</span>&nbsp;
+                        ${{ order.price_total }}</p>
+                    <p><span class="order-info-heading">Shipping:</span>&nbsp;
+                        ${{ order.shipping_total }}</p>
+                    <hr>
+                    <p class="order-info-large"><span
+                            class="order-info-heading">Grand Total:</span>&nbsp;
+                        ${{ order.grand_total }}</p>
+                    <p class="order-info-large"><span
+                            class="order-info-heading">Status:</span>&nbsp;
+                        {{ order.status }}</p>
+                </div>
+
+                {% if request.user.is_authenticated %}
+
+                    <div class="order-button-div">
+                        <a href="{% url 'orders' %}" class="glow-button">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span>My Orders</span>
+                        </a>
+                    </div>
+
+                {% else %}
+
+                    <div class="order-button-div">
+                        <a href="{% url 'index' %}" class="glow-button">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span>Home</span>
+                        </a>
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

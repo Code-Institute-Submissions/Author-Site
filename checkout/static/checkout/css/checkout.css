@@ -1,3 +1,5 @@
+/* -------------- CHECKOUT */
+
 #checkout p {
      margin-bottom: 0;
 }
@@ -25,6 +27,51 @@
     margin: 0 4vw;
 }
 
+/* -------------- SUCCESS PAGE */
+
+.order-detail-container {
+    border: 1px solid lightgrey;
+    margin: 5vw 0;
+    padding: 15px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-heading {
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.order-info-heading {
+    text-transform: uppercase;
+    color: grey;
+    font-weight: 600;
+}
+
+.order-button-div {
+    right: 0;
+    align-self: flex-end;
+}
+
+.order-line-item-div {
+    background-color: lightgrey;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.order-line-item-div p {
+    margin-bottom: 0.1rem !important;
+}
+
+.order-info-large {
+    font-size: 1.5rem;
+}
+
+.empty-orders-container {
+    margin-top: 10vw;
+    margin-bottom: 10vw;
+}
 
 /* -------------- MEDIA QUERIES */
 
@@ -53,5 +100,9 @@
         flex-direction: column;
         justify-content: space-between;
         width: auto;
+    }
+    .empty-orders-container {
+        margin-top: 100px;
+        margin-bottom: 100px;
     }
 }

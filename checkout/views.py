@@ -1,9 +1,12 @@
 from django.conf import settings
 from django.contrib import messages
-from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.http import Http404
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 
-from .forms import OrderForm
+from .forms import Order, OrderForm
+from .models import OrderLineItem
+from .utility import order_form_from_request, extract_payment_intent_id
 from shopping_basket.context_processors import shopping_basket
 
 import stripe
@@ -18,33 +21,11 @@ def validate_form_and_update_payment_intent(request):
     A view to validate the users payment form, then update
     the payment intent.
     """
-
-    # Convert QueryDict to Dict
-    post_data = request.POST.dict()
-
-    # Check use card address as shipping address
-    if post_data['use-card-address-as-shipping-address'] == 'true':
-
-        # Populate shipping address fields with payment address details
-        shipping_mapping = {
-            'shipping_full_name': 'full_name',
-            'shipping_street_address1': 'payment_street_address1',
-            'shipping_street_address2': 'payment_street_address2',
-            'shipping_town_or_city': 'payment_town_or_city',
-            'shipping_country': 'payment_country',
-            'shipping_postcode': 'payment_postcode',
-            'shipping_county': 'payment_county',
-        }
-
-        for shipping_field, payment_field in shipping_mapping.items():
-            post_data[shipping_field] = post_data[payment_field]
-
-    # Creating the order form for validation
-    order_form = OrderForm(post_data)
+    order_form = order_form_from_request(request)
 
     # Validate the form
     if order_form.is_valid():
-        payment_intent_id = request.POST.get('client_secret').split('_secret')[0]
+        payment_intent_id = extract_payment_intent_id(request.POST.get('client_secret'))
 
         # Update the payment intent
         stripe.PaymentIntent.modify(payment_intent_id, shipping={
@@ -75,6 +56,69 @@ def validate_form_and_update_payment_intent(request):
 
 def checkout(request):
     """ Returns the page where users fill out the order form """
+
+    if request.method == 'POST':
+        order_form = order_form_from_request(request)
+        payment_intent_id = extract_payment_intent_id(request.POST.get('client_secret'))
+
+        # Get the shopping basket items
+        try:
+            current_basket = shopping_basket(request)['shopping_basket']
+        except Http404:
+            # Critical problem - customer has already paid
+            messages.error(request,
+                f"One of the products in your bag wasn't found in our database. \
+                Please email us with this reference number {payment_intent_id}!"
+            )
+            print(payment_intent_id)
+            # TODO: Empty the shopping basket
+            redirect_url = reverse('view_or_update_shopping_basket')
+            return redirect(redirect_url)
+
+        # Critical problem - form already validated
+        if not order_form.is_valid():
+            messages.error(request, f'Hey, something went really wrong, \
+                please email us with this reference number {payment_intent_id}')
+            print(payment_intent_id, order_form.errors)
+            # TODO: Empty the shopping basket
+
+            redirect_url = reverse('view_or_update_shopping_basket')
+            return redirect(redirect_url)
+
+        # Creating the order from the order form and the shopping basket
+        order = order_form.save(commit=False)
+        order.stripe_payment_id = payment_intent_id
+        if request.user.is_authenticated:
+            order.user_profile = request.user.profile
+        order.status = 'submitted'
+        order.save()
+
+        # Creating our line items
+        for entry in current_basket['products']:
+            order_line_item = OrderLineItem(
+                order=order,
+                product=entry['product'],
+                quantity=entry['amount'],
+                price=entry['product'].price,
+                shipping=entry['product'].shipping,
+            )
+            order_line_item.save()
+
+        # Emptying the shopping basket
+        request.session['shopping_basket'] = {}
+
+        messages.success(request, f'Order successfully processed! \
+            Your order number is {order.order_number}. A confirmation \
+            email will be sent to {order.email}'
+        )
+
+        # TODO: handle if order already exists (race condition)
+        # TODO: handle 'save info'
+        # TODO: redirect to the order page for the order (if user is logged in)
+        # TODO: Send a confirmation email to the user that the porder went through
+
+        return redirect(reverse('checkout_success', args=[order.order_number]))
+
 
     # Get the current shopping basket
     current_basket = shopping_basket(request)['shopping_basket']
@@ -107,3 +151,17 @@ def checkout(request):
     }
 
     return render(request, 'checkout/checkout.html', context)
+
+
+def checkout_success(request, order_number):
+    """
+    Redirect users to a success landing page, displaying their order.
+    """
+
+    order = get_object_or_404(Order, order_number=order_number)
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+    }
+
+    return render(request, template, context)

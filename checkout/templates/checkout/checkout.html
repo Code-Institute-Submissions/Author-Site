@@ -134,7 +134,7 @@
                             </fieldset>
 
                             <!-- Client secret & public key from view passed to JavaScript handling the stripe payment -->
-                            <input type="hidden" value="{{ client_secret }}" id="client_secret">
+                            <input type="hidden" value="{{ client_secret }}" name="client_secret" id="client_secret">
                             <input type="hidden" value="{{ stripe_public_key }}" id="stripe_public_key">
 
                             <!-- BUTTONS -->
@@ -146,7 +146,7 @@
                                     <span id="button-text">Back</span>
                                 </a>
 
-                                <button id="submit" class="glow-button">
+                                <button id="btn-submit" class="glow-button">
                                     <div class="spinner hidden" id="spinner"></div>
                                     <span class="icon">
                                         <i class="fas fa-money-bill-wave"></i>
