@@ -20,7 +20,7 @@ class Order(models.Model):
     # Basic order info
     order_number = models.CharField(max_length=32, null=False, editable=False)
     date = models.DateTimeField(auto_now_add=True)
-    stripe_payment_id = models.CharField(max_length=254, null=False, blank=False, default='')
+    stripe_payment_id = models.CharField(max_length=254, null=False, blank=False)
     user_profile = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     status = models.CharField(choices=_STATUS, max_length=20)
@@ -53,7 +53,7 @@ class Order(models.Model):
     def price_total(self):
         """ Calculate Order item price total """
         total = 0
-        for lineitem in self.lineitems:
+        for lineitem in self.lineitems.all():
             total += lineitem.price_total()
 
         return total
@@ -61,7 +61,7 @@ class Order(models.Model):
     def shipping_total(self):
         """ Calculate Order shipping total """
         total = 0
-        for lineitem in self.lineitems:
+        for lineitem in self.lineitems.all():
             total += lineitem.shipping_total()
 
         return total
@@ -69,7 +69,7 @@ class Order(models.Model):
     def grand_total(self):
         """ Calculate Order grand total """
         total = 0
-        for lineitem in self.lineitems:
+        for lineitem in self.lineitems.all():
             total += lineitem.grand_total()
 
         return total
@@ -101,10 +101,15 @@ class OrderLineItem(models.Model):
 
     def price_total(self):
         """ Calculate lineitem item price total """
+        if self.price is None:
+            return 0
         return self.price * self.quantity
+
 
     def shipping_total(self):
         """ Calculate lineitem shipping total """
+        if self.shipping is None:
+            return 0
         return self.shipping * self.quantity
 
     def grand_total(self):
