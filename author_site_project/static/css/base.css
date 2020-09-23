@@ -186,6 +186,12 @@ body {
     background-color: black;
 }
 
+.copyright-div {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem !important;
+}
+
 
 /* -------------------------- ALLAUTH */
 
