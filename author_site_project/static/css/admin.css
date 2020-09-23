@@ -1,0 +1,77 @@
+#header {
+    min-height: 50px;
+    background: #e7be08;
+    color: black;
+}
+
+#branding h1 {
+    color: black;
+    font-weight: 600;
+}
+
+#header a:link,
+#header a:visited {
+    color: #3a3558;
+}
+
+a:link,
+a:visited {
+    color: #3a3558;
+}
+
+a.section:link,
+a.section:visited {
+    color: black;
+}
+
+div.breadcrumbs {
+    background: #e7be08;
+    color: black;
+}
+
+div.breadcrumbs a{
+    color: black;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #e7be08;
+    color: black;
+}
+
+.button, input[type=button], input[type=submit], .submit-row input a.button {
+    background:#e7be08;
+    color: black;
+}
+
+.object-tools a:hover {
+    background-color: #3a3558;
+    color: white;
+}
+
+.div.breadcrumbs a:focus, div.breadcrumbs a:hover,
+a.section:hover,
+#user-tools a:hover {
+    color: #662A79;
+    border-bottom-color: #662A79;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #e7be08;
+    color: black;
+}
+
+.button:active, input[type=submit]:active,
+input[type=button]:active, .button:focus,
+input[type=submit]:focus, input[type=button]:focus,
+.button:hover, input[type=submit]:hover,
+input[type=button]:hover {
+    background: #3a3558;
+    color: white;
+}
+
+.button.default:active, input[type=submit].default:active,
+.button.default:focus, input[type=submit].default:focus,
+.button.default:hover, input[type=submit].default:hover {
+    background: #3a3558;
+    color: white;
+}

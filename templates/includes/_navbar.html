@@ -84,8 +84,7 @@
                         {% if request.user.is_authenticated %}
 
                         {% if request.user.is_superuser %}
-                            <!-- TODO: where does this link lead to? -->
-                            <a href="" class="dropdown-item">Product Management</a>
+                            <a href="{% url 'admin:index' %}" class="dropdown-item">Admin Area</a>
                         {% endif %}
 
                         <a href="{% url 'orders' %}" class="dropdown-item">My Orders</a>
