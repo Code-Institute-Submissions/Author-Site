@@ -87,11 +87,32 @@ $(() => {
     $.post(url, postData).done((response) => {
       $('#client_secret').val(response.client_secret)
       payWithCard(stripe, card, response.client_secret)
-    }).fail(function() {
-      // Reloading page - django will post the error message automatically
-      //location.reload();
-    })
+    }).fail((e) => {
 
+      // If error + redirect from validation function
+      if (e.responseJSON['redirect']) {
+        window.location.replace(e.responseJSON['redirect'])
+      }
+
+      $(':input').removeClass('error-field')
+
+      let topmostField = null
+      let topmostPosition = null
+
+      for (key in e.responseJSON) {
+
+        // Highlighting each error field + scroll topmost + focuss on topmost
+        const inputField = $(`:input[name="${key}"]`)
+        inputField.addClass('error-field')
+        if (inputField.offset().top < topmostPosition || topmostPosition === null) {
+          topmostField = inputField
+          topmostPosition = inputField.offset().top
+        }
+      }
+
+      topmostField[0].scrollIntoView(false)
+      topmostField.focus()
+    })
   })
 
   // Submit the payment to stripe & handle success / error

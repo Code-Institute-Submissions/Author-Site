@@ -27,6 +27,15 @@
     margin: 0 4vw;
 }
 
+.error-field {
+    border: 2px solid red !important;
+}
+
+.error-field:focus {
+    outline: none;
+    box-shadow: 0 0 3pt 2pt red;
+}
+
 /* -------------- SUCCESS PAGE */
 
 .order-detail-container {

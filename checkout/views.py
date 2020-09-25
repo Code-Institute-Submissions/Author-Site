@@ -23,24 +23,26 @@ def validate_form_and_update_payment_intent(request):
     """
     order_form = order_form_from_request(request)
 
-    # Validate the form
-    if order_form.is_valid():
-        # Get the current shopping basket
-        current_basket = shopping_basket(request)['shopping_basket']
+    # Checking the form is valid
+    if not order_form.is_valid():
+        return JsonResponse({'form_errors' : order_form.errors}, status=400)
 
-        # Check the users has items in their shopping basket
-        if not current_basket['products']:
-            messages.info(
-                request,
-                'Hey, looks like your bag is empty! Why not check out the shop?'
-            )
-            # TODO: find alternative error handling for this
-            # redirect_url = reverse('products')
-            # return redirect(redirect_url)
+    # Get the current shopping basket
+    current_basket = shopping_basket(request)['shopping_basket']
 
-        # Calculate total for stripe (with no decimal places)
-        stripe_total = round(current_basket['grand_total'] * 100)
+    # Check the users has items in their shopping basket
+    if not current_basket['products']:
+        messages.info(
+            request,
+            'Hey, looks like your bag is empty! Why not check out the shop?'
+        )
+        return JsonResponse({'redirect' : reverse('products')}, status=400)
 
+    # Calculate total for stripe (with no decimal places)
+    stripe_total = round(current_basket['grand_total'] * 100)
+
+
+    try:
         # Create the payment intent
         payment_intent = stripe.PaymentIntent.create(
             amount=stripe_total,
@@ -57,25 +59,20 @@ def validate_form_and_update_payment_intent(request):
                     "state": order_form.cleaned_data['shipping_county'],
                 }
             },
-            metadata={}
+            metadata={} # TODO: Add metadata (?)
         )
+    except:
+        messages.error(
+            request,
+            'Oh no! It seems like our payment provider is having some trouble, please try again later'
+        )
+        return JsonResponse({'redirect' : reverse('products')}, status=400)
 
-        context = {
-            'client_secret': payment_intent.client_secret
-        }
+    context = {
+        'client_secret': payment_intent.client_secret
+    }
 
-        return JsonResponse(context)
-
-    else:
-        print(order_form.errors)
-
-    return HttpResponse(status=200)
-
-
-    # TODO: Update payment intent with other info
-    # TODO: Wrap in try-catch
-    # TODO: Handle validation error
-
+    return JsonResponse(context)
 
 
 def checkout(request):
