@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 
@@ -25,23 +25,47 @@ def validate_form_and_update_payment_intent(request):
 
     # Validate the form
     if order_form.is_valid():
-        payment_intent_id = extract_payment_intent_id(request.POST.get('client_secret'))
+        # Get the current shopping basket
+        current_basket = shopping_basket(request)['shopping_basket']
 
-        # Update the payment intent
-        stripe.PaymentIntent.modify(payment_intent_id, shipping={
-            "name": order_form.cleaned_data['shipping_full_name'],
-            "phone": order_form.cleaned_data['phone_number'],
-            "address": {
-                "line1": order_form.cleaned_data['shipping_street_address1'],
-                "line2": order_form.cleaned_data['shipping_street_address2'],
-                "city": order_form.cleaned_data['shipping_town_or_city'],
-                "country": order_form.cleaned_data['shipping_country'],
-                "postal_code": order_form.cleaned_data['shipping_postcode'],
-                "state": order_form.cleaned_data['shipping_county'],
-            }
-        }, metadata={})
+        # Check the users has items in their shopping basket
+        if not current_basket['products']:
+            messages.info(
+                request,
+                'Hey, looks like your bag is empty! Why not check out the shop?'
+            )
+            # TODO: find alternative error handling for this
+            # redirect_url = reverse('products')
+            # return redirect(redirect_url)
 
-        print('sucess')
+        # Calculate total for stripe (with no decimal places)
+        stripe_total = round(current_basket['grand_total'] * 100)
+
+        # Create the payment intent
+        payment_intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+            shipping={
+                "name": order_form.cleaned_data['shipping_full_name'],
+                "phone": order_form.cleaned_data['phone_number'],
+                "address": {
+                    "line1": order_form.cleaned_data['shipping_street_address1'],
+                    "line2": order_form.cleaned_data['shipping_street_address2'],
+                    "city": order_form.cleaned_data['shipping_town_or_city'],
+                    "country": order_form.cleaned_data['shipping_country'],
+                    "postal_code": order_form.cleaned_data['shipping_postcode'],
+                    "state": order_form.cleaned_data['shipping_county'],
+                }
+            },
+            metadata={}
+        )
+
+        context = {
+            'client_secret': payment_intent.client_secret
+        }
+
+        return JsonResponse(context)
+
     else:
         print(order_form.errors)
 
@@ -119,7 +143,6 @@ def checkout(request):
 
         return redirect(reverse('checkout_success', args=[order.order_number]))
 
-
     # Get the current shopping basket
     current_basket = shopping_basket(request)['shopping_basket']
 
@@ -132,22 +155,12 @@ def checkout(request):
         redirect_url = reverse('products')
         return redirect(redirect_url)
 
-    # Calculate total for stripe (with no decimal places)
-    stripe_total = round(current_basket['grand_total'] * 100)
-
-    # Stripe payment intent
-    payment_intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-    )
-
     # Create our order form
     order_form = OrderForm()
 
     context = {
         'order_form': order_form,
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
-        'client_secret': payment_intent.client_secret,
     }
 
     return render(request, 'checkout/checkout.html', context)

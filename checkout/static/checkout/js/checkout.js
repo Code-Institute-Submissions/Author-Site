@@ -19,7 +19,6 @@ $(() => {
 
   // Read stripe details from HTML hidden fields
   const stripePublicKey = $('#stripe_public_key').val()
-  const clientSecret = $('#client_secret').val()
 
   // Creating a new stripe instance
   const stripe = Stripe(stripePublicKey);
@@ -85,8 +84,9 @@ $(() => {
 
     const url = '/checkout/validate/'
 
-    $.post(url, postData).done(function () {
-      payWithCard(stripe, card, clientSecret)
+    $.post(url, postData).done((response) => {
+      $('#client_secret').val(response.client_secret)
+      payWithCard(stripe, card, response.client_secret)
     }).fail(function() {
       // Reloading page - django will post the error message automatically
       //location.reload();
