@@ -3,8 +3,11 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+from .models import Order
+
 import json
 import stripe
+import time
 
 
 
@@ -46,14 +49,46 @@ class Stripe_WebHook_Handler:
 
     def handle_payment_intent_succeeded(self, event):
         payment_intent = event.data.object
-        print('handle_payment_intent_succeeded', payment_intent)
+
+        for attempt in range(5):
+            try:
+                order = Order.objects.get(stripe_payment_id=payment_intent.id)
+            except Order.DoesNotExist:
+                # We did not find the order in this attempt
+                time.sleep(1)
+                continue
+
+            # We found the order
+            order.status = 'paid'
+            order.save()
+            return HttpResponse(status=200)
+
+        # We did not find the order at all
+        # TODO: create the order
+
         return HttpResponse(status=200)
 
 
     def handle_payment_intent_payment_failed(self, event):
         payment_intent = event.data.object
-        print('handle_payment_intent_payment_failed', payment_intent)
-        return HttpResponse(status=200)
+
+        for attempt in range(5):
+            try:
+                order = Order.objects.get(stripe_payment_id=payment_intent.id)
+            except Order.DoesNotExist:
+                # We did not find the order in this attempt
+                time.sleep(1)
+                continue
+
+            # We found the order
+            order.status = 'payment_failed'
+            order.save()
+            # TODO: send the user an email
+            return HttpResponse(status=200)
+
+        # We did not find the order at all
+
+        return HttpResponse(status=500)
 
 
     def unhandled_event(self, event):
