@@ -89,18 +89,22 @@
   float: right;
 }
 
+.glow-button:disabled {
+  background: gray;
+}
+
 /*------------------------- THE GLOW  */
 
-.glow-button:first-child:hover,
-.glow-button:last-child:hover {
+.glow-button:not(:disabled):hover {
   background: linear-gradient(90deg, #f0cc2e, #f5e388, #dab61a, #ffeb3b, #f0cc2e);
   background-size: 400%;
   text-decoration: none;
   color: #000;
+  z-index: 1;
+  animation: glow 8s linear infinite;
 }
 
-.glow-button:first-child:before,
-.glow-button:last-child:before {
+.glow-button:before {
   text-decoration: none;
   color: #000;
   content: '';
@@ -116,15 +120,9 @@
   transition: opacity 0s;
 }
 
-.glow-button:first-child:hover:before,
-.glow-button:last-child:hover:before {
+.glow-button:not(:disabled):hover:before {
   opacity: 1;
   z-index: -1;
-}
-
-.glow-button:hover{
-  z-index: 1;
-  animation: glow 8s linear infinite;
 }
 
 

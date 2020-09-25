@@ -44,8 +44,24 @@ $(() => {
   const elements = stripe.elements();
   const card = elements.create('card', {style: style});
 
+  // Disable submit button
+  const submitButton = $('#btn-submit')
+  submitButton.prop('disabled', true)
+
   // mounting our created card element
   card.mount('#card-element');
+
+  card.on('change', (event) => {
+    console.log(event)
+
+    if (event.complete) {
+      $('#card-error').text('')
+      submitButton.prop('disabled', false)
+    } else if (event.error) {
+      $('#card-error').text(event.error.message)
+      submitButton.prop('disabled', true)
+    }
+  })
 
   // Prevent the default form submit action
   // Calls the function for paying with Stripe
@@ -137,10 +153,11 @@ $(() => {
           }
         }
       })
-      .then(function(result) {
+      .then((result) => {
         if (result.error) {
-          // TODO: show error message, re-enable the form
-          // showError(result.error.message)
+          $('#card-error').text(result.error.message)
+          card.focus()
+          // TODO: re-enable the form
         } else {
           console.log('Sucess!')
           $('#payment-form')[0].submit()
