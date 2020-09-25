@@ -18,37 +18,37 @@ class Order(models.Model):
     ]
 
     # Basic order info
-    order_number = models.CharField(max_length=32, null=False, editable=False)
+    order_number = models.CharField(max_length=32, editable=False)
     date = models.DateTimeField(auto_now_add=True)
-    stripe_payment_id = models.CharField(max_length=254, null=False, blank=False)
+    stripe_payment_id = models.CharField(max_length=254, blank=False)
     user_profile = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     status = models.CharField(choices=_STATUS, max_length=20)
 
     # Customer Info
-    full_name = models.CharField(max_length=50, null=False, blank=False)
-    email = models.CharField(max_length=254, null=False, blank=False)
-    phone_number = models.CharField(max_length=20, null=False, blank=False)
+    full_name = models.CharField(max_length=50, blank=False)
+    email = models.CharField(max_length=254, blank=False)
+    phone_number = models.CharField(max_length=20, blank=True)
 
     # If Gift
-    gift_message = models.TextField(null=True, blank=True, default='')
+    gift_message = models.TextField(blank=True, default='')
 
     # Payment details
-    payment_street_address1 = models.CharField(max_length=80, null=False, blank=False)
-    payment_street_address2 = models.CharField(max_length=80, null=True, blank=True)
-    payment_town_or_city = models.CharField(max_length=40, null=False, blank=False)
-    payment_county = models.CharField(max_length=80, null=True, blank=True)
-    payment_postcode = models.CharField(max_length=20, null=True, blank=True)
-    payment_country = CountryField(blank_label='Country *', null=False, blank=False)
+    payment_street_address1 = models.CharField(max_length=80, blank=False)
+    payment_street_address2 = models.CharField(max_length=80, blank=True)
+    payment_town_or_city = models.CharField(max_length=40, blank=False)
+    payment_county = models.CharField(max_length=80, blank=True)
+    payment_postcode = models.CharField(max_length=20, blank=True)
+    payment_country = CountryField(blank_label='Country *', blank=False)
 
     # Shipping details
-    shipping_full_name = models.CharField(max_length=50, null=False, blank=False)
-    shipping_street_address1 = models.CharField(max_length=80, null=False, blank=False)
-    shipping_street_address2 = models.CharField(max_length=80, null=True, blank=True)
-    shipping_town_or_city = models.CharField(max_length=40, null=False, blank=False)
-    shipping_county = models.CharField(max_length=80, null=True, blank=True)
-    shipping_postcode = models.CharField(max_length=20, null=True, blank=True)
-    shipping_country = CountryField(blank_label='Country *', null=False, blank=False)
+    shipping_full_name = models.CharField(max_length=50, blank=False)
+    shipping_street_address1 = models.CharField(max_length=80, blank=False)
+    shipping_street_address2 = models.CharField(max_length=80, blank=True)
+    shipping_town_or_city = models.CharField(max_length=40, blank=False)
+    shipping_county = models.CharField(max_length=80, blank=True)
+    shipping_postcode = models.CharField(max_length=20, blank=True)
+    shipping_country = CountryField(blank_label='Country *', blank=False)
 
     def price_total(self):
         """ Calculate Order item price total """
