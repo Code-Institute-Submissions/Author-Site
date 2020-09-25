@@ -20,7 +20,7 @@ class Order(models.Model):
     # Basic order info
     order_number = models.CharField(max_length=32, editable=False)
     date = models.DateTimeField(auto_now_add=True)
-    stripe_payment_id = models.CharField(max_length=254, blank=False)
+    stripe_payment_id = models.CharField(max_length=254, blank=False, unique=True)
     user_profile = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     status = models.CharField(choices=_STATUS, max_length=20)
