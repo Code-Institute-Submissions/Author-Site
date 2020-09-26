@@ -22,9 +22,9 @@ def update_profile(request):
             user_profile_form.save()
             user_form.save()
             messages.success(request, 'Profile updated successfully')
-
-    user_profile_form = UserProfileForm(instance=profile)
-    user_form = UserForm(instance=request.user)
+    else:
+        user_profile_form = UserProfileForm(instance=profile)
+        user_form = UserForm(instance=request.user)
 
     context = {
         'user_profile_form': user_profile_form,
