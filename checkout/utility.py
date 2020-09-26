@@ -1,4 +1,8 @@
+from django.shortcuts import get_object_or_404
+
 from .forms import OrderForm
+from .models import OrderLineItem
+from products.models import Product
 
 
 def order_form_from_request(request):
@@ -33,3 +37,38 @@ def order_form_from_request(request):
 
 def extract_payment_intent_id(client_secret):
     return client_secret.split('_secret')[0]
+
+
+def create_order_from_shopping_basket(
+    shopping_basket,
+    order_form,
+    payment_intent_id,
+    user
+):
+
+    order_lines = []
+
+    for product_id, amount in shopping_basket.items():
+
+        product = get_object_or_404(Product, pk=product_id)
+        order_lines.append(OrderLineItem(
+            product=product,
+            quantity=amount,
+            price=product.price,
+            shipping=product.shipping,
+        ))
+
+    order = order_form.save(commit=False)
+    order.stripe_payment_id = payment_intent_id
+
+    if user.is_authenticated:
+        order.user_profile = user.profile
+
+    order.status = 'submitted'
+    order.save()
+
+    for order_line in order_lines:
+        order_line.order = order
+        order_line.save()
+
+    return order

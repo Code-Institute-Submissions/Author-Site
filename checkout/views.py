@@ -6,9 +6,10 @@ from django.views.decorators.http import require_POST
 
 from .forms import Order, OrderForm
 from .models import OrderLineItem
-from .utility import order_form_from_request, extract_payment_intent_id
+from .utility import order_form_from_request, extract_payment_intent_id, create_order_from_shopping_basket
 from shopping_basket.context_processors import shopping_basket
 
+import json
 import stripe
 
 
@@ -43,13 +44,17 @@ def validate_form_and_update_payment_intent(request):
 
 
     try:
+        # Getting the user id to add to metadata
+        user_id = ''
+        if request.user.is_authenticated:
+            user_id = request.user.id
+
         # Create the payment intent
         payment_intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
             shipping={
                 "name": order_form.cleaned_data['shipping_full_name'],
-                "phone": order_form.cleaned_data['phone_number'],
                 "address": {
                     "line1": order_form.cleaned_data['shipping_street_address1'],
                     "line2": order_form.cleaned_data['shipping_street_address2'],
@@ -59,9 +64,14 @@ def validate_form_and_update_payment_intent(request):
                     "state": order_form.cleaned_data['shipping_county'],
                 }
             },
-            metadata={} # TODO: Add metadata (?)
+            metadata={
+                "user_id": user_id,
+                "gift_message": order_form.cleaned_data['gift_message'],
+                "shopping_basket": json.dumps(request.session.get('shopping_basket', {}))
+            }
         )
-    except:
+    except Exception as e:
+        print(e)
         messages.error(
             request,
             'Oh no! It seems like our payment provider is having some trouble, please try again later'
@@ -107,23 +117,12 @@ def checkout(request):
             return redirect(redirect_url)
 
         # Creating the order from the order form and the shopping basket
-        order = order_form.save(commit=False)
-        order.stripe_payment_id = payment_intent_id
-        if request.user.is_authenticated:
-            order.user_profile = request.user.profile
-        order.status = 'submitted'
-        order.save()
-
-        # Creating our line items
-        for entry in current_basket['products']:
-            order_line_item = OrderLineItem(
-                order=order,
-                product=entry['product'],
-                quantity=entry['amount'],
-                price=entry['product'].price,
-                shipping=entry['product'].shipping,
-            )
-            order_line_item.save()
+        order = create_order_from_shopping_basket(
+            request.session['shopping_basket'],
+            order_form,
+            payment_intent_id,
+            request.user
+        )
 
         # Emptying the shopping basket
         request.session['shopping_basket'] = {}
