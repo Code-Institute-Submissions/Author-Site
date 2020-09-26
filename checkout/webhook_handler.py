@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.core.mail import send_mail
 from django.http import HttpResponse
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -64,6 +66,9 @@ class Stripe_WebHook_Handler:
             # We found the order
             order.status = 'paid'
             order.save()
+
+            self._send_confirmation_email(order)
+
             return HttpResponse(status=200)
 
         # We did not find the order at all - We must create it
@@ -118,6 +123,8 @@ class Stripe_WebHook_Handler:
             order.status = 'paid'
             order.save()
 
+            self._send_confirmation_email(order)
+
         except Product.DoesNotExist as error:
             #messages.error(request,
             #    f"One of the products in your bag wasn't found in our database. \
@@ -152,5 +159,24 @@ class Stripe_WebHook_Handler:
 
 
     def unhandled_event(self, event):
-        print(event.type, event)
+        # print(event.type, event)
         return HttpResponse(status=200)
+
+    def _send_confirmation_email(self, order):
+        """ Send the user a confirmation email """
+
+        try:
+            email_body = render_to_string(
+                'checkout/email_templates/confirmation_email_body.txt',
+                {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL}
+            )
+
+            send_mail(
+                f'[Order : {order.order_number}] Payment Recieved',
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [order.email]
+            )
+        except Exception as e:
+            # Print here as we can't do anything with it in the webhook
+            print(e)

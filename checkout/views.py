@@ -143,8 +143,6 @@ def checkout(request):
         )
 
         # TODO: handle if order already exists (race condition)
-        # TODO: handle 'save info'
-        # TODO: Send a confirmation email to the user that the porder went through
 
         return redirect(reverse('checkout_success', args=[order.order_number]))
 

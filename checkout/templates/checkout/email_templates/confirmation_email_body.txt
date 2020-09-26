@@ -1,0 +1,24 @@
+Hello {{ order.full_name }}
+
+This is a confirmation of the recent order you made with us. Thank you
+for supporting an independant author by purchasing from us directly!
+Your order details are below:
+
+Order Number: {{ order.order_number }}
+Order date: {{ order.date }}
+
+Order Total: {{ order.price_total }}
+Delivery: ${{ order.shipping_total }}
+Grand Total: ${{ order.grand_total }}
+
+Your order will be shipped to {{ order.shipping_street_address1 }} in {{ order.shipping_town_or_city }}, {{order.shipping_country}}.
+
+We have your phone number on file as {{ order.phone_number}}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+
+Holly Thomas - Author's Site
