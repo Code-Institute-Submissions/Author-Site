@@ -68,7 +68,8 @@ def validate_form_and_update_payment_intent(request):
                 "user_id": user_id,
                 "gift_message": order_form.cleaned_data['gift_message'],
                 "shopping_basket": json.dumps(request.session.get('shopping_basket', {}))
-            }
+            },
+            receipt_email=order_form.cleaned_data['email'],
         )
     except Exception as e:
         print(e)
