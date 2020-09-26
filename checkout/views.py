@@ -6,7 +6,12 @@ from django.views.decorators.http import require_POST
 
 from .forms import Order, OrderForm
 from .models import OrderLineItem
-from .utility import order_form_from_request, extract_payment_intent_id, create_order_from_shopping_basket
+from .utility import (
+    order_form_from_request,
+    extract_payment_intent_id,
+    create_order_from_shopping_basket,
+    update_user_profile_from_order
+)
 from shopping_basket.context_processors import shopping_basket
 
 import json
@@ -67,7 +72,8 @@ def create_payment_intent(request):
             metadata={
                 "user_id": user_id,
                 "gift_message": order_form.cleaned_data['gift_message'],
-                "shopping_basket": json.dumps(request.session.get('shopping_basket', {}))
+                "shopping_basket": json.dumps(request.session.get('shopping_basket', {})),
+                "save_user_info": request.POST.get('save-info', '')
             },
             receipt_email=order_form.cleaned_data['email'],
         )
@@ -111,6 +117,10 @@ def checkout(request):
                 payment_intent_id,
                 request.user
             )
+
+            if request.POST.get('save-info'):
+                update_user_profile_from_order(order)
+
         except Product.DoesNotExist as error:
             # Critical problem - customer has already paid
             messages.error(request,

@@ -5,7 +5,7 @@ from django.views.decorators.http import require_POST
 
 from .forms import OrderForm
 from .models import Order
-from .utility import create_order_from_shopping_basket
+from .utility import create_order_from_shopping_basket, update_user_profile_from_order
 from django.contrib.auth.models import User
 
 import json
@@ -110,6 +110,9 @@ class Stripe_WebHook_Handler:
                 payment_intent.id,
                 user,
             )
+
+            if payment_intent.metadata.save_user_info:
+                update_user_profile_from_order(order)
 
             # Log the order as having been paid
             order.status = 'paid'

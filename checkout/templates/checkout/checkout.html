@@ -102,6 +102,19 @@
                                 {{ order_form.payment_country | as_crispy_field }}
                             </fieldset>
 
+                            <!-- SAVE DETAILS -->
+                            <fieldset class="form-section my-4">
+                                {% if user.is_authenticated %}
+                                    <label class="form-check-label" for="id-save-info">Save this address to my profile</label>
+                                    <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                {% else %}
+                                    <label class="form-check-label" for="id-save-info">
+                                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
+                                        <a class="text_info" href="{% url 'account_login' %}">login</a> to save this information.
+                                    </label>
+                                {% endif %}
+                            </fieldset>
+
                             <!-- MINI HEADING -->
                             <div class="my-4 ml-4">
                                 <span class="form-section-heading">Shipping Address</span>

@@ -159,8 +159,7 @@ $(() => {
           card.focus()
           // TODO: re-enable the form
         } else {
-          console.log('Sucess!')
-          // $('#payment-form')[0].submit()
+          $('#payment-form')[0].submit()
         }
       })
   }

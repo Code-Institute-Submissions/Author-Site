@@ -70,3 +70,26 @@ def create_order_from_shopping_basket(
         order_line.save()
 
     return order
+
+
+def update_user_profile_from_order(order):
+    profile = order.user_profile
+
+    if not profile:
+        return
+
+    first_name, last_name = order.full_name.rsplit(maxsplit=1)
+
+    profile.user.first_name = first_name.strip()
+    profile.user.last_name = last_name.strip()
+    profile.user.email = order.email
+    profile.default_phone_number = order.phone_number
+    profile.default_street_address1 = order.payment_street_address1
+    profile.default_street_address2 = order.payment_street_address2
+    profile.default_town_or_city = order.payment_town_or_city
+    profile.default_county = order.payment_county
+    profile.default_postcode = order.payment_postcode
+    profile.default_country = order.payment_country
+
+    profile.user.save()
+    profile.save()
