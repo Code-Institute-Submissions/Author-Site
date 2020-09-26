@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
@@ -195,3 +196,43 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def orders(request):
+    """ A view to return the cutomer's orders & their status """
+
+    # TODO
+    # Get all orders, filtered by customer id
+    # sort by date, most recent first
+
+    user_orders = {
+        'order1': 'order 1',
+        'order2': 'order 2',
+    }
+
+    context = {
+        'user_orders': user_orders,
+    }
+
+    return render(request, 'checkout/orders.html', context)
+
+
+
+@login_required
+def order(request):
+    """ A view to return a specific order """
+
+    # TODO
+    # Get all orders, filtered by customer id
+    # filter by order_id
+
+    user_order = {
+        'order1': 'order 1',
+    }
+
+    context = {
+        'user_order': user_order,
+    }
+
+    return render(request, 'checkout/order.html', context)
