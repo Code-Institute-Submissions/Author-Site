@@ -72,7 +72,6 @@ $(() => {
     $(':input').val((_, oldValue) => oldValue.trim())
 
     // TODO: disable buttons & UI stuff
-    // TODO: capture whether user wants to save their details
 
     /*
     Getting the client secret & save info
@@ -80,7 +79,6 @@ $(() => {
     Posting to create_payment_intent view
     */
 
-    // const saveInfo = Boolean($('#id-save-info').attr('checked'))
     const saveInfo = true
     const postData = {
       'save_info': saveInfo,
