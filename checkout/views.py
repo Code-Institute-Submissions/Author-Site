@@ -92,20 +92,6 @@ def checkout(request):
         order_form = order_form_from_request(request)
         payment_intent_id = extract_payment_intent_id(request.POST.get('client_secret'))
 
-        # Get the shopping basket items
-        try:
-            current_basket = shopping_basket(request)['shopping_basket']
-        except Http404:
-            # Critical problem - customer has already paid
-            messages.error(request,
-                f"One of the products in your bag wasn't found in our database. \
-                Please email us with this reference number {payment_intent_id}!"
-            )
-            print(payment_intent_id)
-            # TODO: Empty the shopping basket
-            redirect_url = reverse('view_or_update_shopping_basket')
-            return redirect(redirect_url)
-
         # Critical problem - form already validated
         if not order_form.is_valid():
             messages.error(request, f'Hey, something went really wrong, \
@@ -117,12 +103,25 @@ def checkout(request):
             return redirect(redirect_url)
 
         # Creating the order from the order form and the shopping basket
-        order = create_order_from_shopping_basket(
-            request.session['shopping_basket'],
-            order_form,
-            payment_intent_id,
-            request.user
-        )
+        try:
+            order = create_order_from_shopping_basket(
+                request.session['shopping_basket'],
+                order_form,
+                payment_intent_id,
+                request.user
+            )
+        except Http404:
+            # Critical problem - customer has already paid
+            messages.error(request,
+                f"One of the products in your bag wasn't found in our database. \
+                Please email us with this reference number {payment_intent_id}!"
+            )
+            print(payment_intent_id)
+             # Emptying the shopping basket
+            request.session['shopping_basket'] = {}
+            redirect_url = reverse('view_or_update_shopping_basket')
+            return redirect(redirect_url)
+
 
         # Emptying the shopping basket
         request.session['shopping_basket'] = {}
@@ -134,7 +133,6 @@ def checkout(request):
 
         # TODO: handle if order already exists (race condition)
         # TODO: handle 'save info'
-        # TODO: redirect to the order page for the order (if user is logged in)
         # TODO: Send a confirmation email to the user that the porder went through
 
         return redirect(reverse('checkout_success', args=[order.order_number]))
