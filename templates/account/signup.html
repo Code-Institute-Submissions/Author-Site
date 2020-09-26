@@ -1,7 +1,7 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
-
+{% load account socialaccount %}
 
 <!-- PARALAX HEADING -->
 {% block paralax_title%} Sign Up {% endblock%}
@@ -11,11 +11,42 @@
 
 {% block content %}
 
+{% get_providers as socialaccount_providers %}
+
+
 <div class="allauth-link-text">
   <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 </div>
 
+
+
 <div class="allauth-section">
+
+  {% if socialaccount_providers %}
+
+    <div class="allauth-link-text">
+      <p>{% blocktrans with site.name as site_name %} You can sign up with
+        your Google account!
+      {% endblocktrans %}</p>
+    </div>
+
+    <div class="socialaccount_ballot">
+
+      <ul class="socialaccount_providers">
+        <div class="social-account-button">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </div>
+      </ul>
+
+      <div class="login-or">{% trans 'or' %}</div>
+      <br>
+    </div>
+
+    {% include "socialaccount/snippets/login_extra.html" %}
+
+  {% endif %}
+
+
   <div class="form-section">
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
