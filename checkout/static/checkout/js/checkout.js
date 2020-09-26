@@ -2,7 +2,7 @@ $(() => {
   /*
   Handle shipping_address toggle checkbox:
   remove required property so we can populate data in the
-  validate_form_and_update_payment_intent view function
+  create_payment_intent view function
   */
   const shippingFields = $(':input[name^="shipping_"][required]')
 
@@ -77,7 +77,7 @@ $(() => {
     /*
     Getting the client secret & save info
     Getting the values from the form
-    Posting to validate_form_and_update_payment_intent view
+    Posting to create_payment_intent view
     */
 
     // const saveInfo = Boolean($('#id-save-info').attr('checked'))
@@ -98,7 +98,7 @@ $(() => {
       }
     })
 
-    const url = '/checkout/validate/'
+    const url = '/checkout/create_payment_intent/'
 
     $.post(url, postData).done((response) => {
       $('#client_secret').val(response.client_secret)
@@ -160,13 +160,7 @@ $(() => {
           // TODO: re-enable the form
         } else {
           console.log('Sucess!')
-          $('#payment-form')[0].submit()
-          /*
-          if (result.paymentIntent.status === 'succeeded') {
-            form.submit();
-          }
-          */
-
+          // $('#payment-form')[0].submit()
         }
       })
   }

@@ -17,7 +17,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 @require_POST
-def validate_form_and_update_payment_intent(request):
+def create_payment_intent(request):
     """
     A view to validate the users payment form, then update
     the payment intent.
