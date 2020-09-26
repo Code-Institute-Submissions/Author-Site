@@ -25,9 +25,9 @@
                 </div>
 
                 <fieldset class="form-section">
+                    {{ user_form.username | as_crispy_field }}
                     {{ user_form.first_name | as_crispy_field }}
                     {{ user_form.last_name | as_crispy_field }}
-                    {{ user_form.email | as_crispy_field }}
                     {{ user_profile_form.default_phone_number | as_crispy_field }}
                 </fieldset>
 
