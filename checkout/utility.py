@@ -1,5 +1,3 @@
-from django.shortcuts import get_object_or_404
-
 from .forms import OrderForm
 from .models import OrderLineItem
 from products.models import Product
@@ -50,7 +48,7 @@ def create_order_from_shopping_basket(
 
     for product_id, amount in shopping_basket.items():
 
-        product = get_object_or_404(Product, pk=product_id)
+        product = Product.objects.get(id=product_id)
         order_lines.append(OrderLineItem(
             product=product,
             quantity=amount,

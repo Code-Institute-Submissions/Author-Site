@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 
@@ -111,7 +111,7 @@ def checkout(request):
                 payment_intent_id,
                 request.user
             )
-        except Http404:
+        except Product.DoesNotExist as error:
             # Critical problem - customer has already paid
             messages.error(request,
                 f"One of the products in your bag wasn't found in our database. \
