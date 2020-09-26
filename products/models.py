@@ -13,6 +13,9 @@ class Product(models.Model):
         ('merchandise', 'Merchandise'),
     ]
 
+    class Meta:
+        ordering = ['name', 'product_type']
+
     # ALL PRODUCTS
     name = models.CharField(max_length=254)
     series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, related_name='products')
