@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -32,6 +32,18 @@ def update_profile(request):
     }
 
     return render( request, 'profiles/update_profile.html', context)
+
+@login_required
+def delete_profile(request):
+
+    if request.method == 'POST':
+        request.user.delete()
+
+        messages.success(request, 'Account deleted successfully')
+        redirect_url = reverse('index')
+        return redirect(redirect_url)
+
+    return render( request, 'profiles/delete_profile.html')
 
 
 @login_required

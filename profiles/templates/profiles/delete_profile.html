@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+        href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
+
+
+<!-- PARALAX HEADING -->
+{% block paralax_title%} Delete Your Account? {% endblock%}
+
+
+{% block content %}
+
+    <section id="profile-details">
+
+        <div id="profile-details-form-container">
+            <form action="{% url 'delete_profile' %}" method="POST" >
+                {% csrf_token %}
+
+                <!-- MINI HEADING -->
+                <div class="my-4 ml-4">
+                    <span class="form-section-heading">Are You Sure?</span>
+                </div>
+
+                <p>
+                    Hey, are you sure you want to delete your account? It
+                    won't cancel any active orders you have with us, but it
+                    will remove any art that you have submitted. Just making
+                    sure, because once you hit that button there's no going back...
+                </p>
+
+
+                <div>
+                    <button class="delete-button my-4">
+                        <span class="icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                        <span>Delete</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+{% endblock %}
