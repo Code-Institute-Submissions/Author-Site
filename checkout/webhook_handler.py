@@ -103,16 +103,25 @@ class Stripe_WebHook_Handler:
                 pass
 
         # Creating the order from the order form and the shopping basket
-        order = create_order_from_shopping_basket(
-            json.loads(payment_intent.metadata.shopping_basket),
-            order_form,
-            payment_intent.id,
-            user,
-        )
+        try:
+            order = create_order_from_shopping_basket(
+                json.loads(payment_intent.metadata.shopping_basket),
+                order_form,
+                payment_intent.id,
+                user,
+            )
 
-        # Log the order as having been paid
-        order.status = 'paid'
-        order.save()
+            # Log the order as having been paid
+            order.status = 'paid'
+            order.save()
+
+        except Product.DoesNotExist as error:
+            #messages.error(request,
+            #    f"One of the products in your bag wasn't found in our database. \
+            #    Please email us with this reference number {payment_intent_id}!"
+            #)
+            # TODO: send an email to the customer
+            pass
 
         return HttpResponse(status=200)
 
