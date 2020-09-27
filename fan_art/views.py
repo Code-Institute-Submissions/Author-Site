@@ -8,7 +8,7 @@ from profiles.models import UserProfile
 from .forms import CreateFanArtForm, UpdateFanArtForm
 
 
-def fan_art_gallery(request):
+def all_fan_art(request):
     """ A view to return all peices of fan art """
 
     fan_art = FanArt.objects.all().filter(is_approved=True)
@@ -20,23 +20,23 @@ def fan_art_gallery(request):
 
     context = {
         'fan_art': paged_fan_art,
-        'current_page': 'fan_art_gallery',
+        'current_page': 'all_fan_art',
     }
 
-    return render(request, 'fan_art/fan_art_gallery.html', context)
+    return render(request, 'fan_art/all_fan_art.html', context)
 
 
-def user_gallery(request):
+def user_fan_art(request):
     """ A view to return the user's submitted fan art """
 
     user_fan_art = FanArt.objects.all().filter(user_profile=request.user.id)
 
     # Checking for unapproved user_fan_art
-    unapproved_art = False
+    unapproved_fan_art = False
 
     for art in user_fan_art:
         if not art.is_approved:
-            unapproved_art = True
+            unapproved_fan_art = True
 
     # Pagination
     paginator = Paginator(user_fan_art, 9)
@@ -45,15 +45,15 @@ def user_gallery(request):
 
     context = {
         'user_fan_art': paged_user_fan_art,
-        'current_page': 'fan_art_gallery',
-        'unapproved_art': unapproved_art,
+        'current_page': 'all_fan_art',
+        'unapproved_fan_art': unapproved_fan_art,
     }
 
-    return render(request, 'fan_art/user_art_gallery.html', context)
+    return render(request, 'fan_art/user_fan_art.html', context)
 
 
 @login_required
-def edit_art(request, art_id):
+def edit_fan_art(request, art_id):
     """ A view to edit the user's own fan art """
 
     fan_art = get_object_or_404(FanArt, pk=art_id)
@@ -67,7 +67,7 @@ def edit_art(request, art_id):
             fan_art.save()
             messages.success(request, 'Art updated successfully')
 
-            redirect_url = reverse('user_gallery')
+            redirect_url = reverse('user_fan_art')
             return redirect(redirect_url)
 
     update_fan_art_form = UpdateFanArtForm(instance=fan_art)
@@ -75,28 +75,28 @@ def edit_art(request, art_id):
     context = {
         'update_fan_art_form': update_fan_art_form,
         'fan_art': fan_art,
-        'current_page': 'fan_art_gallery',
+        'current_page': 'user_fan_art',
     }
 
     return render(request, 'fan_art/edit_fan_art.html', context)
 
 
 @login_required
-def delete_art(request, art_id):
+def delete_fan_art(request, art_id):
     """ A view to delete the user's own fan art """
 
-    # TODO: defensive programming
+    # TODO: defensive programming - check the fan art is owned by the user
     if request.method == 'POST':
-        selected_art = get_object_or_404(FanArt, pk=art_id)
-        selected_art.delete()
+        selected_fan_art = get_object_or_404(FanArt, pk=art_id)
+        selected_fan_art.delete()
         messages.success(request, 'Art deleted successfully')
 
-    redirect_url = reverse('user_gallery')
+    redirect_url = reverse('user_fan_art')
     return redirect(redirect_url)
 
 
 @login_required
-def add_art(request):
+def add_fan_art(request):
     """ A view for the user to submit their own art to the gallery """
 
     if request.method == 'POST':
@@ -107,16 +107,16 @@ def add_art(request):
             fan_art.save()
             messages.success(request, 'Image added successfully')
 
-            redirect_url = reverse('user_gallery')
+            redirect_url = reverse('user_fan_art')
             return redirect(redirect_url)
         else:
             messages.error(request, 'Form not valid')
     else:
-        add_art_form = CreateFanArtForm()
+        add_fan_art_form = CreateFanArtForm()
 
     context = {
-        'add_art_form':  add_art_form,
-        'current_page': 'fan_art_gallery',
+        'add_fan_art_form':  add_fan_art_form,
+        'current_page': 'all_fan_art',
     }
 
     return render(request, 'fan_art/add_fan_art.html', context)

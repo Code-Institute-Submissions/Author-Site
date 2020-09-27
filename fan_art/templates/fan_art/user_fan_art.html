@@ -19,14 +19,14 @@
 
         <div>
 
-            <a href="{% url 'fan_art_gallery' %}" class="glow-button my-4">
+            <a href="{% url 'all_fan_art' %}" class="glow-button my-4">
                 <span class="icon">
                     <i class="fas fa-palette"></i>
                 </span>
                 <span>Main Gallery</span>
             </a>
 
-            <a href="{% url 'add_art' %}" class="glow-button my-4">
+            <a href="{% url 'add_fan_art' %}" class="glow-button my-4">
                 <span class="icon">
                     <i class="fas fa-paint-brush"></i>
                 </span>
@@ -37,7 +37,7 @@
 
         <hr>
 
-        {% if unapproved_art == True %}
+        {% if unapproved_fan_art == True %}
             <div id="unapproved-art-alert" class="alert alert-primary my-5" role="alert">
                 <p>
                     Hey! It looks like you have recently added some art!
@@ -94,7 +94,7 @@
 
                                 <!-- EDIT -->
                                 <div class="single-button-container">
-                                    <a href="{% url 'edit_art' art.id %}" class="glow-button mb-4">
+                                    <a href="{% url 'edit_fan_art' art.id %}" class="glow-button mb-4">
                                         <span class="icon">
                                             <i class="fas fa-edit"></i>
                                         </span>
@@ -176,7 +176,7 @@
         </div>
 
         <div>
-            <a href="{% url 'fan_art_gallery' %}" class="glow-button mb-4">
+            <a href="{% url 'all_fan_art' %}" class="glow-button mb-4">
                 <span class="icon">
                     <i class="fas fa-palette"></i>
                 </span>

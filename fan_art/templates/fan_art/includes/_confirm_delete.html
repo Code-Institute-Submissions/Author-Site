@@ -28,7 +28,7 @@
           </button>
 
           <!-- DELETE -->
-          <form action="{% url 'delete_art' fan_art.id %}" method="POST">
+          <form action="{% url 'delete_fan_art' fan_art.id %}" method="POST">
             {% csrf_token %}
 
             <button class="delete-button">

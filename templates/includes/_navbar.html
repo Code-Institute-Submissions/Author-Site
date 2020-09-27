@@ -56,8 +56,8 @@
                     {% endif %}
                 </li>
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href="{% url 'fan_art_gallery' %}">Fan Art Gallery</a>
-                    {% if current_page == 'fan_art_gallery' %}
+                    <a class="nav-link" href="{% url 'all_fan_art' %}">Fan Art Gallery</a>
+                    {% if current_page == 'all_fan_art' %}
                     <div class="nav-underline-active"></div>
                 {% else %}
                     <div class="nav-underline"></div>
@@ -88,7 +88,7 @@
                         {% endif %}
 
                         <a href="{% url 'orders' %}" class="dropdown-item">My Orders</a>
-                        <a href="{% url 'user_gallery' %}" class="dropdown-item">My Art</a>
+                        <a href="{% url 'user_fan_art' %}" class="dropdown-item">My Art</a>
                         <a href="{% url 'update_profile' %}" class="dropdown-item">My Details</a>
                         <a href="{% url 'account_email' %}" class="dropdown-item">My Email</a>
                         <a href="{% url 'socialaccount_connections' %}" class="dropdown-item">Social Accounts</a>
