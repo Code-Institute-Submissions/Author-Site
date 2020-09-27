@@ -25,7 +25,13 @@ $(() => {
 
     increment_button.click(() => increment(product_id))
     decrement_button.click(() => decrement(product_id))
+    amount_input.change(() => on_input_change(product_id))
   })
+
+  function on_input_change(product_id) {
+    forms[product_id]['new_amount'] = Number.parseInt(forms[product_id]['amount_input'].val())
+    update(product_id)
+  }
 
   function increment(product_id) {
     forms[product_id]['new_amount'] += 1
