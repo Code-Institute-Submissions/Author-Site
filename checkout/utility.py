@@ -3,12 +3,11 @@ from .models import OrderLineItem
 from products.models import Product
 
 
-def order_form_from_request(request):
+def order_form_from_request(post_data):
     """
-    A function to create an order form instance from request data
+    A function to create an order form instance from request data,
+    expects a dictionary from the request data.
     """
-    # Convert QueryDict to Dict
-    post_data = request.POST.dict()
 
     # Check use card address as shipping address
     if post_data.get('use-card-address-as-shipping-address') == 'on':
@@ -85,5 +84,4 @@ def update_user_profile_from_order(order):
     profile.default_postcode = order.payment_postcode
     profile.default_country = order.payment_country
 
-    profile.user.save()
     profile.save()

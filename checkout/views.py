@@ -28,7 +28,7 @@ def create_payment_intent(request):
     A view to validate the users payment form, then update
     the payment intent.
     """
-    order_form = order_form_from_request(request)
+    order_form = order_form_from_request(request.POST.dict())
 
     # Checking the form is valid
     if not order_form.is_valid():
@@ -97,7 +97,7 @@ def checkout(request):
     """ Returns the page where users fill out the order form """
 
     if request.method == 'POST':
-        order_form = order_form_from_request(request)
+        order_form = order_form_from_request(request.POST.dict())
         payment_intent_id = extract_payment_intent_id(request.POST.get('client_secret'))
 
         # Critical problem - form already validated
@@ -206,13 +206,11 @@ def orders(request):
     # Get all orders, filtered by customer id
     # sort by date, most recent first
 
-    user_orders = {
-        'order1': 'order 1',
-        'order2': 'order 2',
-    }
+    orders = Order.objects.all().filter(user_profile=request.user.id)
+
 
     context = {
-        'user_orders': user_orders,
+        'orders': orders,
     }
 
     return render(request, 'checkout/orders.html', context)
