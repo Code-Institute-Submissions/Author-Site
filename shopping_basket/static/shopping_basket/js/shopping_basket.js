@@ -7,6 +7,7 @@ $(() => {
     if (payButton.hasClass('disabled')) event.preventDefault()
   })
 
+
   $('form').each(function () {
     let product_id = $(this).find('input[name=product_id]').val()
     let amount_input = $(this).find('input[name=amount]')
@@ -21,11 +22,13 @@ $(() => {
       'amount_input': amount_input,
       'basket_item': basket_item,
       'decrement_button': decrement_button,
+      'increment_button': increment_button,
     }
 
     increment_button.click(() => increment(product_id))
     decrement_button.click(() => decrement(product_id))
     amount_input.change(() => on_input_change(product_id))
+    update(product_id)
   })
 
   function on_input_change(product_id) {
@@ -64,6 +67,8 @@ $(() => {
       forms[product_id]['basket_item'].removeClass('zero')
       forms[product_id]['decrement_button'].prop('disabled', false)
     }
+
+    forms[product_id]['increment_button'].prop('disabled', (new_amount > 98))
 
   }
 

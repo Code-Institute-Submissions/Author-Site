@@ -15,8 +15,18 @@ def view_or_update_shopping_basket(request):
 
         shopping_basket[product_id] = amount
 
+        # Delete item
         if shopping_basket[product_id] < 1:
             del shopping_basket[product_id]
+
+        # Prevent amount over 99
+        if shopping_basket[product_id] > 99:
+            messages.warning(
+                request,
+                'The maximum number of products you can purchase at \
+                any one time is 99. If you wish to make a larger \
+                purchase (for schools etc) please contact us directly!')
+            shopping_basket[product_id] = 99
 
         request.session['shopping_basket'] = shopping_basket
 
