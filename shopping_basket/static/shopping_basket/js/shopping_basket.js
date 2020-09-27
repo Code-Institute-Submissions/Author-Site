@@ -1,6 +1,11 @@
 /* ON LOAD */
 $(() => {
   let forms = {}
+  const payButton = $('#pay-button')
+
+  payButton.on('click', event => {
+    if (payButton.hasClass('disabled')) event.preventDefault()
+  })
 
   $('form').each(function () {
     let product_id = $(this).find('input[name=product_id]').val()
@@ -22,8 +27,6 @@ $(() => {
     decrement_button.click(() => decrement(product_id))
   })
 
-  console.log(forms)
-
   function increment(product_id) {
     forms[product_id]['new_amount'] += 1
     update(product_id)
@@ -42,8 +45,10 @@ $(() => {
 
     if (origional_amount != new_amount) {
       forms[product_id]['basket_item'].addClass('amount-changed')
+      payButton.addClass('disabled')
     } else {
       forms[product_id]['basket_item'].removeClass('amount-changed')
+      payButton.removeClass('disabled')
     }
 
     if (new_amount === 0){
