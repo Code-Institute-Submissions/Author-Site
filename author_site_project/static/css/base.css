@@ -66,6 +66,7 @@ body {
     display: flex;
     background-color: white;
     flex-wrap: nowrap;
+    box-shadow: 0px 10px 25px rgb(0, 0, 0, 0.5);
 }
 
 #navbar a {
