@@ -60,6 +60,10 @@ body {
    color: lightgrey;
 }
 
+.badge-secondary {
+    background-color: #662a79 !important;
+}
+
 /* ------------------------------- NAV BAR */
 
 #navbar {
