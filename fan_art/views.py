@@ -58,6 +58,14 @@ def edit_fan_art(request, art_id):
 
     fan_art = get_object_or_404(FanArt, pk=art_id)
 
+    if not request.user.id == fan_art.user_profile.user.id:
+        messages.warning(
+            request,
+            'You can only edit your own art!'
+        )
+        redirect_url = reverse('all_fan_art')
+        return redirect(redirect_url)
+
     if request.method == 'POST':
         update_fan_art_form = UpdateFanArtForm(request.POST, instance=fan_art)
 
