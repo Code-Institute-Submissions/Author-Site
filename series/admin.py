@@ -8,5 +8,8 @@ class SeriesAdmin(admin.ModelAdmin):
         'name',
     )
 
+    def has_delete_permission(self, request, series=None):
+        return False
+
 
 admin.site.register(Series, SeriesAdmin)

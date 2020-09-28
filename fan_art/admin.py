@@ -30,5 +30,7 @@ class FanArtAdmin(admin.ModelAdmin):
 
     list_per_page = 25
 
-
+    list_filter = (
+        'is_approved',
+    )
 admin.site.register(FanArt, FanArtAdmin)

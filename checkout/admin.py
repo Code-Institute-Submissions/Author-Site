@@ -71,7 +71,9 @@ class OrderAdmin(admin.ModelAdmin):
 
     readonly_fields = ('order_number', 'date', 'stripe_payment_id',
                        'user_profile', 'price_total', 'shipping_total',
-                       'grand_total',)
+                       'grand_total', 'payment_street_address1',
+                       'payment_street_address2', 'payment_town_or_city',
+                       'payment_county', 'payment_postcode', 'payment_country')
 
     ordering = ('-date',)
     list_per_page = 25
