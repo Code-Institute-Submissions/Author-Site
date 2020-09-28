@@ -123,33 +123,33 @@
 /* ---------------------------- BACKGROUND IMAGES */
 
 #about-image-1 {
-    background-image: url(/static/img/author-profile-photo.png);
+    background-image: url(../../img/author-profile-photo.png);
 }
 
 #ava-pic-front-page {
-    background-image: url(/static/img/AATMD-cover-cropped.jpg);
+    background-image: url(../../img/AATMD-cover-cropped.jpg);
 }
 
 #ava-pic-1 {
-    background-image: url(/static/img/AATMD-1.png);
+    background-image: url(../../img/AATMD-1.png);
 }
 
 #ava-pic-2 {
-    background-image: url(/static/img/AATMD-2.png);
+    background-image: url(../../img/AATMD-2.png);
 }
 
 #ava-pic-3 {
-    background-image: url(/static/img/AATMD-3.png);
+    background-image: url(../../img/AATMD-3.png);
 }
 
 #ph-pic-front-page {
-    background-image: url(/static/img/PHLB_cover_cropped.png);
+    background-image: url(../../img/PHLB_cover_cropped.png);
 }
 
 #ph-pic-1 {
-    background-image: url(/static/img/PHLB-3.jpg);
+    background-image: url(../../img/PHLB-3.jpg);
 }
 
 #ph-pic-2 {
-    background-image: url(/static/img/PHLB-2.jpg);
+    background-image: url(../../img/PHLB-2.jpg);
 }

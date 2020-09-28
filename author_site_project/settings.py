@@ -164,14 +164,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
+if development:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')
+    STATICFILES_STORAGE = 'author_site_project.storage.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'author_site_project.storage.PublicMediaStorage'
+
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'author_site_project/static')
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Allauth

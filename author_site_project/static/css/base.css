@@ -11,7 +11,7 @@ body {
 }
 
 .paralax-background {
-    background-image: url(/static/img/glitter-background-1.jpg);
+    background-image: url(../img/glitter-background-1.jpg);
     height: 50vw;
     max-height: 250px;
     background-attachment: fixed;
@@ -167,7 +167,7 @@ body {
 }
 
 .publishing-logo-div {
-    background-image: url(/static/img/publishing-logo.png);
+    background-image: url(../img/publishing-logo.png);
     min-width: 27px;
     width: 8vw;
     min-height: 27px;
