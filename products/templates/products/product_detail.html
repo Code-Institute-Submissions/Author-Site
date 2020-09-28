@@ -119,13 +119,22 @@
                                     </span>
                                     <span>Back To Shop</span>
                                 </a>
+                                {% if product.in_stock %}
+                                    <button type="submit" class="glow-button mb-4" value="Add to Bag">
+                                        <span class="icon">
+                                            <i class="fas fa-shopping-basket"></i>
+                                        </span>
+                                        <span>Add to Basket</span>
+                                    </button>
+                                {% else %}
+                                    <button type="submit" class="glow-button mb-4 disabled" value="Add to Bag">
+                                        <span class="icon">
+                                            <i class="fas fa-shopping-basket"></i>
+                                        </span>
+                                        <span>Add to Basket</span>
+                                    </button>
+                                {% endif %}
 
-                                <button type="submit" class="glow-button mb-4" value="Add to Bag">
-                                    <span class="icon">
-                                        <i class="fas fa-shopping-basket"></i>
-                                    </span>
-                                    <span>Add to Basket</span>
-                                </button>
                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             </div>
                         </form>

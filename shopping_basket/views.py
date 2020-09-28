@@ -44,11 +44,11 @@ def add_to_shopping_basket(request, product_id):
 
     # Check product is in stock
     if not product.in_stock:
-        messages.error(request, """
-            I'm sorry, this product is currently out of stock.
-            You can check back later or sign up to our mailing list to
-            get emails about our products!
-        """)
+        messages.warning(request,
+            " I'm sorry, this product is currently out of stock. \
+            Once our suppliers give us the thubs up it will be \
+            back though, so check back soon!"
+        )
         return redirect(redirect_url)
 
     # Load or create basket
