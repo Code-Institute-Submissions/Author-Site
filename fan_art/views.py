@@ -6,12 +6,25 @@ from django.contrib import messages
 from .models import FanArt
 from profiles.models import UserProfile
 from .forms import CreateFanArtForm, UpdateFanArtForm
+from series.models import Series
 
 
 def all_fan_art(request):
     """ A view to return all peices of fan art """
 
     fan_art = FanArt.objects.all().filter(is_approved=True)
+    series_list = Series.objects.all()
+
+    # Variables for filtering
+    selected_series = request.GET.get('series', '')
+
+    # Filtering code
+    if selected_series != '':
+        try:
+            selected_series = int(selected_series)
+            fan_art = fan_art.filter(series__id=selected_series)
+        except ValueError:
+            selected_series = ''
 
     # Pagination
     paginator = Paginator(fan_art, 9)
@@ -21,6 +34,8 @@ def all_fan_art(request):
     context = {
         'fan_art': paged_fan_art,
         'current_page': 'all_fan_art',
+        'series_list': series_list,
+        'selected_series': selected_series,
     }
 
     return render(request, 'fan_art/all_fan_art.html', context)

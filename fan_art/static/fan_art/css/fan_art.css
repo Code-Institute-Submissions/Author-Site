@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+#filter-fan-art-form {
+    margin: 20px auto;
+    width: 70vw;
+}
+
 /* --------------------------- USER FAN ART*/
 
 .card-img-overlay {
@@ -51,6 +56,10 @@
 /* --------------------------- MEDIA QUERIES*/
 
 @media (min-width: 576px) {
+    #filter-fan-art-form {
+        margin: 20px 0;
+        width: 300px;
+    }
     .fan-art-form {
         width: 80vw;
     }

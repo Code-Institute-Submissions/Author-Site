@@ -13,6 +13,36 @@
 
 {% block content %}
 
+<!-- PRODUCT FILTERS -->
+<section id="product-filter">
+    <div class="container">
+        <form id="filter-fan-art-form" class="form" method="GET" action="{% url 'all_fan_art' %}">
+
+            <div id="series-filter" class="form-group">
+                <select name="series" class="form-control">
+
+                    {% if selected_series == '' %}
+                        <option value="" selected>All Series</option>
+                    {% else %}
+                        <option value="">All Series</option>
+                    {% endif %}
+
+                    {% for series in series_list %}
+                        {% if selected_series == series.id %}
+                            <option value="{{ series.id }}" selected>{{ series.name }}</option>
+                        {% else %}
+                            <option value="{{ series.id }}">{{ series.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+
+                </select>
+
+            </div>
+        </form>
+    </div>
+</section>
+
+
 <!-- GALLERY -->
 <section id="gallery">
     <div class="container">
@@ -125,5 +155,14 @@
     </div>
 
 </section>
+
+{% endblock %}
+
+<!-- CODE FOR FILTERING ART -->
+{% block postloadjs %}
+
+    {{block.super}}
+
+    <script type="text/javascript" src="{% static 'fan_art/js/fan_art.js' %}"></script>
 
 {% endblock %}
