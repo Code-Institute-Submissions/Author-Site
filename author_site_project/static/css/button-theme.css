@@ -94,10 +94,13 @@
   background: gray;
 }
 
-a.glow-button:hover {
+a.glow-button:hover,
+a.delete-button:hover {
   text-decoration: none;
-  color: black;
+  color: white;
 }
+
+
 
 /*------------------------- THE GLOW  */
 
