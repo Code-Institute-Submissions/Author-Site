@@ -165,10 +165,25 @@ class Stripe_WebHook_Handler:
     def _send_confirmation_email(self, order):
         """ Send the user a confirmation email """
 
+        # Establish whether the user has pourchased an audio or e book
+        bought_audiobook = False
+        bought_ebook = False
+
+        for lineitem in order.lineitems.all():
+            if lineitem.product.product_type == 'e_book':
+                bought_ebook = True
+            elif lineitem.product.product_type == 'audio_book':
+                bought_audiobook = True
+
         try:
             email_body = render_to_string(
-                'checkout/test_templates/confirmation_email_body.txt',
-                {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL}
+                'checkout/text_templates/confirmation_email_body.txt',
+                {
+                    'order': order,
+                    'contact_email': settings.DEFAULT_FROM_EMAIL,
+                    'bought_audiobook': bought_audiobook,
+                    'bought_ebook': bought_ebook,
+                }
             )
 
             send_mail(
@@ -179,4 +194,4 @@ class Stripe_WebHook_Handler:
             )
         except Exception as e:
             # Print here as we can't do anything with it in the webhook
-            print(e)
+            print('error: ', e)

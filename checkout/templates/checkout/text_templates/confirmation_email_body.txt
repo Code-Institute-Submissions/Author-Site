@@ -2,18 +2,78 @@ Hello {{ order.full_name }}
 
 This is a confirmation of the recent order you made with us. Thank you
 for supporting an independant author by purchasing from us directly!
+
+{% if bought_audiobook and bought_ebook %}
+
+Links for your e book and for your audio book will be sent out to you shortly in
+two separate emails. If you don't recieve both emails within two days please
+contact us at {{ contact_email }}.
+
+{% elif bought_audiobook %}
+
+A link for your audio book will be sent out to you shortly. If you
+don't recieve that email within two days please contact us at {{ contact_email }}.
+
+{% elif bought_ebook %}
+
+A link for your e book will be sent out to you shortly. If you
+don't recieve that email within two days please contact us at {{ contact_email }}.
+
+{% endif %}
+
 Your order details are below:
 
 Order Number: {{ order.order_number }}
 Order date: {{ order.date }}
 
+Your Items:
+{% for item in order.lineitems.all %}
+
+    {{ item.product.name }}
+    {{ item.product.get_product_type_display }}
+    Price: ${{ item.product.price }}
+    Shipping: ${{ item.product.shipping }}
+    Quantity: {{ item.quantity }}
+    Sub Total: ${{ item.grand_total }}
+
+{% endfor %}
+
+Your Payment Overview:
+
+{{ order.full_name }}
+{{ order.email }}
+{{ order.phone_number }}
+{{ order.payment_street_address1 }}
+{% if order.payment_street_address2 %}
+    {{ order.payment_street_address2 }}
+{% endif %}
+{{ order.payment_town_or_city }}
+{{ order.payment_county }}
+{{ order.payment_postcode }}
+{{ order.payment_country }}
+
+Your Shipping Info:
+
+{{ order.shipping_full_name }}
+{{ order.shipping_street_address1 }}
+{% if order.shipping_street_address2 %}
+ {{ order.shipping_street_address2 }}
+{% endif %}
+{{ order.shipping_town_or_city }}
+{{ order.shipping_county }}
+{{ order.shipping_postcode }}
+{{ order.shipping_country }}
+
+{% if order.gift_message %}
+Your Gift Message:
+
+{{ order.gift_message }}
+{% endif %}
+
 Order Total: {{ order.price_total }}
 Delivery: ${{ order.shipping_total }}
 Grand Total: ${{ order.grand_total }}
 
-Your order will be shipped to {{ order.shipping_street_address1 }} in {{ order.shipping_town_or_city }}, {{order.shipping_country}}.
-
-We have your phone number on file as {{ order.phone_number}}.
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 
@@ -21,4 +81,4 @@ Thank you for your order!
 
 Sincerely,
 
-Holly Thomas - Author's Site
+Holly Thomas - The Author's Site
