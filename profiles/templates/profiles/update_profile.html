@@ -8,7 +8,7 @@
 
 
 <!-- PARALAX HEADING -->
-{% block paralax_title%} My Details {% endblock%}
+{% block paralax_title%} My Profile {% endblock%}
 
 
 {% block content %}
@@ -45,7 +45,7 @@
                     {{ user_profile_form.default_country | as_crispy_field }}
                 </fieldset>
 
-                <div>
+                <div class="update-profile-buttons">
                     <button class="glow-button my-4">
                         <span class="icon">
                             <i class="fas fa-share"></i>
@@ -54,13 +54,12 @@
                     </button>
                     <!-- DELETE -->
 
-                        <a href="{% url 'delete_profile' %}" class="delete-button mb-4">
-                            <span class="icon">
-                                <i class="fas fa-trash-alt"></i>
-                            </span>
-                            <span>Delete</span>
-                        </a>
-
+                    <a href="{% url 'delete_profile' %}" class="delete-button my-4">
+                        <span class="icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                        <span>Delete</span>
+                    </a>
                 </div>
             </form>
         </div>
