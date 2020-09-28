@@ -17,6 +17,9 @@ class Order(models.Model):
         ('shipped', 'Shipped'),
     ]
 
+    class Meta:
+        ordering = ['-date']
+
     # Basic order info
     order_number = models.CharField(max_length=32, editable=False)
     date = models.DateTimeField(auto_now_add=True)

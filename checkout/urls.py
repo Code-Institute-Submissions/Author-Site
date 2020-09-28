@@ -9,5 +9,5 @@ urlpatterns = [
     path('create_payment_intent/', views.create_payment_intent, name='create_payment_intent'),
     path('stripe/', stripe_webhook_handler, name='stripe'),
     path('orders', views.orders, name='orders'),
-    path('order', views.order, name='order'),
+    path('order/<order_number>', views.order, name='order'),
 ]

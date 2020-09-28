@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 
@@ -13,6 +14,7 @@ from .utility import (
     create_order_from_shopping_basket,
     update_user_profile_from_order
 )
+from products.models import Product
 from shopping_basket.context_processors import shopping_basket
 
 import json
@@ -138,9 +140,12 @@ def checkout(request):
         # Emptying the shopping basket
         request.session['shopping_basket'] = {}
 
-        messages.success(request, f'Order successfully processed! \
-            Your order number is {order.order_number}. A confirmation \
-            email will be sent to {order.email}'
+        messages.success(
+            request,
+            render_to_string(
+                'checkout/text_templates/checkout_success.txt',
+                {'order': order}
+            )
         )
 
         # TODO: handle if order already exists (race condition)
@@ -202,12 +207,7 @@ def checkout_success(request, order_number):
 def orders(request):
     """ A view to return the cutomer's orders & their status """
 
-    # TODO
-    # Get all orders, filtered by customer id
-    # sort by date, most recent first
-
     orders = Order.objects.all().filter(user_profile=request.user.id)
-
 
     context = {
         'orders': orders,
@@ -218,19 +218,29 @@ def orders(request):
 
 
 @login_required
-def order(request):
+def order(request,  order_number):
     """ A view to return a specific order """
+    try:
+        order = get_object_or_404(Order, order_number=order_number)
 
-    # TODO
-    # Get all orders, filtered by customer id
-    # filter by order_id
+        if not request.user.id == order.user_profile.user.id:
+            messages.warning(
+                request,
+                'You can only review your own orders!'
+            )
+            redirect_url = reverse('index')
+            return redirect(redirect_url)
 
-    user_order = {
-        'order1': 'order 1',
-    }
+        context = {
+            'order': order,
+        }
 
-    context = {
-        'user_order': user_order,
-    }
+        return render(request, 'checkout/order.html', context)
 
-    return render(request, 'checkout/order.html', context)
+    except Exception as e:
+        print(e)
+        messages.error(
+            request,
+            "It looks like that order doesn't exist in our database, please contact us to find out more."
+        )
+        return render(request, 'checkout/orders.html')

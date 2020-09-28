@@ -13,16 +13,6 @@
 {% block content %}
 
     <section id="checkout_sucess">
-        <div class="intro-text">
-            <p>
-                Your order has been processed successfully!
-                You can find the order information below.
-                A confirmation email will be sent to
-                <strong>{{ order.email }}</strong>.
-                <br>Thank you for supporting us!
-            </p>
-        </div>
-
 
         <div class="container">
 
@@ -65,10 +55,9 @@
 
                     <!-- GIFT MESSAGE -->
                     {% if order.gift_message %}
-                        <p><span class="order-info-heading">Your Message:</span></p>
+                        <p><span class="order-info-heading">Your Gift Message:</span></p>
                         <div class="order-line-item-div">
-                            <p><strong>Your Message</strong></p>
-                            <p>{{ order.message }}</p>
+                            <p>{{ order.gift_message }}</p>
                         </div>
                     {% endif %}
 
@@ -94,7 +83,7 @@
                         ${{ order.grand_total }}</p>
                     <p class="order-info-large"><span
                             class="order-info-heading">Status:</span>&nbsp;
-                        {{ order.status }}</p>
+                        {{ order.get_status_display }}</p>
                 </div>
 
                 {% if request.user.is_authenticated %}
