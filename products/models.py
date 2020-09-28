@@ -22,6 +22,7 @@ class Product(models.Model):
     product_type = models.CharField(choices=_TYPE_OF_PRODUCT, max_length=20)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     in_stock = models.BooleanField(default=True)
+    list_in_shop = models.BooleanField(default=True)
     image = models.ImageField()
     description = models.TextField()
     shipping = models.DecimalField(max_digits=6, decimal_places=2)

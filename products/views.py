@@ -9,7 +9,7 @@ from series.models import Series
 def all_products(request):
     """ A view to return all products """
 
-    products = Product.objects.all()
+    products = Product.objects.all().filter(list_in_shop=True)
 
     # Variables for filtering
     selected_series = request.GET.get('series', '')

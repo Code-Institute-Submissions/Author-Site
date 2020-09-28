@@ -9,7 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
         'product_type',
         'price',
         'in_stock',
-        'isbn',
+        'list_in_shop',
     )
 
     list_display_links = (
@@ -18,7 +18,7 @@ class ProductAdmin(admin.ModelAdmin):
         'product_type',
         'price',
         'in_stock',
-        'isbn',
+        'list_in_shop',
     )
 
     search_fields = (
@@ -27,15 +27,22 @@ class ProductAdmin(admin.ModelAdmin):
         'product_type',
         'price',
         'in_stock',
+        'list_in_shop',
         'isbn',
     )
 
     list_per_page = 25
 
+    list_filter = (
+        'list_in_shop',
+        'in_stock'
+    )
+
+
     fieldsets = (
         ('All Products', {
             'fields': ('name', 'series', 'product_type',
-            'price', 'in_stock', 'image', 'description',
+            'price', 'in_stock', 'list_in_shop', 'image', 'description',
             'shipping', 'recommended_audience_age',)
         }),
         ('All Books', {
@@ -49,6 +56,9 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('run_time', 'narrator')
         }),
     )
+
+    def has_delete_permission(self, request, product=None):
+        return False
 
 
 admin.site.register(Product, ProductAdmin)
