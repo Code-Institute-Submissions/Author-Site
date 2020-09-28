@@ -73,7 +73,10 @@
                         <!-- PRODUCT CARD -->
                         <div class="col-md-6 col-lg-4 mb-4">
                             <div class="card" >
-                                <img class="card-img-top" src="{{ product.image.url }}" alt="product photo">
+                                <a href="{% url 'product_detail' product.id %}">
+                                    <img class="card-img-top" src="{{ product.image.url }}" alt="product photo">
+                                </a>
+
                                 <div class="card-img-overlay">
                                     {% if product.in_stock %}
                                         <h2>
