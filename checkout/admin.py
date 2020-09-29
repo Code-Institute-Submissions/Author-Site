@@ -41,6 +41,7 @@ class OrderLineItemAdminInLine(admin.TabularInline):
 
 
 
+
 class OrderAdmin(admin.ModelAdmin):
     """
     Admin class for order. Line items set as inline only,
@@ -79,12 +80,6 @@ class OrderAdmin(admin.ModelAdmin):
         'status',
     )
 
-    readonly_fields = ('order_number', 'date', 'stripe_payment_id',
-                       'user_profile', 'price_total', 'shipping_total',
-                       'grand_total', 'payment_street_address1',
-                       'payment_street_address2', 'payment_town_or_city',
-                       'payment_county', 'payment_postcode', 'payment_country')
-
     ordering = ('-date',)
     list_per_page = 25
 
@@ -116,6 +111,31 @@ class OrderAdmin(admin.ModelAdmin):
                        'shipping_country')
         }),
     )
+
+    def get_readonly_fields(self, request, order):
+        """ Set the read only fields depending on the status of the order """
+
+        readonly_fields = [
+            'order_number', 'date', 'stripe_payment_id',
+            'user_profile', 'price_total', 'shipping_total',
+            'grand_total', 'payment_street_address1',
+            'payment_street_address2', 'payment_town_or_city',
+            'payment_county', 'payment_postcode', 'payment_country'
+        ]
+
+        if order.status == 'shipped':
+            readonly_fields.extend([
+                'full_name', 'email', 'phone_number',
+                'gift_message',
+                'shipping_full_name',
+                'shipping_street_address1',
+                'shipping_street_address2',
+                'shipping_town_or_city',
+                'shipping_county', 'shipping_postcode',
+                'shipping_country'
+            ])
+
+        return readonly_fields
 
 
 admin.site.register(Order, OrderAdmin)
