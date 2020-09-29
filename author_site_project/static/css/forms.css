@@ -28,6 +28,16 @@
     padding: 10px;
 }
 
+select,
+select option {
+    color: #000000;
+}
+
+select:invalid,
+select option[value=""] {
+    color: grey !important;
+}
+
 /* ---------------- CHECKOUT */
 
 #payment-section {
