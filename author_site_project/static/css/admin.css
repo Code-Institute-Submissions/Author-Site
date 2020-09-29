@@ -75,3 +75,7 @@ input[type=button]:hover {
     background: #3a3558;
     color: white;
 }
+
+#order_form .original {
+    display: none;
+}
