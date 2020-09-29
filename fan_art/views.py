@@ -108,7 +108,6 @@ def edit_fan_art(request, art_id):
 def delete_fan_art(request, art_id):
     """ A view to delete the user's own fan art """
 
-    # TODO: defensive programming - check the fan art is owned by the user
     if request.method == 'POST':
         selected_fan_art = get_object_or_404(FanArt, pk=art_id)
         selected_fan_art.delete()

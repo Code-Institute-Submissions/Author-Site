@@ -39,9 +39,6 @@ def shopping_basket(request):
             'subtotal': subtotal,
         })
 
-    # TODO: sort products
-    # TODO: refactor with 'quantity' or 'amount' (currently using both)
-
     context =  {
         'ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL': ADD_TO_SHOPPING_BASKET_MESSAGE_LEVEL,
         'shopping_basket': {

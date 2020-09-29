@@ -70,9 +70,6 @@ class TestExtractPaymentIntentID(TestCase):
         self.assertEqual(payment_intent_id, 'xxx')
 
 
-# TODO: test create_order_from_shopping_basket
-
-
 class TestUpdateUserProfileFromOrder(TestCase):
     """ Testing class for Order utility functions """
 

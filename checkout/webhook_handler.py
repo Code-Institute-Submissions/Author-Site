@@ -132,7 +132,6 @@ class Stripe_WebHook_Handler:
             #    f"One of the products in your bag wasn't found in our database. \
             #    Please email us with this reference number {payment_intent_id}!"
             #)
-            # TODO: send an email to the customer
             pass
 
         return HttpResponse(status=200)
@@ -153,7 +152,7 @@ class Stripe_WebHook_Handler:
             # We found the order
             order.status = 'payment_failed'
             order.save()
-            # TODO: send the user an email
+
             return HttpResponse(status=200)
 
         # We did not find the order at all

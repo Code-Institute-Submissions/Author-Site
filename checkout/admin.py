@@ -39,7 +39,6 @@ class OrderLineItemAdminInLine(admin.TabularInline):
         """ Returns the product name to display in the order line item """
         return order_line.product.name
 
-    # TODO: remove the 'OrderLineItem object (1)' title on each item
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -118,7 +117,5 @@ class OrderAdmin(admin.ModelAdmin):
         }),
     )
 
-    # TODO: set the read only status of certain fields depending on the order status
-    # TODO: simplify the date/time to only show date
 
 admin.site.register(Order, OrderAdmin)

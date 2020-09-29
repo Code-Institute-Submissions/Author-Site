@@ -71,8 +71,6 @@ $(() => {
     // Trim the form values
     $(':input').val((_, oldValue) => oldValue.trim())
 
-    // TODO: disable buttons & UI stuff
-
     /*
     Getting the client secret & save info
     Getting the values from the form
@@ -155,7 +153,6 @@ $(() => {
         if (result.error) {
           $('#card-error').text(result.error.message)
           card.focus()
-          // TODO: re-enable the form
         } else {
           $('#payment-form')[0].submit()
         }

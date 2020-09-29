@@ -107,7 +107,6 @@ def checkout(request):
             messages.error(request, f'Hey, something went really wrong, \
                 please email us with this reference number {payment_intent_id}')
             print(payment_intent_id, order_form.errors)
-            # TODO: Empty the shopping basket
 
             redirect_url = reverse('view_or_update_shopping_basket')
             return redirect(redirect_url)
@@ -147,8 +146,6 @@ def checkout(request):
                 {'order': order}
             )
         )
-
-        # TODO: handle if order already exists (race condition)
 
         return redirect(reverse('checkout_success', args=[order.order_number]))
 
