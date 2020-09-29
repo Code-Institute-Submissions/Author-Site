@@ -100,7 +100,23 @@ a.delete-button:hover {
   color: white;
 }
 
+/* -------------------- GOOGLE BUTTON */
 
+.socialaccount_providers .socialaccount_provider.google {
+  background: url(../img/google-button/btn_google_signin_dark_normal_web.png);
+  display: inline-block;
+  width: 191px;
+  height: 46px;
+  color: transparent;
+}
+
+.socialaccount_providers .socialaccount_provider.google:hover {
+  background: url(../img/google-button/btn_google_signin_dark_focus_web.png);
+}
+
+.socialaccount_providers .socialaccount_provider.google:active {
+  background: url(../img/google-button/btn_google_signin_dark_pressed_web.png);
+}
 
 /*------------------------- THE GLOW  */
 
