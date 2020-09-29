@@ -1,5 +1,5 @@
 /*
-  GLOW CODE FROM:
+  Glow buttons inspired by this site::
   https://www.codingnepalweb.com/2020/05/cool-glowing-effect-on-css-buttons.html
 */
 
@@ -101,6 +101,7 @@ a.delete-button:hover {
 }
 
 /* -------------------- GOOGLE BUTTON */
+/* Google button image & guidelines from here: https://developers.google.com/identity/branding-guidelines */
 
 .socialaccount_providers .socialaccount_provider.google {
   background: url(../img/google-button/btn_google_signin_dark_normal_web.png);
