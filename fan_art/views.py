@@ -110,6 +110,15 @@ def delete_fan_art(request, art_id):
 
     if request.method == 'POST':
         selected_fan_art = get_object_or_404(FanArt, pk=art_id)
+
+        if not request.user.id == selected_fan_art.user_profile.user.id:
+            messages.warning(
+                request,
+                'You can only delete your own art!'
+            )
+            redirect_url = reverse('all_fan_art')
+            return redirect(redirect_url)
+
         selected_fan_art.delete()
         messages.success(request, 'Art deleted successfully')
 
