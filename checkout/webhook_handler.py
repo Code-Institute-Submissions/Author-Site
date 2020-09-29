@@ -128,11 +128,16 @@ class Stripe_WebHook_Handler:
             self._send_confirmation_email(order)
 
         except Product.DoesNotExist as error:
-            #messages.error(request,
-            #    f"One of the products in your bag wasn't found in our database. \
-            #    Please email us with this reference number {payment_intent_id}!"
-            #)
-            pass
+            # This situation should never happen
+            # Sending the details to ourselves so we can follow up
+            send_mail(
+                f'Error while processing payment intent: {payment_intent_id}',
+                error,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.DEFAULT_FROM_EMAIL]
+            )
+
+            return HttpResponse(status=500)
 
         return HttpResponse(status=200)
 
