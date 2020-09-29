@@ -219,7 +219,7 @@ def orders(request):
 def order(request,  order_number):
     """ A view to return a specific order """
     try:
-        order = get_object_or_404(Order, order_number=order_number)
+        order = Order.objects.get(order_number=order_number)
 
         if not request.user.id == order.user_profile.user.id:
             messages.warning(
@@ -236,8 +236,7 @@ def order(request,  order_number):
 
         return render(request, 'checkout/order.html', context)
 
-    except Exception as e:
-        print(e)
+    except Order.DoesNotExist:
         messages.error(
             request,
             "It looks like that order doesn't exist in our database, please contact us to find out more."
