@@ -241,4 +241,4 @@ def order(request,  order_number):
             request,
             "It looks like that order doesn't exist in our database, please contact us to find out more."
         )
-        return render(request, 'checkout/orders.html')
+        return redirect(reverse('orders'))
