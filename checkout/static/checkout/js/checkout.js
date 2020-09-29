@@ -67,6 +67,7 @@ $(() => {
   // Calls the function for paying with Stripe
   $('#payment-form').submit((e) => {
     e.preventDefault()
+    $('.loader').removeClass('hidden')
 
     // Trim the form values
     $(':input').val((_, oldValue) => oldValue.trim())
@@ -100,6 +101,8 @@ $(() => {
       $('#client_secret').val(response.client_secret)
       payWithCard(stripe, card, response.client_secret)
     }).fail((e) => {
+
+      $('.loader').addClass('hidden')
 
       // If error + redirect from validation function
       if (e.responseJSON['redirect']) {
@@ -151,6 +154,7 @@ $(() => {
       })
       .then((result) => {
         if (result.error) {
+          $('.loader').addClass('hidden')
           $('#card-error').text(result.error.message)
           card.focus()
         } else {

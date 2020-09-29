@@ -36,6 +36,24 @@
     box-shadow: 0 0 3pt 2pt red;
 }
 
+.loader {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    }
+
+.loader.hidden {
+    display: none;
+}
+
 /* -------------- SUCCESS PAGE */
 
 .order-detail-container {
