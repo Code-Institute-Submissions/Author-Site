@@ -108,6 +108,9 @@ def checkout(request):
                 please email us with this reference number {payment_intent_id}')
             print(payment_intent_id, order_form.errors)
 
+            # Empty shopping basket
+            request.session['shopping_basket'] = {}
+
             redirect_url = reverse('view_or_update_shopping_basket')
             return redirect(redirect_url)
 
