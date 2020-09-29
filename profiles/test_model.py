@@ -4,6 +4,7 @@ from .models import UserProfile
 
 
 class TestUserProfile(TestCase):
+    """ Testing class for User profile """
 
     def test_create_or_update_user_profile(self):
         user_data = {

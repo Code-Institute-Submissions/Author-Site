@@ -3,6 +3,8 @@ from .models import Product
 
 
 class ProductAdmin(admin.ModelAdmin):
+    """ Admin class for the Product """
+
     list_display = (
         'name',
         'series',
@@ -58,6 +60,7 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
     def has_delete_permission(self, request, product=None):
+        """ Prevents a product from being deleted """
         return False
 
 

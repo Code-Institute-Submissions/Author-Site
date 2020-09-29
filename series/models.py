@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Series(models.Model):
+    """ Series Model """
 
     class Meta:
         verbose_name_plural = 'Series'

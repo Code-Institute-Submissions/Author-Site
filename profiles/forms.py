@@ -4,15 +4,15 @@ from .models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
-
+    """ Form to update UserProfile instance """
     class Meta:
         model = UserProfile
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
         """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
+        Add placeholders, remove auto-generated
+        labels and set autofocus
         """
         super().__init__(*args, **kwargs)
 
@@ -33,7 +33,7 @@ class UserProfileForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-
+    """ Form to update UserProfile instance """
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', )

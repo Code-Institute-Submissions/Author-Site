@@ -8,6 +8,8 @@ import os
 
 
 class TestFanArtViews(TestCase):
+    """ Test class for the FanArt views & approval flow """
+
     user_data = {
         'username': 'username',
         'password': 'password',

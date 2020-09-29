@@ -35,6 +35,7 @@ def update_profile(request):
 
 @login_required
 def delete_profile(request):
+    """ Handles delete of a user account & redirect """
 
     if request.method == 'POST':
         request.user.delete()

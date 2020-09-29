@@ -3,6 +3,10 @@ from .models import Order, OrderLineItem
 
 
 class OrderLineItemAdminInLine(admin.TabularInline):
+    """
+    Admin class for order line items. Set as inline only,
+    has no add or delete permission to prevent order modification post payment.
+    """
     model = OrderLineItem
     extra = 0
 
@@ -20,21 +24,28 @@ class OrderLineItemAdminInLine(admin.TabularInline):
     ]
 
     def has_delete_permission(self, request, order):
+        """ Prevents order line items from being deleted """
         return False
 
     def has_add_permission(self, request, order):
+        """ Prevents order line items from being added """
         return False
 
     def product_type(self, order_line):
+        """ Returns the product type to display in the order line item """
         return order_line.product.get_product_type_display()
 
     def product_name(self, order_line):
+        """ Returns the product name to display in the order line item """
         return order_line.product.name
 
     # TODO: remove the 'OrderLineItem object (1)' title on each item
 
 
 class OrderAdmin(admin.ModelAdmin):
+    """
+    Admin class for order. Line items set as inline only,
+    """
     inlines = (OrderLineItemAdminInLine,)
 
     list_display = (

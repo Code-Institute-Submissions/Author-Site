@@ -33,6 +33,7 @@ def order_form_from_request(post_data):
 
 
 def extract_payment_intent_id(client_secret):
+    """ Extracts the payment id from the client secret """
     return client_secret.split('_secret')[0]
 
 
@@ -42,6 +43,7 @@ def create_order_from_shopping_basket(
     payment_intent_id,
     user
 ):
+    """ Creates an order with line items from the shopping basket """
 
     order_lines = []
 
@@ -72,6 +74,10 @@ def create_order_from_shopping_basket(
 
 
 def update_user_profile_from_order(order):
+    """
+    Saves the order card address to the users default address
+    on their profile.
+    """
     profile = order.user_profile
 
     if not profile:

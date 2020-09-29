@@ -32,6 +32,7 @@ class Stripe_WebHook_Handler:
 
 
     def process_request(self):
+        """ Processes each request, and calls the appropriate handler """
         event = None
 
         try:
@@ -53,6 +54,7 @@ class Stripe_WebHook_Handler:
 
 
     def handle_payment_intent_succeeded(self, event):
+        """ Handles a successfll payment """
         payment_intent = event.data.object
 
         for attempt in range(5):
@@ -137,6 +139,7 @@ class Stripe_WebHook_Handler:
 
 
     def handle_payment_intent_payment_failed(self, event):
+        """ Handles a failed payment """
         payment_intent = event.data.object
 
         for attempt in range(5):
@@ -159,6 +162,7 @@ class Stripe_WebHook_Handler:
 
 
     def unhandled_event(self, event):
+        """ Any unhandled event """
         # print(event.type, event)
         return HttpResponse(status=200)
 

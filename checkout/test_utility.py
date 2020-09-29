@@ -10,6 +10,8 @@ from .utility import (
 
 
 class TestOrderFormFromRequest(TestCase):
+    """ Testing class for Order utility functions """
+
     form_data = {
         'full_name' : 'full_name',
         'email': 'email@example.com',
@@ -60,6 +62,7 @@ class TestOrderFormFromRequest(TestCase):
 
 
 class TestExtractPaymentIntentID(TestCase):
+    """ Testing class for Order utility functions """
 
     def test_extracts_payment_id(self):
         client_secret = 'xxx_secret_yyy'
@@ -71,6 +74,8 @@ class TestExtractPaymentIntentID(TestCase):
 
 
 class TestUpdateUserProfileFromOrder(TestCase):
+    """ Testing class for Order utility functions """
+
     order_data = {
         'stripe_payment_id': 'stripe_payment_id',
         'status': 'submitted',
