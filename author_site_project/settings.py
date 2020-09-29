@@ -114,16 +114,16 @@ WSGI_APPLICATION = 'author_site_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if development:
+if "DATABASE_URL" in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
-    }
-else:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
 
 
@@ -165,13 +165,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-if development:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-else:
+if "GS_BUCKET_NAME" in os.environ:
     GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')
     STATICFILES_STORAGE = 'author_site_project.storage.StaticStorage'
     DEFAULT_FILE_STORAGE = 'author_site_project.storage.PublicMediaStorage'
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 STATIC_URL = '/static/'
@@ -206,12 +206,12 @@ STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', '')
 # E-mails
 DEFAULT_FROM_EMAIL = 'avasmagicdoor@gmail.com'
 
-if development:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
+if "EMAIL_HOST_PASSWORD" in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = '465'
     EMAIL_HOST_USER = 'avasmagicdoor@gmail.com'
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
     EMAIL_USE_SSL = True
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

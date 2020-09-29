@@ -40,10 +40,13 @@ class UserProfile(models.Model):
 
 
 @receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
+def create_or_update_user_profile(sender, instance, created, raw, **kwargs):
     """
     Create or update the user profile based on changes from the User model
     """
+    # For db migrations
+    if raw:
+        return
     if created:
         UserProfile.objects.create(user=instance)
 
