@@ -8,4 +8,7 @@ venv
 /media
 .coverage
 htmlcov
+README.md
+.gitignore
+.git
 serviceaccount.json
