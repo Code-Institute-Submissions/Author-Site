@@ -2,20 +2,17 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet"
-        href="{% static 'profiles/css/profiles.css' %}">
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 
 <!-- PARALAX HEADING -->
-{% block paralax_title%} Order {% endblock%}
+{% block paralax_title%} {{ paralax_text }} {% endblock%}
 
 
 {% block content %}
 
-    <section id="orders">
-
-        {% if order %}
+    <section id="order">
 
             <div class="container">
 
@@ -115,34 +112,7 @@
                 </div>
 
 
-
-
             </div>
-
-        {% else %}
-
-            <div class="container empty-orders-container">
-
-                <div class="empty-basket-icon">
-                    <span class="icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                    <br>
-                    <p>Oh my, it looks like something went wrong! Please contact us to find out why</p>
-                </div>
-
-                <div class="basket-button-div">
-                    <a href="{% url 'index' %}" class="glow-button my-4">
-                        <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span>Home</span>
-                    </a>
-                </div>
-
-            </div>
-
-        {% endif %}
 
     </section>
 

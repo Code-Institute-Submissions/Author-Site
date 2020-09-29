@@ -192,9 +192,10 @@ def checkout_success(request, order_number):
     """
 
     order = get_object_or_404(Order, order_number=order_number)
-    template = 'checkout/checkout_success.html'
+    template = 'checkout/order.html'
     context = {
         'order': order,
+        'paralax_text': "Thank You!",
     }
 
     return render(request, template, context)
@@ -230,6 +231,7 @@ def order(request,  order_number):
 
         context = {
             'order': order,
+            'paralax_text': "Order",
         }
 
         return render(request, 'checkout/order.html', context)
