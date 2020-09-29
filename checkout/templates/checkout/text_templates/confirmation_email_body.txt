@@ -2,7 +2,7 @@ Hello {{ order.full_name }}
 
 This is a confirmation of the recent order you made with us. Thank you
 for supporting an independant author by purchasing from us directly!
-
+{% autoescape off %}
 {% if bought_audiobook and bought_ebook %}
 
 Links for your e book and for your audio book will be sent out to you shortly in
@@ -27,6 +27,7 @@ Order Number: {{ order.order_number }}
 Order date: {{ order.date }}
 
 Your Items:
+
 {% for item in order.lineitems.all %}
 
     {{ item.product.name }}
@@ -37,6 +38,7 @@ Your Items:
     Sub Total: ${{ item.grand_total }}
 
 {% endfor %}
+
 
 Your Payment Overview:
 
@@ -65,15 +67,17 @@ Your Shipping Info:
 {{ order.shipping_country }}
 
 {% if order.gift_message %}
+
 Your Gift Message:
 
 {{ order.gift_message }}
+
 {% endif %}
 
 Order Total: {{ order.price_total }}
 Delivery: ${{ order.shipping_total }}
 Grand Total: ${{ order.grand_total }}
-
+{% endautoescape %}
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 
