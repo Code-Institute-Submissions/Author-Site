@@ -46,7 +46,7 @@ def add_to_shopping_basket(request, product_id):
     if not product.in_stock:
         messages.warning(request,
             " I'm sorry, this product is currently out of stock. \
-            Once our suppliers give us the thubs up it will be \
+            Once our suppliers give us the thumbs up it will be \
             back though, so check back soon!"
         )
         return redirect(redirect_url)
