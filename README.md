@@ -1,6 +1,6 @@
 # Holly Thomas - Author Site
 
-TODO: embed site banner picture
+![README banner](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/site-banner.png)
 
 
 The home of books by Holly Thomas! Read about the author, the world of the books and the inspiration behind some of her work. Visit the shop and pick up copies of her book, cuddly toys and more! Join our community and see your art featured in the gallery!
@@ -8,19 +8,19 @@ The home of books by Holly Thomas! Read about the author, the world of the books
 
 ## Site
 
-TODO: Site Link
-[Link Here]
+
+[Visit!](https://author-site.herokuapp.com/)
 
 ***
 
 ## Table of Contents
 * [UX](#UX)
-    * [Strategy & Planning](#strategy-&-planning)
+    * [Strategy and Planning](#strategy-and-planning)
     * [User Stories](#user-stories)
-    * [Research & Prioritization](#research-&-prioritization )
+    * [Research and Prioritization](#research-and-prioritization )
     * [Scope](#scope)
     * [Structure](#structure)
-        * [Database & App Design](#database-&-app-design)
+        * [Database and App Design](#database-and-app-design)
         * [Skeleton](#skeleton)
         * [Surface](#surface)
         * [Design Decisions](#design-decisions)
@@ -28,9 +28,9 @@ TODO: Site Link
 * [Technologies Used](#technologies-used)
 * [Testing](#testing)
     * [User Story Testing](#user-story-testing)
-    * [Automated & Other Testing](#automated-&-other-testing)
+    * [Automated and Other Testing](#automated-and-other-testing)
     * [Interesting Bugs](#interesting-bugs)
-* [Deployment & Version Control](#deployment-&-version-control)
+* [Deployment and Version Control](#deployment-and-version-control)
     * [Content](#content)
     * [Media](#media)
     * [Acknowledgements](#acknowledgements)
@@ -39,13 +39,13 @@ TODO: Site Link
 
 # UX
 
-## Strategy & Planning
+## Strategy and Planning
 
 My UX design process focussed on a mobile first design that would allow users to navigate through the information and the shopping parts of the site easily. The whole site should be tied together with a unified structure and theme to give a clear brand and unified feeling. The overall feeling should be ‘magical’ and welcoming to readers of all ages.
 
 ## User Stories
 <details>
-    <summary>Click to view user stories</summary>
+    <summary>Click to see - User Stories</summary>
 
 ### User
 * As a user I can read about the author.
@@ -86,10 +86,13 @@ My UX design process focussed on a mobile first design that would allow users to
 
 </details>
 
-## Research & Prioritization
+## Research and Prioritization
 
 <details>
-    <summary>Click to see table</summary>
+    <summary>Click to see - Research & Prioritization Table</summary>
+
+
+&nbsp;
 
 Opportunity / Problem | Importance | Feasibility
 ----------------------|-------------|----------------------
@@ -98,8 +101,8 @@ B - Build a webshop where users and logged in users can purchase products | 5 | 
 C - Build a gallery where visitors can view submitted fan art  | 4 | 5
 D - Allow users to create accounts where they can track the status of their orders & submit their own fan art | 5 | 4
 E - A robust admin area where one can manage the web shop as well as viewing and approving submitted fan art | 5 | 5
-E - Customization for the user accounts, avatars etc | 1 | 2
-E - Glowwing buttons for mobile | 1 | 5
+F - Customization for the user accounts, avatars etc | 1 | 3
+G - Glowing 'magical' navigation buttons | 1 | 2
 
 
 </details>
@@ -107,24 +110,38 @@ E - Glowwing buttons for mobile | 1 | 5
 ## Scope
 The goal of this website is to provide a hub for information about the Author and her books, and a place for people to purchase those books and related products.
 
-It should build the fan base by attracting new readers, give existing readers an opportunity to read more, and help to build a sense of community by allowing readers to display their fan art.
+It should build the fan base by attracting new readers, give existing readers an opportunity to learn more about the books, and help to build a sense of community by encouraging readers to display their fan art.
 
 It is important that this website has a robust admin section, allowing the site administrators to manage the shop, the orders and the approval process for submitted fan art.
 
 > you can focus on writing your app without needing to reinvent the wheel.
 > -django
 
-Taking a leaf from the Django philosophy I decided to utilize their incredibly powerful and fully customizable admin site. As such I have not build front end functionality for admin users to create, edit and delete products etc but have instead focussed on fully styling and customizing the existing django admin tool.
+Taking a leaf from the Django philosophy I decided to utilize their incredibly powerful and customizable admin site. As such I have not build front end functionality for admin users to create, edit and delete products etc but have instead focussed on fully styling and customizing the existing django admin tool.
 
-
-As part of the user profiles I originally intended to build in user customization, allowing users to choose an avatar from a pre-approved selection. While this would be a lovely feature for the users experience it ranked incredibly low against the core functionality of the site, as such it has been moved to MVP2 scope.
-
-I briefely considdered allowing users to upload their own profile images, however this is something that ihave decided against for now. This author writes children’s books, and so many of the fans and community members are children and young adults. Allowing users to upload images and text that has not been approved leaves the system open to abuse. As such any system that allowed people to upload their own profile images would first need to send those images to be vetted. Balanced against the time to build and the time to run & administrate I decided that this was simply not a priority.
-
-I discuss the glowing buttons in the [Design Desicions](#design-decisions) section of the README
 
 <details>
-    <summary>Click to see scope breakdown</summary>
+	<summary>Click to see - Scope Desicions</summary>
+	
+	
+### Scope Desicions
+
+As part of the user profiles I originally intended to build in user customization, allowing users to choose an avatar from a pre-approved selection. While this would be a lovely feature for the users experience it ranked very low in importance against the core functionality of the site, as such it has been moved to MVP2 scope.
+
+I briefely considdered allowing users to upload their own profile images, however this is something that I have decided against for now. This author writes children’s books, and so many of the fans and community members are children and young adults. Allowing users to upload images and text that has not been approved leaves the system open to abuse. As such any system that allowed people to upload their own profile images would first need to send those images to be vetted (as we do with all submitted fan art). Balanced against the time to build and the time to run & administrate I decided that this was simply not a priority.
+
+***
+
+Another scope decision early on was to not focuss too much overall project time on building the 'magical' glowing buttons. While they would bring a great look and feel to the project they would not affect the core functionality in any way. While researching and testing chunks of code it became clear that to build the buttons I had in mind origionally would take a significant chunk of time. As such I decided to use a glow style that would work as a good placeholder and move the more ambitious button design to MVP2. 
+
+One effect of this decision is that the 'glow' effect is tied to hover functionality, and so does not work on a mobile or tablet screen. While this is by no means ideal I decided that some glow effect would be better than no glow effect, and for mobile users the buttons would still have the golden colour.  
+
+	
+</details>
+
+
+<details>
+    <summary>Click to see - Scope Breakdown</summary>
 
 ### Core Scope
 
@@ -138,17 +155,17 @@ I discuss the glowing buttons in the [Design Desicions](#design-decisions) secti
 ### MVP2
 
 * User account customization, where a user can choose between a pre-selected array of avatar images.
-* Glowing buttons for mobile users
+* Glowing buttons for mobile and tablet users
 
 </details>
 
 
 ## Structure
 
-### Database & App Design
+### Database and App Design
 Designing the back end I knew that I wanted to have a separate profile table, not only for the orders but also for handling the fan art. Similarly the series table quickly became important as it ties together the fan art and the products, making both tables searchable on their series field.
 
-When building the product model I knew that I would be selling a range of different types of products, some of which would have type specific fields. Initially I planned to use model inheritance (see attached image) but eventually decided against it. The scope of this webshop is fairly small, there will only be a limited number and range of products available. To create an intricate model inheritance set up felt more geared towards a much larger shop setup. For this reason I instead have the shared fields as required and the others as optional.
+When building the product model I knew that I would be selling a range of different types of products, some of which would have type specific fields. Initially I planned to use model inheritance (see attached image) but eventually decided against it. The scope of this webshop is fairly small, there will only be a limited number and range of products available. To create an intricate model inheritance set up felt more geared towards a much larger shop setup. For this reason I instead have the shared fields as required and the type specific fields as optional.
 
 The front end structure mirrors much of the backend app structure, with the following exceptions. The Series app has no front end presence, it exists only as a reference for the fan art & product models. The shopping basket app has no models, instead using the session ID and a context processor to track the user’s selections. The static pages app also has no models as these pages will not pull from a database, but instead simply contain information about the author and the series.
 
@@ -156,10 +173,26 @@ While I could have placed the about the series pages in the series app neither p
 
 The drawing below roughly maps out the models and the app structure, and the attached PDF shows the database design.
 
-TODO: link to pictures & diagrams
+
 
 <details>
-    <summary>Pictures & Diagrams</summary>
+    <summary>Click to see - Rough Database Map </summary>
+	
+	
+&nbsp;
+![rough databse map](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database-map-drawing.jpg)	
+
+</details>
+
+
+
+<details>
+    <summary>Click to see - Database Design </summary>
+
+&nbsp;
+![databse design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.png) 
+
+[Link to pdf of Database Design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.pdf)
 
 </details>
 
@@ -167,43 +200,53 @@ TODO: link to pictures & diagrams
 
 As the site is aimed at a wide age range of users I wanted to keep the design both clean and fun. I wanted to focus on the images, and make large and appealing buttons and UI elements. It was also important to have both a well structured menu and plenty of navigational buttons to give as seamless an experience as possible for everyone.
 
-TODO: link to wireframes
 
 <details>
-    <summary>Wireframes</summary>
+    <summary>Click to see - Wireframes</summary>
+<br>
+
+
+
+[Mobile Wireframe pdf](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/mobile-wireframe.pdf)
+<br>
+
+[Desktop Wireframe pdf](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/desktop-wireframe.pdf)
 
 </details>
 
 ### Surface
 
-I held two key elements in mind when designing the surface for the site, the goal that it should feel ‘magical’ and building a site cohesive to the look and feel of the world of the story. The colours that I use have been pulled directly from the cover of the book, and the glowing effects around the text and on the hover for the buttons is designed to echo the glowing effect of the doorway on the book’s cover.
+I held two key elements in mind when designing the surface for the site, the goal that it should feel ‘magical’ and building a site cohesive to the look and feel of the world of the more popular of the author's books. The colours that I used have been pulled directly from the cover of said book, and the glowing effects around the text and on the hover for the buttons is designed to echo the glowing effect of the doorway on the book’s cover.
 
-Similarly I selected the title font to give a whimsical and slightly hand drawn feel. It had to be clear (for yonder readers) but also have a fantasy / magic personality.
+Similarly I selected the title font to give a whimsical and slightly hand drawn feel. It had to be clear (for yonger readers) but also have a fantasy / magical personality.
 
 [Mystery Quest](https://fonts.google.com/specimen/Mystery+Quest) - Title / Heading font
 
-TODO: link to surface picture
+
 
 <details>
-    <summary>Click to see design images</summary>
+    <summary>Click to see - Colour Palet</summary>
+	
+	
+![colour palet](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/colour-palet.png)
 
 </details>
 
 ### Design Decisions
 
-One design decision that should be discussed is my use of an on hover effect on all of the site’s buttons. This effect is exactly the tone and feel that I was aiming for with a ‘magical’ and ‘glowing’ theme, that fits with the cover of the author’s main books, however it is a hover effect and so does not appear on mobile.
+* One key design decision pertained to the glowing buttons. As discussed in the [scope section](#scope) I decided to use a glow effect that relied on 'hover' which unfortunately meant that it was not visible on mobile or tablet. 
 
-One way around this, that I would add to my MVP2 scope, would be to create each button as a series of layers and add a CSS animation property to each layer. Several layers of glowing dots overlapping and animated to move across different axes for example. This would give the same glow effect for both mobile users & desktop users.
+* Another design decision was to limit the user to updating their email on the provided allauth page which I linked to in the nav bar, rather than in the user profile section. The main reason behind this was to ensure that the correct allauth validations etc would be preserved, rather than having to try and write my own. 
 
-During the scoping and design phase I realized that building these buttons would take quite a chunk of time, and bring little to the overall site functionality, as such they are part of the MVP2 scope.
+* In terms of serving digital purchases to the user (the audio book and e-book) rather than build a special download page I decided to send the user an email with a direct download link. While it would be simple to build the page ultimately i decided that this was something that could be handled manually, and was outside the scope of this site. 
 
-That being said I still wanted to have as much of a glow effect as would be easily added, so I used a much simpler effect that you can see on the site today.
+* While building the order model I decided to remove the ability to delete products from the product model. When creating or accessing an order many of the fields are generated from the product model, such as price etc. The thinking behind this was that this site will mostly feature the same products, adding more as the author writes more books, but will never have the high turnover of a large webshop. It is unlikely that a book will go out of print, and thus have to be completely removed. It is possible that merchandize may no longer be produced by the supplier and so forth, so I have build in the ability to remove products from the shop, but since this applies to only a small number of items I removed the posibility to completely delete them. This is a decision that could easilly be altered in the future if the webshop becomes significantly larger by saving items and prices to an order model rather than calculating them.  
 
-
+* When a product is out of stock it is shown on the products page, and a user is still able to click on it to read more information. There is an out of stock overlay and the purchase button is greyed out, but I decided to let the user click the purchase button and to then show them a message. The thinking behind this was to avoid too many alerts popping up for the user. It is clearly indicated both with text and a greyed out button that this product is out of stock, and it is only if the user still clicks on the purchase button that we show the alert.      
 
 ***
 
-[To Top](#Holly-Thomas---Author-Site)
+[Back To Top](#table-of-contents)
 
 ## Features
 
@@ -211,12 +254,14 @@ That being said I still wanted to have as much of a glow effect as would be easi
 
 <details>
     <summary>Click to see the Existing Features</summary>
+	
+<br>	
 
 * **A Styled & Branded Navbar** - signposts visitors to different areas of the site, as well as displaying the name of the author and a character from one of the books as a logo. Responsive on mobile, also displays the user’s card with a responsive display of the number of products in the user's shopping cart.
 * **A Simple & Informative Footer** - Gives users a quick overview of the publishing, copyright and contact information at a glance on every screen.
 * **A Welcome / Home Page** - Gives an immediate overview of the author’s works, inviting the visitor to read more of brows the shop and make a purchase.
 * **Information Pages** - Allowing visitors to read more about the author, and about each of the series.
-* **A Fan Art Gallery** - Allowing visitors to the site to browse through the submitted fan art, and for logged in users to submit their own fan art.
+* **A Fan Art Gallery** - Allowing visitors to the site to browse through the submitted fan art, and for logged in users to add / edit / delete their own fan art.
 * **A Filterable Webshop** - Gives users an overview of all products available, as well as being able to filter by series and by product type.
 * **A Robust Stripe Checkout** - Allows users and logged in users to purchase items from the webshop, choosing whether to save their details (if logged in) and then receiving both an order overview and confirmation email upon purchase.
 * **A User Account Service** - Where users can submit their fan art, save their address details and view their order history.
@@ -229,6 +274,8 @@ That being said I still wanted to have as much of a glow effect as would be easi
 <details>
     <summary>Click to see the MVP2 features</summary>
 
+<br>
+
 * **User Account Customization** - Allowing the users to customize their accounts further by allowing them to select from a set of pre-approved avatar images
 * **Cross Device Glowing Buttons** - Layered and styled button divs that would be animated all the time across all devices (not just on hover on desktop).
 
@@ -237,22 +284,45 @@ That being said I still wanted to have as much of a glow effect as would be easi
 
 &nbsp;
 
-[To Top](#Holly-Thomas---Author-Site)
+[Back To Top](#table-of-contents)
 
 ## Technologies Used
 
-This project was built completely in django, it is hosted on Heroku.
+This project was built completely in django, and is hosted on Heroku.
 &nbsp;
 
 <details>
-    <summary>Click to see full list of technologies</summary>
+    <summary>Click to see -  List of Technologies</summary>
+	
+### The Site	
+
+The site is built using Django and uses a Sqlite databse. 
 
 * [HTML](https://en.wikipedia.org/wiki/HTML)
 * [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 * [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+* [Bootstrap](https://getbootstrap.com/)
+* [FontAwesome](https://fontawesome.com/)
+* [Jquery](https://jquery.com/)
 * [django](https://www.djangoproject.com/)
+* [Stripe](https://stripe.com/en-gb-se)
+* [Sqlite3](https://sqlite.org/index.html)
 * [Python](https://www.python.org/)
+* [PostgresSQL](https://www.postgresql.org/)
+* [Psychopg2](https://pypi.org/project/psycopg2/)
+
+### Development 
+
+I serve the site using uWSGI, packed into a docker image. This docker image is then deployed on Heroku
+
+* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)
+* [Docker](https://www.docker.com/)
 * [Heroku](https://www.heroku.com/)
+
+### Version Control
+
+* [git](https://git-scm.com/) - Version controll.
+* [GitHub](https://github.com/) - Host directory.
 
 
 </details>
@@ -261,13 +331,13 @@ This project was built completely in django, it is hosted on Heroku.
 
 &nbsp;
 
-[To Top](#Holly-Thomas---Author-Site)
+[Back To Top](#table-of-contents)
 &nbsp;
 
 ## Testing
 
 ### User Story Testing
-&nbsp;
+
 
 <details>
     <summary>Click to see User Story Testing</summary>
@@ -343,27 +413,66 @@ This project was built completely in django, it is hosted on Heroku.
 
 ### Automated & Other Testing
 
-[TODO: general testing write up]
+
+### Chrome Developer Tools
+Ensure the app works well and looks as it should on all screen sizes, as well as using the console tool get real time error feedback & stack tracing. 
+
+### User Testing
+Sending the app to friends & colleges to use, collecting their feedback for bug fixes and adjustments. This helped me spot a bug in the orders view and user fan art view where i was compareing the user.id instead of user.profile.
+
+
+### Django unit testing
+I wrote tests for some of the more complex peices of the site. Ideally it would be nice to get as much coverage as possible, however in the time available I chose to prioritize testing on the more complex functions & views I had written myself (rather than on the code from stripe for example, or on simple views that return just a static page).  
 
 ### Interesting Bugs
 
-[TODO: interesting bugs write up]
+* If shopping basket gets updated after payment intent has been created, and whilst payment is ongoing, then the order gets created with an updated shopping basket while the payment will be the price of the previous shopping basket.  
+
+[Back To Top](#table-of-contents)
+&nbsp;
+
 
 ## Deployment & Version Control
 
-[TODO: deployment & version control write up]
+### Local Development
+- Clone this directory to your local computer.
+- Create a virtual enviroment
+`virtualenv venv`.
+- Activate the virtual environment `source venv/bin/activate`.
+
+### Deploy to Heroku
+These instructions assume that you have a github account and a Heroku account, and have set up the Heroku CLI on your computer.
+- Clone this git repository to your own github account
+- Run the following commands
+  ```bash
+  heroku apps:create $APP_NAME --region eu
+  heroku stack:set container -a $APP_NAME
+  heroku config:set -a $APP_NAME MONGO_URI="$MONGO_DB_URI"
+  ```
+  where `$APP_NAME` is the name of your Heroku app, and `$MONGO_DB_URI` is
+  your MongoDB
+- On the Heroku website, in your new app, connect to your github
+- Select the repo you have cloned
+- On the deploy tab manually deploy
+
+[Back To Top](#table-of-contents)
+&nbsp;
 
 ## Credits
+
+### Code
+- Code for the glowing buttons was inspired by [this website](https://www.codingnepalweb.com/2020/05/cool-glowing-effect-on-css-buttons.html)
+- I had help building the Docker image and configuring uWSGI from my partner.
 
 ### Content
 The content for this site was written by the author herself.
 
 ### Media
-&nbsp;
+
 <details>
     <summary>Click to see all media credits</summary>
 
-* Site: [Paralax Header Background](#https://www.pexels.com/photo/background-blur-bokeh-bright-220067/) - Pexels
+* Site: [Paralax Header Background](https://www.pexels.com/photo/background-blur-bokeh-bright-220067/) - Pexels
 * Home / Shop: Ava book cover - Author's own
 * Home / Shop: Parma Ham book cover - Author's own
 * Site logo guineapig - Author's own
@@ -371,16 +480,18 @@ The content for this site was written by the author herself.
 * Ava's World images (1,2,3) - Author's own
 * Parma Ham's World images (1,2) -  Author's own
 * Shop: Gunea pig christmas decoration - Author's own
-* Shop: [Cuddly bear toy](#https://unsplash.com/photos/iqiIlTm3-_4) - unsplash - [Ra Dragon](#https://unsplash.com/@radragon)
+* Shop: [Cuddly bear toy](https://unsplash.com/photos/iqiIlTm3-_4) - unsplash - [Ra Dragon](https://unsplash.com/@radragon)
 
 * Fan art - Submitted by fans
 
 
 </details>
-&nbsp;
+
 
 ### Acknowledgements
 I was inspired to create this website after looking at the following author websites
 * [Terry Pratchett](#https://www.terrypratchettbooks.com/)
 * [Niel Gaiman](#https://neilgaiman.com/)
 * [Natasha Pulley](#https://natashapulley.co.uk/)
+
+[Back To Top](#table-of-contents)
