@@ -20,10 +20,10 @@ The home of books by Holly Thomas! Read about the author, the world of the books
     * [Research and Prioritization](#research-and-prioritization )
     * [Scope](#scope)
     * [Structure](#structure)
-        * [Database and App Design](#database-and-app-design)
-        * [Skeleton](#skeleton)
+    	* [Design Decisions](#design-decisions)
         * [Surface](#surface)
-        * [Design Decisions](#design-decisions)
+        * [Skeleton](#skeleton)
+        * [Database and App Design](#database-and-app-design)        
 * [Features](#features)
 * [Technologies Used](#technologies-used)
 * [Testing](#testing)
@@ -67,7 +67,6 @@ My UX design process focussed on a mobile first design that would allow users to
 * As a logged in user I can delete my account.
 * As a logged in user I can save my payment details.
 * As a logged in user I can edit my profile details.
-* As a logged in user I can sign up for email updates about upcoming books.
 * As a logged in user I can view my order history.
 * As a logged in user I can view the shipping status of my order.
 * As a logged in user I can submit fan art.
@@ -78,11 +77,10 @@ My UX design process focussed on a mobile first design that would allow users to
 * As an admin user I can view & approve submitted fan art
 * As an admin user I can add products
 * As an admin user I can edit products
-* As an admin user I can remove products from the shop by changing the product status.
 * As an admin user I can view customer orders
-* As an admin user I can set the status of each product (in stock, out of stock, unavailable)
+* As an admin user I can set the status of each product (in stock or out of stock)
+* As an admin user I can hide unavailable products from the shop.
 * As an admin user I can set the shipping status for each product
-* As an admin user I can easily get a list of user emails for the email updates.
 
 </details>
 
@@ -98,11 +96,10 @@ Opportunity / Problem | Importance | Feasibility
 ----------------------|-------------|----------------------
 A - Display information about the books & the author | 5 | 5
 B - Build a webshop where users and logged in users can purchase products | 5 | 4
-C - Build a gallery where visitors can view submitted fan art  | 4 | 5
-D - Allow users to create accounts where they can track the status of their orders & submit their own fan art | 5 | 4
+C - Allow users to create accounts where they can track the status of their orders & submit their own fan art | 5 | 4
+D - Build a gallery where visitors can view submitted fan art  | 4 | 5
 E - A robust admin area where one can manage the web shop as well as viewing and approving submitted fan art | 5 | 5
 F - Customization for the user accounts, avatars etc | 1 | 3
-G - Glowing 'magical' navigation buttons | 1 | 2
 
 
 </details>
@@ -146,53 +143,52 @@ One effect of this decision is that the 'glow' effect is tied to hover functiona
 ### Core Scope
 
 * A home page that gives an overview of the different series of books that the author has written, clearly signposting the visitor to both read more and to buy the books.
-* A shop, where a user or logged in user can purchase the books or related products.
-* Information pages about the Author and each of the series, where the user can read more.
+* A shop, where a user can purchase the books or related products.
+* Information pages about the author and each of the series, where the user can read more.
 * User accounts, where the user can track orders, view past orders and save their details.
-* A Fan Art gallery where any visitor to the site can view the approved fan art, and that allows logged in users to submit fan art.
-* A fully customized and well organized admin section that allows the site owner to manage the shop and orders, as well as the approval process for the fan art submissions.
+* A fan art gallery where any visitor to the site can view the approved fan art, and that allows logged in users to submit fan art.
+* A fully customized admin section that allows the site owner to manage the shop and orders, as well as the approval process for the fan art submissions.
 
 ### MVP2
 
 * User account customization, where a user can choose between a pre-selected array of avatar images.
-* Glowing buttons for mobile and tablet users
+
 
 </details>
 
 
 ## Structure
 
-### Database and App Design
-Designing the back end I knew that I wanted to have a separate profile table, not only for the orders but also for handling the fan art. Similarly the series table quickly became important as it ties together the fan art and the products, making both tables searchable on their series field.
+### Design Decisions
 
-When building the product model I knew that I would be selling a range of different types of products, some of which would have type specific fields. Initially I planned to use model inheritance (see attached image) but eventually decided against it. The scope of this webshop is fairly small, there will only be a limited number and range of products available. To create an intricate model inheritance set up felt more geared towards a much larger shop setup. For this reason I instead have the shared fields as required and the type specific fields as optional.
+* It was critical when designing the flow of the user fan art submission that any art, titles and text needed to be approved by a site administrator before being shown to the public. This author has mainly written books for younger readers, and a site that allowed for anything submitted to be instantly displayed would leave an oppertunity for innapropriate things to be posted where children are the target audience. This also applies to editing art that has already been approved. 
 
-The front end structure mirrors much of the backend app structure, with the following exceptions. The Series app has no front end presence, it exists only as a reference for the fan art & product models. The shopping basket app has no models, instead using the session ID and a context processor to track the user’s selections. The static pages app also has no models as these pages will not pull from a database, but instead simply contain information about the author and the series.
+* As touched on in the scope section I decided to use the exisitng Django admin site. Building my own admin pages felt like trying to re-invent the wheel, so instead I customized the built-in admin site as it already provides all of the existing functionality for managing the orders, products and fan art. Furthermore I customized it to use the same colour scheme and branding as the main website to give a consistent look and feel for an admin user (note the admin top bar logo from the main site footer).  
 
-While I could have placed the about the series pages in the series app neither page draws from the database, instead containing only static text. Since this is more closely aligned with the other static pages I decided to host them in the static pages app (though in theory they could live in either).
+* While the shop sells digital media such as e-boks and audio books handling the distribution of these is out of scope for this project. When a user purchases a digital media product they will recieve a code that they can use to redeam their product on a separate platform. 
+ 
 
-The drawing below roughly maps out the models and the app structure, and the attached PDF shows the database design.
+* While building the order model I decided to remove the ability to delete products from the product model. When creating or accessing an order many of the fields are generated from the product model, such as price etc. The thinking behind this was that this site will mostly feature the same products, adding more as the author writes more books, but will never have the high turnover of a large webshop. It is unlikely that a book will go out of print, and thus have to be completely removed. It is possible that merchandize may no longer be produced by the supplier and so forth, so I have build in the ability to remove products from the shop, but since this applies to only a small number of items I removed the posibility to completely delete them. This is a decision that could easilly be altered in the future if the webshop becomes significantly larger by saving items and prices to an order model rather than calculating them.  
+
+* When a product is out of stock it is shown on the products page, and a user is still able to click on it to read more information. There is an out of stock overlay and the purchase button is greyed out, but I decided to let the user click the purchase button and to then show them a message. The thinking behind this was to avoid too many alerts popping up for the user. It is clearly indicated both with text and a greyed out button that this product is out of stock, and it is only if the user still clicks on the purchase button that we show the alert.      
+
+* I wanted to integrate my website with social media accounts so people can log in and create a profile using an existing social media account. I have specifically chosen to integrate with Google so people can log in with their g-mail accounnts but by using [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html) it is easy to extend to other social media platforms in the future. 
+
+### Surface
+
+I held two key elements in mind when designing the surface for the site, the goal that it should feel ‘magical’ and building a site cohesive to the look and feel of the world of the more popular of the author's books. The colours that I used have been pulled directly from the cover of 'Ava and the Magic Door. The glowing effects around the text and on  the buttons is designed to echo the glowing effect of the doorway on the book’s cover.
+
+Similarly I selected the title font to give a whimsical and slightly hand drawn feel. It had to be clear (for yonger readers) but also have a fantasy / magical personality.
+
+[Mystery Quest](https://fonts.google.com/specimen/Mystery+Quest) - Title / Heading font
 
 
 
 <details>
-    <summary>Click to see - Rough Database Map </summary>
+    <summary>Click to see - Colour Palet</summary>
 	
 	
-&nbsp;
-![rough databse map](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database-map-drawing.jpg)	
-
-</details>
-
-
-
-<details>
-    <summary>Click to see - Database Design </summary>
-
-&nbsp;
-![databse design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.png) 
-
-[Link to pdf of Database Design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.pdf)
+![colour palet](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/colour-palet.png)
 
 </details>
 
@@ -214,35 +210,44 @@ As the site is aimed at a wide age range of users I wanted to keep the design bo
 
 </details>
 
-### Surface
 
-I held two key elements in mind when designing the surface for the site, the goal that it should feel ‘magical’ and building a site cohesive to the look and feel of the world of the more popular of the author's books. The colours that I used have been pulled directly from the cover of said book, and the glowing effects around the text and on the hover for the buttons is designed to echo the glowing effect of the doorway on the book’s cover.
 
-Similarly I selected the title font to give a whimsical and slightly hand drawn feel. It had to be clear (for yonger readers) but also have a fantasy / magical personality.
+### Database and App Design
 
-[Mystery Quest](https://fonts.google.com/specimen/Mystery+Quest) - Title / Heading font
+<details>
+    <summary>Click to see - Rough Database / App Map </summary>
+	
+	
+&nbsp;
+![rough databse map](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database-map-drawing.jpg)	
+
+</details>
 
 
 
 <details>
-    <summary>Click to see - Colour Palet</summary>
-	
-	
-![colour palet](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/colour-palet.png)
+    <summary>Click to see - Database Design </summary>
+
+&nbsp;
+![databse design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.png) 
+
+[Link to pdf of Database Design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.pdf)
 
 </details>
 
-### Design Decisions
 
-* One key design decision pertained to the glowing buttons. As discussed in the [scope section](#scope) I decided to use a glow effect that relied on 'hover' which unfortunately meant that it was not visible on mobile or tablet. 
+Designing the backend I knew that I wanted to have a separate profile table, not only for the orders but also for handling the fan art. Similarly the series table quickly became important as it ties together the fan art and the products, making both tables searchable on their series field.
 
-* Another design decision was to limit the user to updating their email on the provided allauth page which I linked to in the nav bar, rather than in the user profile section. The main reason behind this was to ensure that the correct allauth validations etc would be preserved, rather than having to try and write my own. 
+When building the product model I knew that I would be selling a range of different types of products, some of which would have type specific fields. Initially I planned to use model inheritance (see attached image) but eventually decided against it. The scope of this webshop is fairly small, there will only be a limited number and range of products available. To create an intricate model inheritance set up felt more geared towards a much larger shop setup. For this reason I instead have the shared fields as required and the type specific fields as optional.
 
-* In terms of serving digital purchases to the user (the audio book and e-book) rather than build a special download page I decided to send the user an email with a direct download link. While it would be simple to build the page ultimately i decided that this was something that could be handled manually, and was outside the scope of this site. 
+The frontend structure mirrors much of the backend app structure, with the following exceptions. The Series app has no frontend presence, it exists only as a reference for the fan art & product models. The shopping basket app has no models, instead using Django's built-in session and a context processor to track the user’s selections. The static pages app also has no models as these pages will not pull from a database, but instead simply contain information about the author and the series.
 
-* While building the order model I decided to remove the ability to delete products from the product model. When creating or accessing an order many of the fields are generated from the product model, such as price etc. The thinking behind this was that this site will mostly feature the same products, adding more as the author writes more books, but will never have the high turnover of a large webshop. It is unlikely that a book will go out of print, and thus have to be completely removed. It is possible that merchandize may no longer be produced by the supplier and so forth, so I have build in the ability to remove products from the shop, but since this applies to only a small number of items I removed the posibility to completely delete them. This is a decision that could easilly be altered in the future if the webshop becomes significantly larger by saving items and prices to an order model rather than calculating them.  
+While I could have placed the 'about the series' pages in the series app neither page draws from the database, instead containing only static text. Since this is more closely aligned with the other static pages I decided to host them in the static pages app (though in theory they could live in either).
 
-* When a product is out of stock it is shown on the products page, and a user is still able to click on it to read more information. There is an out of stock overlay and the purchase button is greyed out, but I decided to let the user click the purchase button and to then show them a message. The thinking behind this was to avoid too many alerts popping up for the user. It is clearly indicated both with text and a greyed out button that this product is out of stock, and it is only if the user still clicks on the purchase button that we show the alert.      
+The drawing below roughly maps out the models and the app structure, and the attached PDF shows the database design.
+
+
+
 
 ***
 
@@ -257,13 +262,13 @@ Similarly I selected the title font to give a whimsical and slightly hand drawn 
 	
 <br>	
 
-* **A Styled & Branded Navbar** - signposts visitors to different areas of the site, as well as displaying the name of the author and a character from one of the books as a logo. Responsive on mobile, also displays the user’s card with a responsive display of the number of products in the user's shopping cart.
+* **A Styled & Branded Navbar** - Signposts visitors to different areas of the site, as well as displaying the name of the author and a character from one of the books as a logo. Responsive on mobile, also displays the user's shopping basket with a responsive display of the number of products in the user's shopping basket.
 * **A Simple & Informative Footer** - Gives users a quick overview of the publishing, copyright and contact information at a glance on every screen.
-* **A Welcome / Home Page** - Gives an immediate overview of the author’s works, inviting the visitor to read more of brows the shop and make a purchase.
+* **A Welcome / Home Page** - Gives an immediate overview of the author’s works, inviting the visitor to read more and browse the shop and make a purchase.
 * **Information Pages** - Allowing visitors to read more about the author, and about each of the series.
 * **A Fan Art Gallery** - Allowing visitors to the site to browse through the submitted fan art, and for logged in users to add / edit / delete their own fan art.
 * **A Filterable Webshop** - Gives users an overview of all products available, as well as being able to filter by series and by product type.
-* **A Robust Stripe Checkout** - Allows users and logged in users to purchase items from the webshop, choosing whether to save their details (if logged in) and then receiving both an order overview and confirmation email upon purchase.
+* **A Stripe Checkout** - Allows users to purchase items from the webshop, choosing whether to save their details (if logged in) and then receiving both an order overview and confirmation email upon purchase.
 * **A User Account Service** - Where users can submit their fan art, save their address details and view their order history.
 * **A Well Organized Admin Section** - Fully customized and styled in line with the site, it is linked to from the nav bar only for super users. Each model has searchable fields, filters and carefully built styling to make using the admin site as intuitive as possible.
 
@@ -277,7 +282,7 @@ Similarly I selected the title font to give a whimsical and slightly hand drawn 
 <br>
 
 * **User Account Customization** - Allowing the users to customize their accounts further by allowing them to select from a set of pre-approved avatar images
-* **Cross Device Glowing Buttons** - Layered and styled button divs that would be animated all the time across all devices (not just on hover on desktop).
+
 
 
 </details>
@@ -296,7 +301,7 @@ This project was built completely in django, and is hosted on Heroku.
 	
 ### The Site	
 
-The site is built using Django and uses a Sqlite databse. 
+The site is built using Django and an SQL databse; SQLite for development and PostgreSQL for deployment. 
 
 * [HTML](https://en.wikipedia.org/wiki/HTML)
 * [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
@@ -305,19 +310,20 @@ The site is built using Django and uses a Sqlite databse.
 * [FontAwesome](https://fontawesome.com/)
 * [Jquery](https://jquery.com/)
 * [django](https://www.djangoproject.com/)
-* [Stripe](https://stripe.com/en-gb-se)
 * [Sqlite3](https://sqlite.org/index.html)
 * [Python](https://www.python.org/)
-* [PostgresSQL](https://www.postgresql.org/)
-* [Psychopg2](https://pypi.org/project/psycopg2/)
 
-### Development 
+
+### Deployment
 
 I serve the site using uWSGI, packed into a docker image. This docker image is then deployed on Heroku
 
 * [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)
 * [Docker](https://www.docker.com/)
 * [Heroku](https://www.heroku.com/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Stripe](https://stripe.com/en-gb-se)
+* [Google Cloud](https://cloud.google.com/)
 
 ### Version Control
 
@@ -343,24 +349,24 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
     <summary>Click to see User Story Testing</summary>
 
 * Home Page
-	* See the name of the Author
-	* Easily access the Site menu on both mobile & desktop
+	* See the name of the author
+	* Easily access the site menu on both mobile & desktop
 	* Log in or sign up
 	* Instantly see the shopping basket
 	* Scroll down to get an overview of the different series the author has written
 	* Click on the ‘read more’ button to navigate to the about the series pages
-    * Click on the  ‘buy the book’ buttons to navigate to the shop, where the series clicked on is pre-set as a product filter.
+	* Click on the  ‘buy the book’ buttons to navigate to the shop, where the series clicked on is pre-set as a product filter.
 * About Pages (Series + Author)
 	* Read more about the series & inspiration
 	* Click on and visit related websites (eg. the hotel that inspired the Ava books)
-    * Read more about the author
+	* Read more about the author
 * Fan Art Gallery
-    * Before logging in I can scroll through the existing fan art, reading the titles and descriptions and seeing who has submitted them
-	* Once logged in I can view my own fan art, including any that i have submitted that has not yet been approved.
-    * I can add new fan art.
-	* If I have an unapproved fanart I get a clear notification, and the art is clearly labeled as unapproved.
+	* Before logging in I can scroll through the existing fan art, reading the titles and descriptions and seeing who has submitted them
+	* Once logged in I can view my own fan art, including any that I have submitted that has not yet been approved.
+	* I can add new fan art.
+	* If I have an unapproved fan art I get a clear notification, and the art is clearly labeled as unapproved.
 	* I can click edit to change the text, title or artists name on the fan art that I have submitted. If I save changes the fan art is then returned to an un approved state.
-    * I can delete fan art that I have submitted.
+	* I can delete fan art that I have submitted.
 * Account
 	* I can click on the account icon in the header to create an account
 	* Once I have created an account and logged in I can reach the admin area if I am a superuser
@@ -368,6 +374,10 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 	* I can see each previous order in full detail
 	* I have a quick link to view my submitted fan art
 	* I can see the details that the website has saved for me, and edit them.
+        * I can delete my account, and see that my fan art is also deleted (but any orders are not). 
+* Social Media Account
+        * I can click on the google button to create an account using my google email
+        * I can choose to de-couple my account from my google account (as long as I have another email registered)
 * Shop
 	* I can scroll through all of the work that the author has produced to get a full overview
 	* I can filter the shop by the type of product i want to buy (eg. audio book)
@@ -376,19 +386,19 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 	* If a product is out of stock I cannot add it to my basket. An error message is shown if i try.
 	* On the product page I can click open a drop down to read more of the details
 	* I can add the product to my basket.
-	* When I add a product to my basket I see a modal with a brief overview of my basket and the option to keep shopping (which returns me to the page) to go to my basket
+	* When I add a product to my basket I see a modal with a brief overview of my basket and the option to keep shopping (which returns me to the page) to go to my basket. Inspired by [Threadless](https://www.threadless.com/)
 * Basket
 	* The basket, with the number of items in it, is visible from every screen
 	* The basket page allows me to add and remove items from within the basket screen.
-	* When I set an item to 0 I cannot add minus numbers. The text has a strikethrough and the update button then turns red to indicate a delete action.
-	* [TODO: set a max number a user can add to the basket]
+	* I cannot set less than 0 for any product .
+	* I cannot add more than 99 of any type of product.
 	* I can return to the product overview to read more about the product.
-    * When I have made a change to the number of items in the basket a button appears to clearly show i need to click update
-	* [TODO: disable the pay button if the page needs to update (or at least pop up some kind of warning]
-    * I can click pay to be taken to the checkout
+	* When I have made a change to the number of items in the basket a button appears to clearly show I need to click update
+	* I cannot click pay while there is an item in my shopping basket that needs to be updated.
+	* I can click pay to be taken to the checkout
 * Checkout
 	* If I try to pay without filling out the required fields the page will not let me submit
-	* I have the option to save the card address to my profile
+	* I have the option to save the card address to my profile if logged in. 
 	* I have the option to use the same address for both card and shipping, when I choose this I no longer see the shipping address fields.
 	* When I submit a payment I am taken to a success page that presents me with a message that the order was successful and tells me that an email will be sent to me.
 	* On the success screen I can view my order in detail, including the payment & shipping details.
@@ -402,12 +412,13 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 	* I can access the product table, getting an overview of which products are in the shop and their in stock status.
 	* I can add new products
 	* I can edit existing products
-	* I can delete existing products
+        * I cannot delete products
 	* If a product is currently out of stock I can set it to be out of stock
 	* I can view a complete list of all customer orders.
 	* I can search for customer orders on a number of different identifiers (order number, date, stripe payment id, user profile, status, full name and email)
-	* I can quickly filter the orders based on their status (submitted, Paid, Payment Failed, Shipped)
-	* [TODO: able to get list of all users that have signed up for the newsletter]
+	* I can quickly filter the orders based on their status (submitted, paid, payment failed, shipped)
+        * Once the order has been shipped (and status set to shipped) I cannot change any details on the order. 
+	
 
 </details>
 
@@ -418,11 +429,11 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 Ensure the app works well and looks as it should on all screen sizes, as well as using the console tool get real time error feedback & stack tracing. 
 
 ### User Testing
-Sending the app to friends & colleges to use, collecting their feedback for bug fixes and adjustments. This helped me spot a bug in the orders view and user fan art view where i was compareing the user.id instead of user.profile.
+Sending the app to friends & colleagues to use, collecting their feedback for bug fixes and adjustments. 
 
 
 ### Django unit testing
-I wrote tests for some of the more complex peices of the site. Ideally it would be nice to get as much coverage as possible, however in the time available I chose to prioritize testing on the more complex functions & views I had written myself (rather than on the code from stripe for example, or on simple views that return just a static page).  
+I wrote tests for some of the more complex pieces of the site. Ideally it would be nice to get as much coverage as possible, however in the time available I chose to prioritize testing on the more complex functions & views I had written myself (rather than on the code from stripe for example, or on simple views that return just a static page).  
 
 ### Interesting Bugs
 
@@ -434,26 +445,114 @@ I wrote tests for some of the more complex peices of the site. Ideally it would 
 
 ## Deployment & Version Control
 
+<details>
+    <summary>Click to see - Deployment Steps </summary>
+
 ### Local Development
-- Clone this directory to your local computer.
-- Create a virtual enviroment
+* Clone this directory to your local computer.
+* Create a virtual enviroment
 `virtualenv venv`.
-- Activate the virtual environment `source venv/bin/activate`.
+* Activate the virtual environment `source venv/bin/activate`.
+* `pip install -r requirements.txt`
+* create a .env file 
+        * SECRET_KEY=[generare a secret key](https://djecrety.ir/)
+        * DEVELOPMENT=True
+        * DEFAULT_FROM_EMAIL=(whatever you would like your default 'from' email to be)       
+* `python manage.py migrate`       
+* `python manage.py runserver`
+
+
+### Stripe Payment in Local Development
+* Set up a [Stripe account](https://stripe.com/en-gb-se)
+* From your Stripe dashboard access and add the following to your .env file
+        * STRIPE_PUBLIC_KEY=(Your Publishable key)
+        * STRIPE_SECRET_KEY=(Secret Key)
+* Install the [Stripe CLI](https://stripe.com/docs/stripe-cli)
+* Run the following command and follow the instructions in the terminal
+  ```bash
+  stripe login
+  ```
+* Run the command
+  ```bash
+  stripe listen --forward-to 127.0.0.1:8000/checkout/stripe/
+  ```
+* That command will print out the webhook secret, add this to your .env file
+        - STRIPE_WEBHOOK_SECRET=(get from terminal)
+* Open a new terminal (and leave this one running)
+* Run the command
+  ```bash
+  python manage.py runserver
+  ```
+  
+### Setting Up Email for Local Development
+If you want to test sending real email, while developing you need to configure
+the project using the SMTP settings from your email provider.
+* In your .env file
+        * EMAIL_HOST=(The SMTP server)
+        * EMAIL_PORT=(The SMTP server port. Defaults to 465)
+        * EMAIL_HOST_USER=(The SMTP username. Defaults to whatever you put in DEFAULT_FROM_EMAIL)
+        * EMAIL_HOST_PASSWORD=(The SMTP password)
+        * EMAIL_USE_SSL=(Whether the SMTP server is using SSL. Defaults to True)
+
+### Setting Up Google with allauth
+* Follow [these instructions](https://django-allauth.readthedocs.io/en/latest/providers.html#app-registration)
+
+
+### Google Bucket
+* Follow the steps for setting up Google with allauth if you havent done that already (above). You will have created a project during this step.  
+* Go to the [cloud console](https://console.cloud.google.com/) 
+        * IAM & Admin -> Service Accounts -> Create a service account
+        * Create a json key for your service account (this will trigger a download of the key file)
+        * Move this json file into the top level of your project and rename it  `serviceaccount.json` (your gitignore is set to ignore this file name, don't delete this file)
+        * Storage -> Browser -> Create Bucket (use fine grained permissions)
+        * Click on your bucket and navigate to permissions
+        * Click Add to assign the 'Storage Object Admin' role to your service account
+        * Click Add to assign the 'Storage Object Viewer' role to 'allUsers'
+* In your .env set
+        * GOOGLE_APPLICATION_CREDENTIALS=(the name of the json file)
+        * GS_BUCKET_NAME=(your bucket name)
+        
 
 ### Deploy to Heroku
 These instructions assume that you have a github account and a Heroku account, and have set up the Heroku CLI on your computer.
-- Clone this git repository to your own github account
-- Run the following commands
+* Clone this git repository to your own github account
+* Run the following commands
   ```bash
   heroku apps:create $APP_NAME --region eu
   heroku stack:set container -a $APP_NAME
-  heroku config:set -a $APP_NAME MONGO_URI="$MONGO_DB_URI"
   ```
-  where `$APP_NAME` is the name of your Heroku app, and `$MONGO_DB_URI` is
-  your MongoDB
-- On the Heroku website, in your new app, connect to your github
-- Select the repo you have cloned
-- On the deploy tab manually deploy
+  where `$APP_NAME` is the name of your Heroku app
+* On the Heroku website, in your new app, connect to your github
+* In the Heroku website create a PostgreSQL database as a Heroku addon
+* While in your Heroku project copy the database URI and add it to your .env file
+        * DATABASE_URL=(Heroku database URI)
+* Go to Stripe -> Developers -> Webhooks
+        * Add endpoint
+        * Set the URL to the URL for your Heroku app -> https://app-name.herokuapp.com/checkout/stripe/
+        * Copy the Signing Secret and go back to Heroku
+* In Heroku set the Signing Secret you just coppied as the Config Var STRIPE_WEBHOOK_SECRET
+* Set your other config vars
+        * ALLOWED_HOSTS=(app-name.herokuapp.com)
+        * DATABASE_URL=(same as .env)
+        * DEFAULT_FROM_EMAIL=(same as .env)
+        * EMAIL_HOST=(same as .env)
+        * EMAIL_HOST_PASSWORD=(same as .env)
+        * GS_BUCKET_NAME=(same as .env)
+        * SECRET_KEY=(same as .env)
+        * SERVICE_ACCOUNT_KEY=(the contents of the service account file, the whole object)
+        * STRIPE_PUBLIC_KEY=(same as .env)
+        * STRIPE_SECRET_KEY=(same as .env)
+* Select the repo you have cloned
+* On the deploy tab manually deploy
+* In your project, in the terminal
+  ```bash
+  python manage.py migrate
+  python manage.py collectstatic
+  ```
+
+
+
+</details>
 
 [Back To Top](#table-of-contents)
 &nbsp;
