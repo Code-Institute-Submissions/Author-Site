@@ -178,8 +178,9 @@ a.delete-button:hover {
 
 
 @media (min-width: 1200px) {
-    .button-container {
+    .double-button-container {
         flex-direction: row;
         align-items: center;
     }
+
 }
