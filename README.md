@@ -23,7 +23,7 @@ The home of books by Holly Thomas! Read about the author, the world of the books
     	* [Design Decisions](#design-decisions)
         * [Surface](#surface)
         * [Skeleton](#skeleton)
-        * [Database and App Design](#database-and-app-design)        
+        * [Database and App Design](#database-and-app-design)
 * [Features](#features)
 * [Technologies Used](#technologies-used)
 * [Testing](#testing)
@@ -119,8 +119,8 @@ Taking a leaf from the Django philosophy I decided to utilize their incredibly p
 
 <details>
 	<summary>Click to see - Scope Desicions</summary>
-	
-	
+
+
 ### Scope Desicions
 
 As part of the user profiles I originally intended to build in user customization, allowing users to choose an avatar from a pre-approved selection. While this would be a lovely feature for the users experience it ranked very low in importance against the core functionality of the site, as such it has been moved to MVP2 scope.
@@ -129,11 +129,11 @@ I briefely considdered allowing users to upload their own profile images, howeve
 
 ***
 
-Another scope decision early on was to not focuss too much overall project time on building the 'magical' glowing buttons. While they would bring a great look and feel to the project they would not affect the core functionality in any way. While researching and testing chunks of code it became clear that to build the buttons I had in mind origionally would take a significant chunk of time. As such I decided to use a glow style that would work as a good placeholder and move the more ambitious button design to MVP2. 
+Another scope decision early on was to not focuss too much overall project time on building the 'magical' glowing buttons. While they would bring a great look and feel to the project they would not affect the core functionality in any way. While researching and testing chunks of code it became clear that to build the buttons I had in mind origionally would take a significant chunk of time. As such I decided to use a glow style that would work as a good placeholder and move the more ambitious button design to MVP2.
 
-One effect of this decision is that the 'glow' effect is tied to hover functionality, and so does not work on a mobile or tablet screen. While this is by no means ideal I decided that some glow effect would be better than no glow effect, and for mobile users the buttons would still have the golden colour.  
+One effect of this decision is that the 'glow' effect is tied to hover functionality, and so does not work on a mobile or tablet screen. While this is by no means ideal I decided that some glow effect would be better than no glow effect, and for mobile users the buttons would still have the golden colour.
 
-	
+
 </details>
 
 
@@ -161,18 +161,18 @@ One effect of this decision is that the 'glow' effect is tied to hover functiona
 
 ### Design Decisions
 
-* It was critical when designing the flow of the user fan art submission that any art, titles and text needed to be approved by a site administrator before being shown to the public. This author has mainly written books for younger readers, and a site that allowed for anything submitted to be instantly displayed would leave an oppertunity for innapropriate things to be posted where children are the target audience. This also applies to editing art that has already been approved. 
+* It was critical when designing the flow of the user fan art submission that any art, titles and text needed to be approved by a site administrator before being shown to the public. This author has mainly written books for younger readers, and a site that allowed for anything submitted to be instantly displayed would leave an oppertunity for innapropriate things to be posted where children are the target audience. This also applies to editing art that has already been approved.
 
-* As touched on in the scope section I decided to use the exisitng Django admin site. Building my own admin pages felt like trying to re-invent the wheel, so instead I customized the built-in admin site as it already provides all of the existing functionality for managing the orders, products and fan art. Furthermore I customized it to use the same colour scheme and branding as the main website to give a consistent look and feel for an admin user (note the admin top bar logo from the main site footer).  
+* As touched on in the scope section I decided to use the exisitng Django admin site. Building my own admin pages felt like trying to re-invent the wheel, so instead I customized the built-in admin site as it already provides all of the existing functionality for managing the orders, products and fan art. Furthermore I customized it to use the same colour scheme and branding as the main website to give a consistent look and feel for an admin user (note the admin top bar logo from the main site footer).
 
-* While the shop sells digital media such as e-boks and audio books handling the distribution of these is out of scope for this project. When a user purchases a digital media product they will recieve a code that they can use to redeam their product on a separate platform. 
- 
+* While the shop sells digital media such as e-boks and audio books handling the distribution of these is out of scope for this project. When a user purchases a digital media product they will recieve a code that they can use to redeam their product on a separate platform.
 
-* While building the order model I decided to remove the ability to delete products from the product model. When creating or accessing an order many of the fields are generated from the product model, such as price etc. The thinking behind this was that this site will mostly feature the same products, adding more as the author writes more books, but will never have the high turnover of a large webshop. It is unlikely that a book will go out of print, and thus have to be completely removed. It is possible that merchandize may no longer be produced by the supplier and so forth, so I have build in the ability to remove products from the shop, but since this applies to only a small number of items I removed the posibility to completely delete them. This is a decision that could easilly be altered in the future if the webshop becomes significantly larger by saving items and prices to an order model rather than calculating them.  
 
-* When a product is out of stock it is shown on the products page, and a user is still able to click on it to read more information. There is an out of stock overlay and the purchase button is greyed out, but I decided to let the user click the purchase button and to then show them a message. The thinking behind this was to avoid too many alerts popping up for the user. It is clearly indicated both with text and a greyed out button that this product is out of stock, and it is only if the user still clicks on the purchase button that we show the alert.      
+* While building the order model I decided to remove the ability to delete products from the product model. When creating or accessing an order many of the fields are generated from the product model, such as price etc. The thinking behind this was that this site will mostly feature the same products, adding more as the author writes more books, but will never have the high turnover of a large webshop. It is unlikely that a book will go out of print, and thus have to be completely removed. It is possible that merchandize may no longer be produced by the supplier and so forth, so I have build in the ability to remove products from the shop, but since this applies to only a small number of items I removed the posibility to completely delete them. This is a decision that could easilly be altered in the future if the webshop becomes significantly larger by saving items and prices to an order model rather than calculating them.
 
-* I wanted to integrate my website with social media accounts so people can log in and create a profile using an existing social media account. I have specifically chosen to integrate with Google so people can log in with their g-mail accounnts but by using [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html) it is easy to extend to other social media platforms in the future. 
+* When a product is out of stock it is shown on the products page, and a user is still able to click on it to read more information. There is an out of stock overlay and the purchase button is greyed out, but I decided to let the user click the purchase button and to then show them a message. The thinking behind this was to avoid too many alerts popping up for the user. It is clearly indicated both with text and a greyed out button that this product is out of stock, and it is only if the user still clicks on the purchase button that we show the alert.
+
+* I wanted to integrate my website with social media accounts so people can log in and create a profile using an existing social media account. I have specifically chosen to integrate with Google so people can log in with their g-mail accounnts but by using [django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html) it is easy to extend to other social media platforms in the future.
 
 ### Surface
 
@@ -186,8 +186,8 @@ Similarly I selected the title font to give a whimsical and slightly hand drawn 
 
 <details>
     <summary>Click to see - Colour Palet</summary>
-	
-	
+
+
 ![colour palet](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/colour-palet.png)
 
 </details>
@@ -216,10 +216,10 @@ As the site is aimed at a wide age range of users I wanted to keep the design bo
 
 <details>
     <summary>Click to see - Rough Database / App Map </summary>
-	
-	
+
+
 &nbsp;
-![rough databse map](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database-map-drawing.jpg)	
+![rough databse map](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database-map-drawing.jpg)
 
 </details>
 
@@ -229,7 +229,7 @@ As the site is aimed at a wide age range of users I wanted to keep the design bo
     <summary>Click to see - Database Design </summary>
 
 &nbsp;
-![databse design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.png) 
+![databse design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.png)
 
 [Link to pdf of Database Design](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/database%20design.pdf)
 
@@ -259,8 +259,8 @@ The drawing below roughly maps out the models and the app structure, and the att
 
 <details>
     <summary>Click to see the Existing Features</summary>
-	
-<br>	
+
+<br>
 
 * **A Styled & Branded Navbar** - Signposts visitors to different areas of the site, as well as displaying the name of the author and a character from one of the books as a logo. Responsive on mobile, also displays the user's shopping basket with a responsive display of the number of products in the user's shopping basket.
 * **A Simple & Informative Footer** - Gives users a quick overview of the publishing, copyright and contact information at a glance on every screen.
@@ -298,10 +298,10 @@ This project was built completely in django, and is hosted on Heroku.
 
 <details>
     <summary>Click to see -  List of Technologies</summary>
-	
-### The Site	
 
-The site is built using Django and an SQL databse; SQLite for development and PostgreSQL for deployment. 
+### The Site
+
+The site is built using Django and an SQL databse; SQLite for development and PostgreSQL for deployment.
 
 * [HTML](https://en.wikipedia.org/wiki/HTML)
 * [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
@@ -374,7 +374,7 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 	* I can see each previous order in full detail
 	* I have a quick link to view my submitted fan art
 	* I can see the details that the website has saved for me, and edit them.
-        * I can delete my account, and see that my fan art is also deleted (but any orders are not). 
+        * I can delete my account, and see that my fan art is also deleted (but any orders are not).
 * Social Media Account
         * I can click on the google button to create an account using my google email
         * I can choose to de-couple my account from my google account (as long as I have another email registered)
@@ -398,7 +398,7 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 	* I can click pay to be taken to the checkout
 * Checkout
 	* If I try to pay without filling out the required fields the page will not let me submit
-	* I have the option to save the card address to my profile if logged in. 
+	* I have the option to save the card address to my profile if logged in.
 	* I have the option to use the same address for both card and shipping, when I choose this I no longer see the shipping address fields.
 	* When I submit a payment I am taken to a success page that presents me with a message that the order was successful and tells me that an email will be sent to me.
 	* On the success screen I can view my order in detail, including the payment & shipping details.
@@ -417,8 +417,8 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 	* I can view a complete list of all customer orders.
 	* I can search for customer orders on a number of different identifiers (order number, date, stripe payment id, user profile, status, full name and email)
 	* I can quickly filter the orders based on their status (submitted, paid, payment failed, shipped)
-        * Once the order has been shipped (and status set to shipped) I cannot change any details on the order. 
-	
+        * Once the order has been shipped (and status set to shipped) I cannot change any details on the order.
+
 
 </details>
 
@@ -426,18 +426,18 @@ I serve the site using uWSGI, packed into a docker image. This docker image is t
 
 
 ### Chrome Developer Tools
-Ensure the app works well and looks as it should on all screen sizes, as well as using the console tool get real time error feedback & stack tracing. 
+Ensure the app works well and looks as it should on all screen sizes, as well as using the console tool get real time error feedback & stack tracing.
 
 ### User Testing
-Sending the app to friends & colleagues to use, collecting their feedback for bug fixes and adjustments. 
+Sending the app to friends & colleagues to use, collecting their feedback for bug fixes and adjustments.
 
 
 ### Django unit testing
-I wrote tests for some of the more complex pieces of the site. Ideally it would be nice to get as much coverage as possible, however in the time available I chose to prioritize testing on the more complex functions & views I had written myself (rather than on the code from stripe for example, or on simple views that return just a static page).  
+I wrote tests for some of the more complex pieces of the site. Ideally it would be nice to get as much coverage as possible, however in the time available I chose to prioritize testing on the more complex functions & views I had written myself (rather than on the code from stripe for example, or on simple views that return just a static page).
 
 ### Interesting Bugs
 
-* If shopping basket gets updated after payment intent has been created, and whilst payment is ongoing, then the order gets created with an updated shopping basket while the payment will be the price of the previous shopping basket.  
+* If shopping basket gets updated after payment intent has been created, and whilst payment is ongoing, then the order gets created with an updated shopping basket while the payment will be the price of the previous shopping basket.
 
 [Back To Top](#table-of-contents)
 &nbsp;
@@ -454,19 +454,19 @@ I wrote tests for some of the more complex pieces of the site. Ideally it would 
 `virtualenv venv`.
 * Activate the virtual environment `source venv/bin/activate`.
 * `pip install -r requirements.txt`
-* create a .env file 
-        * SECRET_KEY=[generare a secret key](https://djecrety.ir/)
-        * DEVELOPMENT=True
-        * DEFAULT_FROM_EMAIL=(whatever you would like your default 'from' email to be)       
-* `python manage.py migrate`       
+* create a .env file
+    * SECRET_KEY=[generare a secret key](https://djecrety.ir/)
+    * DEVELOPMENT=True
+    * DEFAULT_FROM_EMAIL=(whatever you would like your default 'from' email to be)
+* `python manage.py migrate`
 * `python manage.py runserver`
 
 
 ### Stripe Payment in Local Development
 * Set up a [Stripe account](https://stripe.com/en-gb-se)
 * From your Stripe dashboard access and add the following to your .env file
-        * STRIPE_PUBLIC_KEY=(Your Publishable key)
-        * STRIPE_SECRET_KEY=(Secret Key)
+    * STRIPE_PUBLIC_KEY=(Your Publishable key)
+    * STRIPE_SECRET_KEY=(Secret Key)
 * Install the [Stripe CLI](https://stripe.com/docs/stripe-cli)
 * Run the following command and follow the instructions in the terminal
   ```bash
@@ -477,41 +477,41 @@ I wrote tests for some of the more complex pieces of the site. Ideally it would 
   stripe listen --forward-to 127.0.0.1:8000/checkout/stripe/
   ```
 * That command will print out the webhook secret, add this to your .env file
-        - STRIPE_WEBHOOK_SECRET=(get from terminal)
+    * STRIPE_WEBHOOK_SECRET=(get from terminal)
 * Open a new terminal (and leave this one running)
 * Run the command
   ```bash
   python manage.py runserver
   ```
-  
+
 ### Setting Up Email for Local Development
 If you want to test sending real email, while developing you need to configure
 the project using the SMTP settings from your email provider.
 * In your .env file
-        * EMAIL_HOST=(The SMTP server)
-        * EMAIL_PORT=(The SMTP server port. Defaults to 465)
-        * EMAIL_HOST_USER=(The SMTP username. Defaults to whatever you put in DEFAULT_FROM_EMAIL)
-        * EMAIL_HOST_PASSWORD=(The SMTP password)
-        * EMAIL_USE_SSL=(Whether the SMTP server is using SSL. Defaults to True)
+    * EMAIL_HOST=(The SMTP server)
+    * EMAIL_PORT=(The SMTP server port. Defaults to 465)
+    * EMAIL_HOST_USER=(The SMTP username. Defaults to whatever you put in DEFAULT_FROM_EMAIL)
+    * EMAIL_HOST_PASSWORD=(The SMTP password)
+    * EMAIL_USE_SSL=(Whether the SMTP server is using SSL. Defaults to True)
 
 ### Setting Up Google with allauth
 * Follow [these instructions](https://django-allauth.readthedocs.io/en/latest/providers.html#app-registration)
 
 
 ### Google Bucket
-* Follow the steps for setting up Google with allauth if you havent done that already (above). You will have created a project during this step.  
-* Go to the [cloud console](https://console.cloud.google.com/) 
-        * IAM & Admin -> Service Accounts -> Create a service account
-        * Create a json key for your service account (this will trigger a download of the key file)
-        * Move this json file into the top level of your project and rename it  `serviceaccount.json` (your gitignore is set to ignore this file name, don't delete this file)
-        * Storage -> Browser -> Create Bucket (use fine grained permissions)
-        * Click on your bucket and navigate to permissions
-        * Click Add to assign the 'Storage Object Admin' role to your service account
-        * Click Add to assign the 'Storage Object Viewer' role to 'allUsers'
+* Follow the steps for setting up Google with allauth if you havent done that already (above). You will have created a project during this step.
+* Go to the [cloud console](https://console.cloud.google.com/)
+    * IAM & Admin -> Service Accounts -> Create a service account
+    * Create a json key for your service account (this will trigger a download of the key file)
+    * Move this json file into the top level of your project and rename it  `serviceaccount.json` (your gitignore is set to ignore this file name, don't delete this file)
+    * Storage -> Browser -> Create Bucket (use fine grained permissions)
+    * Click on your bucket and navigate to permissions
+    * Click Add to assign the 'Storage Object Admin' role to your service account
+    * Click Add to assign the 'Storage Object Viewer' role to 'allUsers'
 * In your .env set
-        * GOOGLE_APPLICATION_CREDENTIALS=(the name of the json file)
-        * GS_BUCKET_NAME=(your bucket name)
-        
+    * GOOGLE_APPLICATION_CREDENTIALS=(the name of the json file)
+    * GS_BUCKET_NAME=(your bucket name)
+
 
 ### Deploy to Heroku
 These instructions assume that you have a github account and a Heroku account, and have set up the Heroku CLI on your computer.
@@ -525,23 +525,23 @@ These instructions assume that you have a github account and a Heroku account, a
 * On the Heroku website, in your new app, connect to your github
 * In the Heroku website create a PostgreSQL database as a Heroku addon
 * While in your Heroku project copy the database URI and add it to your .env file
-        * DATABASE_URL=(Heroku database URI)
+    * DATABASE_URL=(Heroku database URI)
 * Go to Stripe -> Developers -> Webhooks
-        * Add endpoint
-        * Set the URL to the URL for your Heroku app -> https://app-name.herokuapp.com/checkout/stripe/
-        * Copy the Signing Secret and go back to Heroku
+    * Add endpoint
+    * Set the URL to the URL for your Heroku app -> https://app-name.herokuapp.com/checkout/stripe/
+    * Copy the Signing Secret and go back to Heroku
 * In Heroku set the Signing Secret you just coppied as the Config Var STRIPE_WEBHOOK_SECRET
 * Set your other config vars
-        * ALLOWED_HOSTS=(app-name.herokuapp.com)
-        * DATABASE_URL=(same as .env)
-        * DEFAULT_FROM_EMAIL=(same as .env)
-        * EMAIL_HOST=(same as .env)
-        * EMAIL_HOST_PASSWORD=(same as .env)
-        * GS_BUCKET_NAME=(same as .env)
-        * SECRET_KEY=(same as .env)
-        * SERVICE_ACCOUNT_KEY=(the contents of the service account file, the whole object)
-        * STRIPE_PUBLIC_KEY=(same as .env)
-        * STRIPE_SECRET_KEY=(same as .env)
+    * ALLOWED_HOSTS=(app-name.herokuapp.com)
+    * DATABASE_URL=(same as .env)
+    * DEFAULT_FROM_EMAIL=(same as .env)
+    * EMAIL_HOST=(same as .env)
+    * EMAIL_HOST_PASSWORD=(same as .env)
+    * GS_BUCKET_NAME=(same as .env)
+    * SECRET_KEY=(same as .env)
+    * SERVICE_ACCOUNT_KEY=(the contents of the service account file, the whole object)
+    * STRIPE_PUBLIC_KEY=(same as .env)
+    * STRIPE_SECRET_KEY=(same as .env)
 * Select the repo you have cloned
 * On the deploy tab manually deploy
 * In your project, in the terminal
