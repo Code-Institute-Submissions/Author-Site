@@ -41,7 +41,6 @@ select option[value=""] {
 /* ---------------- CHECKOUT */
 
 #payment-section {
-    width: 80vw;
     margin: auto;
     border: 1px solid lightgrey;
     border-radius: 10px;

@@ -60,7 +60,7 @@ a.glow-button:hover {
   color: #000;
 }
 
-.glow-button:before {
+.glow-button:not(:disabled):not(.disabled):before {
   content: '';
   position: absolute;
   background: inherit;
@@ -97,7 +97,7 @@ a.glow-button:hover {
     border: none;
     outline: none;
     border-radius: 50px;
-    font-size: 3vw;
+    font-size: 4vw;
     display: inline-block;
     position: relative;
     margin: 5px 0;
@@ -106,7 +106,7 @@ a.glow-button:hover {
     letter-spacing: 2px;
     font-weight: 500;
     padding: 10px 20px;
-    width: 48vw;
+    width: 59vw;
     max-width: 230px;
     text-decoration: none;
 }
