@@ -1,6 +1,6 @@
 # Holly Thomas - Author Site
 
-![README banner](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/site-banner.png)
+![README banner](https://github.com/LittleBlue418/Author-Site/blob/master/author_site_project/documentation/laptop-tablet-phone-pc.png)
 
 
 The home of books by Holly Thomas! Read about the author, the world of the books and the inspiration behind some of her work. Visit the shop and pick up copies of her book, cuddly toys and more! Join our community and see your art featured in the gallery!
