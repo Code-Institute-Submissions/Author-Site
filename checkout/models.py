@@ -31,7 +31,7 @@ class Order(models.Model):
     # Customer Info
     full_name = models.CharField(max_length=50, blank=False)
     email = models.CharField(max_length=254, blank=False)
-    phone_number = models.CharField(max_length=20, blank=True)
+    phone_number = models.CharField(max_length=20, blank=False)
 
     # If Gift
     gift_message = models.TextField(max_length=500, blank=True, default='')
