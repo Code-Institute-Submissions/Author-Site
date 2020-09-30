@@ -14,26 +14,27 @@ The home of books by Holly Thomas! Read about the author, the world of the books
 ***
 
 ## Table of Contents
-* [UX](#UX)
-    * [Strategy and Planning](#strategy-and-planning)
-    * [User Stories](#user-stories)
-    * [Research and Prioritization](#research-and-prioritization )
-    * [Scope](#scope)
-    * [Structure](#structure)
-    	* [Design Decisions](#design-decisions)
-        * [Surface](#surface)
-        * [Skeleton](#skeleton)
-        * [Database and App Design](#database-and-app-design)
-* [Features](#features)
-* [Technologies Used](#technologies-used)
-* [Testing](#testing)
-    * [User Story Testing](#user-story-testing)
-    * [Automated and Other Testing](#automated-and-other-testing)
-    * [Interesting Bugs](#interesting-bugs)
-* [Deployment and Version Control](#deployment-and-version-control)
-    * [Content](#content)
-    * [Media](#media)
-    * [Acknowledgements](#acknowledgements)
+- [UX](#ux)
+  * [Strategy and Planning](#strategy-and-planning)
+  * [User Stories](#user-stories)
+  * [Research and Prioritization](#research-and-prioritization)
+  * [Scope](#scope)
+  * [Structure](#structure)
+    + [Design Decisions](#design-decisions)
+    + [Surface](#surface)
+    + [Skeleton](#skeleton)
+    + [Database and App Design](#database-and-app-design)
+  * [Features](#features)
+  * [Technologies Used](#technologies-used)
+  * [Testing](#testing)
+  * [Deployment & Version Control](#deployment---version-control)
+  * [Credits](#credits)
+    + [Code](#code)
+    + [Content](#content)
+    + [Media](#media)
+    + [Acknowledgements](#acknowledgements)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ***
 
