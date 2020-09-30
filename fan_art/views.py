@@ -44,7 +44,7 @@ def all_fan_art(request):
 def user_fan_art(request):
     """ A view to return the user's submitted fan art """
 
-    user_fan_art = FanArt.objects.all().filter(user_profile=request.user.id)
+    user_fan_art = FanArt.objects.all().filter(user_profile=request.user.profile)
 
     # Checking for unapproved user_fan_art
     unapproved_fan_art = False
