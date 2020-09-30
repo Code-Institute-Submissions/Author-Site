@@ -208,7 +208,7 @@ def checkout_success(request, order_number):
 def orders(request):
     """ A view to return the cutomer's orders & their status """
 
-    orders = Order.objects.all().filter(user_profile=request.user.id)
+    orders = Order.objects.all().filter(user_profile=request.user.profile)
 
     context = {
         'orders': orders,
