@@ -86,3 +86,32 @@ class TestFanArtViews(TestCase):
         with self.assertRaises(FanArt.DoesNotExist):
             fan_art = FanArt.objects.get(user_profile=user.profile, title=fan_art_data['title'])
 
+
+    def test_only_owner_can_edit_and_delete_fanart(self):
+        user_owning_fanart = User.objects.create_user(**self.user_data)
+        self.client.force_login(user_owning_fanart)
+        with open('author_site_project/static/img/logo.png', 'rb') as file_pointer:
+            fan_art_data = dict(self.fan_art_data, image=file_pointer)
+            response = self.client.post(reverse('add_fan_art'), fan_art_data)
+
+        fan_art = FanArt.objects.get(user_profile=user_owning_fanart.profile, title=fan_art_data['title'])
+
+        # Switch to another user
+        other_user_data = dict(self.user_data, username='otheruser')
+        other_user = User.objects.create_user(**other_user_data)
+        self.client.force_login(other_user)
+
+        # Try to edit the fan art as another user
+        updated_fan_art_data = dict(self.fan_art_data, title='title2')
+        self.client.post(reverse('edit_fan_art', args=[fan_art.id]), updated_fan_art_data)
+
+        # Verify that the title is unchanged
+        fan_art.refresh_from_db()
+        self.assertEqual(fan_art.title, self.fan_art_data['title'])
+
+        # Try to delete the fan art as another user
+        self.client.post(reverse('delete_fan_art', args=[fan_art.id]))
+
+        # Verify that the fan art still exists in the DB
+        fan_art.refresh_from_db()
+
