@@ -20,7 +20,7 @@ def view_or_update_shopping_basket(request):
             del shopping_basket[product_id]
 
         # Prevent amount over 99
-        if shopping_basket[product_id] > 99:
+        elif shopping_basket[product_id] > 99:
             messages.warning(
                 request,
                 'The maximum number of products you can purchase at \
