@@ -115,10 +115,14 @@ def checkout(request):
             redirect_url = reverse('view_or_update_shopping_basket')
             return redirect(redirect_url)
 
+        # Fetch shopping basket from when the Payment Intent was created
+        payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+        original_shopping_basket = json.loads(payment_intent.metadata.shopping_basket)
+
         # Creating the order from the order form and the shopping basket
         try:
             order = create_order_from_shopping_basket(
-                request.session['shopping_basket'],
+                original_shopping_basket,
                 order_form,
                 payment_intent_id,
                 request.user
