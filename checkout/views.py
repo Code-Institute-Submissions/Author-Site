@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.utils import IntegrityError
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
@@ -138,6 +139,9 @@ def checkout(request):
             redirect_url = reverse('view_or_update_shopping_basket')
             return redirect(redirect_url)
 
+        except IntegrityError:
+            # The order has already been created in the webhook
+            order = Order.objects.get(stripe_payment_id=payment_intent_id)
 
         # Emptying the shopping basket
         request.session['shopping_basket'] = {}
